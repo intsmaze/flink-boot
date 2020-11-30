@@ -31,34 +31,40 @@ Flink-Boot
 ```
 
 ## 2. 技术选项和集成情况
-技术 | 名称 | 状态 | 免费版 | 会员版 |
-----|------|----|------|----
-Spring Framework | 容器  | 已集成 | 有  | 有
-Spring 基于XML方式配置Bean | 装配Bean  | 已集成 | 有  | 有
-Spring 基于注解方式配置Bean | 装配Bean  | 已集成 | 无  | 有
-Spring 基于注解声明方法重试机制 | Retry注解  | 已集成 | 无  | 有
-Spring 基于注解声明方法缓存 | Cache注解  | 已集成 | 无  | 有
-Hibernate Validator | 校验框架  | 已集成 | 无  | 有
-Druid | 数据库连接池  | 已集成 | 有  | 有
-MyBatis | ORM框架  | 已集成 | 无  | 有
-Kafka | 消息队列  | 已集成 | 有  | 有
-HDFS | 分布式文件系统  | 已集成 | 有  | 有
-Log4J | 日志组件  | 已集成 | 有  | 有
-Junit | 单元测试  | 已集成 | 有  | 有
-Mybatis-Plus | MyBatis扩展包  | 进行中 | 无  | 有
-PageHelper | MyBatis物理分页插件  | 进行中 | 无  | 有
-ZooKeeper | 分布式协调服务  | 进行中 | 无  | 有
-Dubbo | 分布式服务框架  | 进行中 | 无  | 有
-Redis | 分布式缓存数据库  | 进行中 | 有  | 有
-Solr & Elasticsearch | 分布式全文搜索引擎  | 进行中 | 有  | 有
-Ehcache | 进程内缓存框架  | 进行中 | 无  | 有
-sequence | 分布式高效ID生产  | 进行中 | 有  | 有
-Dubbole消费者 | 服务消费者  | 进行中 | 有  | 有
-Spring eurake消费者 | 服务消费者  | 进行中 | 有  | 有
-Apollo配置中心 | 携程阿波罗配置中心  | 进行中 | 无  | 有
-Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中 | 无  | 有
+技术 | 名称 | 状态 |
+----|------|----
+Spring Framework | 容器  | 已集成 
+Spring 基于XML方式配置Bean | 装配Bean  | 已集成 
+Spring 基于注解方式配置Bean | 装配Bean  | 已集成
+Spring 基于注解声明方法重试机制 | Retry注解  | 已集成 
+Spring 基于注解声明方法缓存 | Cache注解  | 已集成 
+Hibernate Validator | 校验框架  | 已集成
+Druid | 数据库连接池  | 已集成 
+MyBatis | ORM框架  | 已集成 
+Kafka | 消息队列  | 已集成
+HDFS | 分布式文件系统  | 已集成 
+Log4J | 日志组件  | 已集成 
+Junit | 单元测试  | 已集成 
+Mybatis-Plus | MyBatis扩展包  | 进行中 
+PageHelper | MyBatis物理分页插件  | 进行中 
+ZooKeeper | 分布式协调服务  | 进行中
+Dubbo | 分布式服务框架  | 进行中 
+Redis | 分布式缓存数据库  | 进行中 
+Solr & Elasticsearch | 分布式全文搜索引擎  | 进行中
+Ehcache | 进程内缓存框架  | 进行中 
+sequence | 分布式高效ID生产  | 进行中 
+Dubbole消费者 | 服务消费者  | 进行中 
+Spring eurake消费者 | 服务消费者  | 进行中 
+Apollo配置中心 | 携程阿波罗配置中心  | 进行中 
+Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中 
 
 ## 3. 快速开始
+
+下面是继承Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
+微信号：intsmaze [微信二维码无法显示可跳转该页面扫码](https://www.cnblogs.com/intsmaze/)
+
+![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
+
 
 ### 3.1 核心基础工程
 
@@ -287,33 +293,6 @@ public class SimpleClient extends BaseFlink {
     
     .......     
    
-
-**为尊重知识产权和劳动所得，会员版功能只开放代码部分供客户浏览，核心配置文件不对外开发，如需请扫码购买，价格19.9元（钻石会员）或29.9元（至尊会员）。**
-
-#### 购买微信号：intsmaze [微信二维码无法显示可跳转该页面扫码](https://www.cnblogs.com/intsmaze/)
-
-![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
-
-#### 19.9元（钻石会员）或29.9元（至尊会员）获得完整项目以及文档。
-
-# 下面是洗脑广告语
-### **1. 19.9元**将您3小时自行琢磨的时间缩短到10分钟，人生又有多少个3小时。
-### **2. 19.9元**免去用脑掉发的烦恼--我来替您掉头发，人生又有多少头发可以掉。
-### 3. 你**月薪过万**，时薪最少100元，您花费了19.9元避免了300元的损失。
-### 4. 少喝两杯奶茶即可获得个人能力提升。
-
-
-
-##  还在顾虑什么，赶紧扫码购买吧。现在扫码购买除了获得会员版全部代码还可以获得如下**尊享特权**：
-### 1. 完整的开发手册和项目模块集成讲解。（钻石会员）（至尊会员）
-### 2. 免费获得Flink-Boot新版本内容，集成前沿技术。（至尊会员）
-### 3. 采纳客户需求进行新特性集成。（至尊会员）
-
-### 购买微信号：intsmaze [微信二维码无法显示可跳转该页面扫码](https://www.cnblogs.com/intsmaze/)
-
-![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
-
-
 
 ## 演示地址
 
