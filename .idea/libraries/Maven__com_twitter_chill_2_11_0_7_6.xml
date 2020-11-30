@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.twitter:chill_2.11:0.7.6">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/twitter/chill_2.11/0.7.6/chill_2.11-0.7.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/twitter/chill_2.11/0.7.6/chill_2.11-0.7.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/twitter/chill_2.11/0.7.6/chill_2.11-0.7.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-lazy-init="true" default-init-method="init">
+
+    <context:property-placeholder location="classpath:config.properties"/>
+
+    <!-- ===========base=====start============  -->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url"
+                  value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.user}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="druidDataSource"></constructor-arg>
+    </bean>
+
+
+    <bean id="dataService" class="com.intsmaze.flink.base.service.DataService">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+    <!-- ===========base=====end============  -->
+
+
+
+    <!--<bean id="variableJdbc" class="com.intsmaze.flink.base.jdbc.VariableJdbc">-->
+    <!--<property name="jdbcTemplate" ref="jdbcTemplate"></property>-->
+    <!--</bean>-->
+
+
+    <!--<bean id="switchThread" class=" com.intsmaze.flink.base.thread.SwitchThread">-->
+        <!--<property name="variableJdbc" ref="variableJdbc"></property>-->
+    <!--</bean>-->
+
+
+
+    <!--<bean id="flinkConfig" class="org.springframework.beans.factory.config.MapFactoryBean">-->
+    <!--<property name="sourceMap">-->
+    <!--<map>-->
+    <!--<entry key="bootstrap.servers" value="${bootstrap.servers}"/>-->
+    <!--&lt;!&ndash;<entry key="kafka.offset.Port" value="${kafka.offset.Port}"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<entry key="bootstrap.servers" value="192.168.19.201"/>&ndash;&gt;-->
+    <!--<entry key="kafka.brokerZkPath" value="/brokers"/>-->
+    <!--<entry key="kafka.offset.Port" value="9092"/>-->
+    <!--<entry key="kafka.offset.zkRoot" value="/kafka-offset"/>-->
+    <!--</map>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+
+    <!--<context:component-scan base-package="com.intsmaze">-->
+    <!--<context:include-filter type="annotation"-->
+    <!--expression="org.aspectj.lang.annotation.Aspect"/>-->
+    <!--</context:component-scan>-->
+
+    <!-- 启动@AspectJ支持 这个注解一放开，打包运行就报错 -->
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+
+
+</beans>
