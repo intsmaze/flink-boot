@@ -60,7 +60,7 @@ Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中
 
 ## 3. 快速开始
 
-下面是继承Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
+下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
 微信号：intsmaze [微信二维码无法显示可跳转该页面扫码](https://www.cnblogs.com/intsmaze/)
 
 ![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
