@@ -1,9 +1,11 @@
 
 # 懒松鼠Flink-Boot
 #### [懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发。](https://github.com/intsmaze/flink-book)
+![image](https://github.com/intsmaze/flink-boot/blob/master/fm.png)
 ##### 该脚手架屏蔽掉组装Flink API细节，让跨界变得简单，使得开发者能以传统Java WEB模式的开发方式开发出具备分布式计算能力的流处理程序。
 ##### 开发者完全不需要理解分布式计算的理论知识和Flink框架的细节，便可以快速编写业务代码实现。
 ##### 为了进一步提升开发者使用该脚手架开发大型项目的敏捷的程度，该脚手架工程默认集成Spring框架进行Bean管理，同时将微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。
+
 
 ##### 除此之外针对目前流行的各大Java框架，该Flink脚手架工程也进行了集成，加快开发人员的编码速度,比如:
 * 集成Jbcp-template对Mysql,Oracle,SQLServer等关系型数据库的快速访问。
