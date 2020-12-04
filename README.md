@@ -15,6 +15,105 @@
 * 集成Spring Cache框架,实现注解式定义方法缓存。
 * ......
 
+## 你可能面临如下苦恼：
+
+1. 开发的Flink流处理应用程序，业务逻辑全部写在Flink的操作符中，代码无法服用，无法分层
+2. 要是有一天它可以像开发Spring Boot程序那样可以优雅的分层，优雅的装配Bean，不需要自己new对象好了
+3. 可以使用各种Spring生态的框架，一些琐碎的逻辑不再硬编码到代码中。
+
+### 接口缓存
+
+**你的现状**
+
+```
+static Map<String,String> cache=new HashMap<String,String>();
+
+public String findUUID(FlowData flowData) {
+    String value=cache.get(flowData.getSubTestItem());
+    if(value==null)
+    {
+        String uuid=userMapper.findUUID(flowData);
+        cache.put(uuid,value);
+        return uuid;
+    }
+    return value;
+}
+```
+
+**你想要的是这样**
+
+```
+@Cacheable(value = "FlowData.findUUID", key = "#flowData.subTestItem")
+public String findUUID(FlowData flowData) {
+    return userMapper.findUUID(flowData);
+}
+```
+
+### 重试机制
+
+**你的现状**
+
+```java
+public void insertFlow(FlowData flowData) {
+    try{
+        userMapper.insertFlow(flowData);
+      }Cache(Exception e)
+      {
+         Thread.sleep(10000);
+         userMapper.insertFlow(flowData);
+      }
+}
+```
+
+**你想要的是这样**
+
+```java
+    @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 2000L, multiplier = 1.5))
+    @Override
+    public void insertFlow(FlowData flowData) {
+        userMapper.insertFlow(flowData);
+    }
+```
+
+
+
+### Bean校验
+
+**你的现状**
+
+```
+if(flowData.getSubTestItem().length()<2&&flowData.getSubTestItem().length()>7)
+{
+    return null;
+}
+if(flowData.getBillNumber()==null)
+{
+    return null;
+}
+```
+
+**你想要的是这样**
+
+```
+Map<String, StringBuffer> validate = ValidatorUtil.validate(flowData);
+if (validate != null) {
+    System.out.println(validate);
+    return null;
+}
+
+public class FlowData {
+
+    private String uuid;
+    //声明该参数的校验规则字符串长度必须在7到20之间
+    @Size(min = 7, max = 20, message = "长度必须在{min}-{max}之间")
+    private String subTestItem;
+    //声明该参数的校验规则字符串不能为空
+    @NotBlank(message = "billNumber不能为空")
+    private String billNumber;
+}
+```
+### 等等......
+
 
 ## 1. 组织结构
 
