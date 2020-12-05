@@ -9,6 +9,9 @@
 ##### Developers do not need to understand the theoretical knowledge of distributed computing and the details of the Flink framework, and they can quickly write business code to achieve.
 ##### In order to further enhance the agility of developers using the scaffolding to develop large-scale projects, the scaffolding project integrates the Spring framework by default for Bean management, and at the same time integrates microservices and frameworks frequently used in the WEB development field to further improve the development speed.
 
+懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发,让Flink全面拥抱Spring生态体系，使得开发者可以以Java WEB开发模式开发出分布式运行的流处理程序，懒松鼠让跨界变得更加简单。懒松鼠旨在让开发者以更底上手成本（不需要理解分布式计算的理论知识和Flink框架的细节）便可以快速编写业务代码实现。为了进一步提升开发者使用懒松鼠脚手架开发大型项目的敏捷的度，该脚手架默认集成Spring框架进行Bean管理，同时将微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。比如集成Mybatis ORM框架，Hibernate Validator校验框架,Spring Retry重试框架等，具体见下面的脚手架特性。
+
+Lazy Squirrel Flink-Boot scaffolding is developed by the author of 《深入理解Flink核心设计与实践原理》, allowing Flink to fully embrace the Spring ecosystem, allowing developers to develop distributed running stream processing programs in the Java WEB development model. Lazy Squirrel makes cross-border easier. Lazy Squirrel aims to allow developers to quickly write business code implementation at a lower cost (no need to understand the theoretical knowledge of distributed computing and the details of the Flink framework). In order to further enhance the agility of developers using Lazy Squirrel Scaffolding to develop large-scale projects, the scaffolding integrates the Spring framework by default for Bean management, and at the same time integrates microservices and frameworks frequently used in the WEB development field to further improve the development speed. For example, integration of Mybatis ORM framework, Hibernate Validator verification framework, Spring Retry retry framework, etc., see the scaffolding features below for details.
 
 ##### 除此之外针对目前流行的各大Java框架，该Flink脚手架工程也进行了集成，加快开发人员的编码速度,比如:
 * 集成Jbcp-template对Mysql,Oracle,SQLServer等关系型数据库的快速访问。
@@ -30,6 +33,7 @@
 1. 开发的Flink流处理应用程序，业务逻辑全部写在Flink的操作符中，代码无法复用，无法分层
 2. 要是有一天它可以像开发Spring Boot程序那样可以优雅的分层，优雅的装配Bean，不需要自己new对象好了
 3. 可以使用各种Spring生态的框架，一些琐碎的逻辑不再硬编码到代码中。
+
 1. In the Flink stream processing application developed, the business logic is all written in Flink operators, and the code cannot be reused and cannot be layered
 2. If one day it can be elegantly layered and assemble Beans elegantly like the development of Spring Boot programs, without having to own new objects.
 3. Various Spring ecological frameworks can be used, and some trivial logic is no longer hard-coded into the code.
