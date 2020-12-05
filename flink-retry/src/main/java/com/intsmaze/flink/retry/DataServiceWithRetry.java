@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 /**
  * github地址: https://github.com/intsmaze
  * 博客地址：https://www.cnblogs.com/intsmaze/
- * 出版书籍《深入理解Flink核心设计与实践原理》 随书代码
+ * 出版书籍《深入理解Flink核心设计与实践原理》
  *
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
@@ -34,7 +34,7 @@ public class DataServiceWithRetry  {
     /**
      * github地址: https://github.com/intsmaze
      * 博客地址：https://www.cnblogs.com/intsmaze/
-     * 出版书籍《深入理解Flink核心设计与实践原理》 随书代码
+     * 出版书籍《深入理解Flink核心设计与实践原理》
      * 重试3次还失败抛出异常，delay第一次多少秒间隔重试，multiplier递增倍数（即下次间隔是上次的多少倍）
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
@@ -53,7 +53,7 @@ public class DataServiceWithRetry  {
     /**
      * github地址: https://github.com/intsmaze
      * 博客地址：https://www.cnblogs.com/intsmaze/
-     * 出版书籍《深入理解Flink核心设计与实践原理》 随书代码
+     * 出版书籍《深入理解Flink核心设计与实践原理》
      * 重试3次还失败抛出异常，delay第一次多少秒间隔重试，multiplier递增倍数（即下次间隔是上次的多少倍）
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
