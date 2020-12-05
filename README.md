@@ -5,6 +5,9 @@
 ##### 该脚手架屏蔽掉组装Flink API细节，让跨界变得简单，使得开发者能以传统Java WEB模式的开发方式开发出具备分布式计算能力的流处理程序。
 ##### 开发者完全不需要理解分布式计算的理论知识和Flink框架的细节，便可以快速编写业务代码实现。
 ##### 为了进一步提升开发者使用该脚手架开发大型项目的敏捷的程度，该脚手架工程默认集成Spring框架进行Bean管理，同时将微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。
+##### The scaffolding shields the details of assembling the Flink API, making it easy to cross-border, allowing developers to develop stream processing programs with distributed computing capabilities in the traditional Java WEB mode of development.
+##### Developers do not need to understand the theoretical knowledge of distributed computing and the details of the Flink framework, and they can quickly write business code to achieve.
+##### In order to further enhance the agility of developers using the scaffolding to develop large-scale projects, the scaffolding project integrates the Spring framework by default for Bean management, and at the same time integrates microservices and frameworks frequently used in the WEB development field to further improve the development speed.
 
 
 ##### 除此之外针对目前流行的各大Java框架，该Flink脚手架工程也进行了集成，加快开发人员的编码速度,比如:
@@ -14,16 +17,26 @@
 * 集成Mybatis框架,提高对关系型数据库增，删，改，查的开发速度。
 * 集成Spring Cache框架,实现注解式定义方法缓存。
 * ......
+##### In addition to the current popular Java frameworks, the Flink scaffolding project has also been integrated to speed up the coding speed of developers, such as:
+* Integrate Jbcp-template to quickly access relational databases such as Mysql, Oracle, SQLServer.
+* Integrate Hibernate Validator framework for parameter verification.
+* Integrate Spring Retry framework for retry flag.
+* Integrate Mybatis framework to improve the development speed of adding, deleting, modifying and checking relational databases.
+* Integrate the Spring Cache framework to implement annotation-style defined method caching.
+* ......
 
-## 你可能面临如下苦恼：
+## 你可能面临如下苦恼/You may face the following distress：
 
-1. 开发的Flink流处理应用程序，业务逻辑全部写在Flink的操作符中，代码无法服用，无法分层
+1. 开发的Flink流处理应用程序，业务逻辑全部写在Flink的操作符中，代码无法复用，无法分层
 2. 要是有一天它可以像开发Spring Boot程序那样可以优雅的分层，优雅的装配Bean，不需要自己new对象好了
 3. 可以使用各种Spring生态的框架，一些琐碎的逻辑不再硬编码到代码中。
+1. In the Flink stream processing application developed, the business logic is all written in Flink operators, and the code cannot be reused and cannot be layered
+2. If one day it can be elegantly layered and assemble Beans elegantly like the development of Spring Boot programs, without having to own new objects.
+3. Various Spring ecological frameworks can be used, and some trivial logic is no longer hard-coded into the code.
 
-### 接口缓存
+### 接口缓存/Interface cache
 
-**你的现状**
+**你的现状/Your current situation**
 
 ```
 static Map<String,String> cache=new HashMap<String,String>();
@@ -40,7 +53,7 @@ public String findUUID(FlowData flowData) {
 }
 ```
 
-**你想要的是这样**
+**你想要的是这样/What you want is this**
 
 ```
 @Cacheable(value = "FlowData.findUUID", key = "#flowData.subTestItem")
@@ -49,9 +62,9 @@ public String findUUID(FlowData flowData) {
 }
 ```
 
-### 重试机制
+### 重试机制/Retry mechanism
 
-**你的现状**
+**你的现状/Your current situation**
 
 ```java
 public void insertFlow(FlowData flowData) {
@@ -65,7 +78,7 @@ public void insertFlow(FlowData flowData) {
 }
 ```
 
-**你想要的是这样**
+**你想要的是这样/What you want is this**
 
 ```java
     @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 2000L, multiplier = 1.5))
@@ -77,9 +90,9 @@ public void insertFlow(FlowData flowData) {
 
 
 
-### Bean校验
+### Bean校验/Bean verification
 
-**你的现状**
+**你的现状/Your current situation**
 
 ```
 if(flowData.getSubTestItem().length()<2&&flowData.getSubTestItem().length()>7)
@@ -92,7 +105,7 @@ if(flowData.getBillNumber()==null)
 }
 ```
 
-**你想要的是这样**
+**你想要的是这样/What you want is this**
 
 ```
 Map<String, StringBuffer> validate = ValidatorUtil.validate(flowData);
@@ -115,20 +128,20 @@ public class FlowData {
 ### 等等......
 
 
-## 1. 组织结构
+## 1. 组织结构/Organizational structure
 
 ``` lua
 Flink-Boot
-├── Flink-Base -- Flink-Boot工程基础模块
-├── Flink-Client -- Flink-Boot 客户端模块
-├── flink-annotation -- 注解生效模块
-├── flink-mybatis -- mybatis orm模块
-├── flink-retry -- 注解重试机制模式
-├── flink-validate -- 校验模块
-├── flink-sql -- Flink SQL解耦至XML配置模块
-├── flink-cache-annotation -- 接口缓冲模块
-├── flink-junit -- 单元测试模块
-├── flink-apollo -- 阿波罗配置客户端模块
+├── Flink-Base -- Flink-Boot工程基础模块/Engineering basic module
+├── Flink-Client -- Flink-Boot 客户端模块/Client module
+├── flink-annotation -- 注解生效模块/Annotation effective module
+├── flink-mybatis -- mybatis orm模块/mybatis orm module
+├── flink-retry -- 注解重试机制模块/Annotation retry mechanism module
+├── flink-validate -- 校验模块/validate module
+├── flink-sql -- Flink SQL解耦至XML配置模块/SQL decoupling to XML configuration module
+├── flink-cache-annotation -- 接口缓冲模块/Interface buffer module
+├── flink-junit -- 单元测试模块/Unit test module
+├── flink-apollo -- 阿波罗配置客户端模块/Apollo configuration client module
 ```
 
 ## 2. 技术选项和集成情况
