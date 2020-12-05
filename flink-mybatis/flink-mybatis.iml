@@ -17,7 +17,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="flink-base" />
-    <orderEntry type="library" name="Maven: log4j:log4j:1.2.27" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-table_2.11:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:force-shading:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-streaming-scala_2.11:1.7.2" level="project" />
@@ -82,7 +82,8 @@
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.4" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.13.1" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.6" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.16" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.5.3" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:2.0.3" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.14" level="project" />

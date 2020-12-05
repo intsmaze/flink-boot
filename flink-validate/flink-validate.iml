@@ -17,7 +17,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="flink-base" />
-    <orderEntry type="library" name="Maven: log4j:log4j:1.2.27" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-table_2.11:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:force-shading:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.flink:flink-streaming-scala_2.11:1.7.2" level="project" />

@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fee8853e-8d6f-4961-9f2b-64e072b743c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_27.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flink-annotation/flink-annotation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-annotation/flink-annotation.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flink-base/flink-base.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-base/flink-base.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flink-base/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-base/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flink-cache-annotation/flink-cache-annotation.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-cache-annotation/flink-cache-annotation.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flink-client/flink-client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-client/flink-client.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flink-mybatis/flink-mybatis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-mybatis/flink-mybatis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flink-mybatis/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-mybatis/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flink-retry/flink-retry.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-retry/flink-retry.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flink-sql/flink-sql.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-sql/flink-sql.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flink-validate/flink-validate.iml" beforeDir="false" afterPath="$PROJECT_DIR$/flink-validate/flink-validate.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/flink-base/target/" />
@@ -346,7 +336,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1607136732064" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1607137182569" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/flink-annotation" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -471,7 +461,7 @@
       <workItem from="1606820455147" duration="512000" />
       <workItem from="1606829410331" duration="1188000" />
       <workItem from="1606834008435" duration="285000" />
-      <workItem from="1607135963400" duration="1004000" />
+      <workItem from="1607135963400" duration="1209000" />
     </task>
     <task id="LOCAL-00001" summary="准备代码">
       <created>1605013480696</created>
@@ -606,16 +596,24 @@
       <option name="project" value="LOCAL" />
       <updated>1607136561608</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="升级依赖包">
+      <created>1607136988055</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1607136988055</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19851000" />
+    <option name="totallyTimeSpent" value="20056000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2497979" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2497979" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -630,7 +628,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" visible="true" weight="0.2895204" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.10834814" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.20781527" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
