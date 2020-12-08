@@ -19,7 +19,7 @@ import java.util.List;
  * @date: 2020/10/15 18:33
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
     @Resource

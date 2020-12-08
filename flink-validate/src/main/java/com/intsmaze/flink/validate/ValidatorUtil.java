@@ -33,7 +33,7 @@ public class ValidatorUtil {
         Set<ConstraintViolation<T>> validatorSet = validator.validate(obj, Default.class);
         Map<String,StringBuffer> errorMap = null;
         if(validatorSet != null && validatorSet.size() >0 ){
-            errorMap = new HashMap<String,StringBuffer>();
+            errorMap = new HashMap<String,StringBuffer>(10);
             String property = null;
             for(ConstraintViolation<T> cv : validatorSet){
                 property = cv.getPropertyPath().toString();

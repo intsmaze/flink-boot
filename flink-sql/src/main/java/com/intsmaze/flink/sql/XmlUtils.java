@@ -31,7 +31,7 @@ public class XmlUtils {
      */
     public static Map<String, String> readXMLForSql(String[] pathArr)
             throws Exception {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<String, String>(10);
         if (pathArr != null) {
             for (String path : pathArr) {
                 InputStream in = XmlUtils.class.getClassLoader().getResourceAsStream(path);
@@ -72,7 +72,7 @@ public class XmlUtils {
             File file1 = fileList.get(i);
             System.out.println(file1.getName() + "1111111");
         }
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<String, String>(10);
         return map;
     }
 
