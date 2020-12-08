@@ -30,7 +30,7 @@ public class RetryClient extends BaseFlink {
     }
 
     @Override
-    public String getTopoName() {
+    public String getJobName() {
         return "RetryClient";
     }
 

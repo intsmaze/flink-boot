@@ -24,8 +24,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -80,10 +78,10 @@ public abstract class BaseFlink {
             if ("isIncremental".equals(isIncremental)) {
                 //如果本地调试，必须指定hdfs的端口信息，且要依赖hadoop包，如果集群执行，flink与hdfs在同一集群，那么可以不指定hdfs端口信息，也不用将hadoop打进jar包。
 //           stateBackend=new RocksDBStateBackend("hdfs://centos-Reall-131:9000/home/intsmaze/flink/", true);
-                stateBackend = new RocksDBStateBackend("hdfs:///home/intsmaze/flink/" + getTopoName(), true);
+                stateBackend = new RocksDBStateBackend("hdfs:///home/intsmaze/flink/" + getJobName(), true);
                 env.setStateBackend(stateBackend);
             } else if ("full".equals(isIncremental)) {
-                stateBackend = new RocksDBStateBackend("hdfs://" + hadoopIp + "/home/intsmaze/flink/" + getTopoName(), false);
+                stateBackend = new RocksDBStateBackend("hdfs://" + hadoopIp + "/home/intsmaze/flink/" + getJobName(), false);
                 env.setStateBackend(stateBackend);
             }
 
@@ -138,7 +136,7 @@ public abstract class BaseFlink {
         String bootstrapServers = properties.getProperty("bootstrap.servers", "");
         String port = properties.getProperty("kafka.offset.Port", "");
 
-        String id = StringUtils.join(getTopoName(), "-", topic);
+        String id = StringUtils.join(getJobName(), "-", topic);
         Properties properties = new Properties();
         properties.setProperty("bootstrap.servers", bootstrapServers + ":" + port);
         properties.setProperty("group.id", id);
@@ -156,7 +154,7 @@ public abstract class BaseFlink {
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
      */
-    public abstract String getTopoName();
+    public abstract String getJobName();
 
     /**
      * github地址: https://github.com/intsmaze
@@ -202,7 +200,7 @@ public abstract class BaseFlink {
         setupConfig();
         createTopology(env);
 
-        String topoName = StringUtils.join(getTopoName(), "-", new DateTime().toString("yyyyMMdd-HHmmss"));
+        String topoName = StringUtils.join(getJobName(), "-", new DateTime().toString("yyyyMMdd-HHmmss"));
         env.execute(topoName);
     }
 

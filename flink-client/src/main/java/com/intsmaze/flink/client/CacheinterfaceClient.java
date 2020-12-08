@@ -32,7 +32,7 @@ public class CacheinterfaceClient extends BaseFlink {
     }
 
     @Override
-    public String getTopoName() {
+    public String getJobName() {
         return "CacheinterfaceClient";
     }
 

@@ -30,7 +30,7 @@ public class SimpleClient extends BaseFlink {
     }
 
     @Override
-    public String getTopoName() {
+    public String getJobName() {
         return "SimpleClient";
     }
 

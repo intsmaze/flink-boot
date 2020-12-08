@@ -47,7 +47,7 @@ public class SQLClient extends BaseFlink {
     }
 
     @Override
-    public String getTopoName() {
+    public String getJobName() {
         return "SQLClient";
     }
 

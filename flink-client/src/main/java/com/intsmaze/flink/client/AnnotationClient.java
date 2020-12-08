@@ -30,7 +30,7 @@ public class AnnotationClient extends BaseFlink {
     }
 
     @Override
-    public String getTopoName() {
+    public String getJobName() {
         return "AnnotationClient";
     }
 

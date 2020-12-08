@@ -31,7 +31,7 @@ public class MybatisClient extends BaseFlink {
     }
 
     @Override
-    public String getTopoName() {
+    public String getJobName() {
         return "MybatisClient";
     }
 
