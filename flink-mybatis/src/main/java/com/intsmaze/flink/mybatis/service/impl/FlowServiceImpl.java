@@ -1,8 +1,12 @@
-package com.intsmaze.flink.mybatis.mapper;
+package com.intsmaze.flink.mybatis.service.impl;
 
 import com.intsmaze.flink.base.bean.FlowData;
-import com.intsmaze.flink.mybatis.dto.UserDto;
+import com.intsmaze.flink.mybatis.mapper.FlowMapper;
+import com.intsmaze.flink.mybatis.service.FlowService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -13,7 +17,12 @@ import java.util.List;
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
  */
-public interface UserMapper {
+@Service
+@Transactional(rollbackFor = Exception.class)
+public class FlowServiceImpl implements FlowService {
+
+    @Resource
+    private FlowMapper flowMapper;
 
     /**
      * github地址: https://github.com/intsmaze
@@ -23,7 +32,10 @@ public interface UserMapper {
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
      */
-    List<UserDto> findAllUser();
+    @Override
+    public List<FlowData> findAll(){
+        return flowMapper.findAll();
+    }
 
     /**
      * github地址: https://github.com/intsmaze
@@ -33,7 +45,10 @@ public interface UserMapper {
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
      */
-    String findUUID(FlowData flowData);
+    @Override
+    public String findUUID(FlowData flowData) {
+        return flowMapper.findUUID(flowData);
+    }
 
     /**
      * github地址: https://github.com/intsmaze
@@ -43,6 +58,8 @@ public interface UserMapper {
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
      */
-    void insertFlow(FlowData flowData);
+    @Override
+    public void insertFlow(FlowData flowData) {
+        flowMapper.insertFlow(flowData);
+    }
 }
-

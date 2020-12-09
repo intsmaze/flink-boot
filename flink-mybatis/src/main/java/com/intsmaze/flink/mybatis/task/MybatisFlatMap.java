@@ -5,8 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.intsmaze.flink.base.bean.FlowData;
 import com.intsmaze.flink.base.transform.CommonFunction;
-import com.intsmaze.flink.mybatis.service.UserService;
-import com.intsmaze.flink.mybatis.service.impl.UserServiceImpl;
+import com.intsmaze.flink.mybatis.service.FlowService;
+import com.intsmaze.flink.mybatis.service.impl.FlowServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.configuration.Configuration;
 
@@ -24,7 +24,7 @@ public class MybatisFlatMap extends CommonFunction {
 
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
-    private UserService userService;
+    private FlowService flowService;
 
     /**
      * github地址: https://github.com/intsmaze
@@ -37,7 +37,7 @@ public class MybatisFlatMap extends CommonFunction {
     @Override
     public void open(Configuration parameters) {
         super.open(parameters);
-        userService = beanFactory.getBean(UserServiceImpl.class);
+        flowService = beanFactory.getBean(FlowServiceImpl.class);
     }
 
     /**
@@ -54,11 +54,11 @@ public class MybatisFlatMap extends CommonFunction {
         FlowData flowData = gson.fromJson(message, new TypeToken<FlowData>() {
         }.getType());
 
-        String flowUUID = userService.findUUID(flowData);
+        String flowUUID = flowService.findUUID(flowData);
         if (StringUtils.isBlank(flowUUID)) {
             flowUUID = UUID.randomUUID().toString();
             flowData.setUuid(flowUUID);
-            userService.insertFlow(flowData);
+            flowService.insertFlow(flowData);
         }
         return gson.toJson(flowData);
     }

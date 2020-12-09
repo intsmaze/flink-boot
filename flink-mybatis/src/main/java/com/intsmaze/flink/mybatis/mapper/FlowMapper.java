@@ -1,13 +1,7 @@
-package com.intsmaze.flink.mybatis.service.impl;
+package com.intsmaze.flink.mybatis.mapper;
 
 import com.intsmaze.flink.base.bean.FlowData;
-import com.intsmaze.flink.mybatis.dto.UserDto;
-import com.intsmaze.flink.mybatis.mapper.UserMapper;
-import com.intsmaze.flink.mybatis.service.UserService;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,12 +12,7 @@ import java.util.List;
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
  */
-@Service
-@Transactional(rollbackFor = Exception.class)
-public class UserServiceImpl implements UserService {
-
-    @Resource
-    private UserMapper userMapper;
+public interface FlowMapper {
 
     /**
      * github地址: https://github.com/intsmaze
@@ -33,10 +22,7 @@ public class UserServiceImpl implements UserService {
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
      */
-    @Override
-    public List<UserDto> FindAllUser(){
-        return userMapper.findAllUser();
-    }
+    List<FlowData> findAll();
 
     /**
      * github地址: https://github.com/intsmaze
@@ -46,10 +32,7 @@ public class UserServiceImpl implements UserService {
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
      */
-    @Override
-    public String findUUID(FlowData flowData) {
-        return userMapper.findUUID(flowData);
-    }
+    String findUUID(FlowData flowData);
 
     /**
      * github地址: https://github.com/intsmaze
@@ -59,8 +42,6 @@ public class UserServiceImpl implements UserService {
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
      */
-    @Override
-    public void insertFlow(FlowData flowData) {
-        userMapper.insertFlow(flowData);
-    }
+    void insertFlow(FlowData flowData);
 }
+

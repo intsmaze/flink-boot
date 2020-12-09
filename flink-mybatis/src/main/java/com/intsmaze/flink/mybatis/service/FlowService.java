@@ -1,7 +1,6 @@
 package com.intsmaze.flink.mybatis.service;
 
 import com.intsmaze.flink.base.bean.FlowData;
-import com.intsmaze.flink.mybatis.dto.UserDto;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
  */
-public interface UserService {
+public interface FlowService {
 
     /**
      * github地址: https://github.com/intsmaze
@@ -23,7 +22,7 @@ public interface UserService {
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
      */
-    List<UserDto> FindAllUser();
+    List<FlowData> findAll();
 
     /**
      * github地址: https://github.com/intsmaze
