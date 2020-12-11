@@ -1,19 +1,15 @@
 
 # 懒松鼠Flink-Boot
 #### [懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发。](https://github.com/intsmaze/flink-book)
+#### 声明：懒松鼠Flink-Boot脚手架不是《深入理解Flink核心设计与实践原理》的配套内容，两者没有任何关系。
 ![image](https://github.com/intsmaze/flink-boot/blob/master/fm.png)
 ##### 该脚手架屏蔽掉组装Flink API细节，让跨界变得简单，使得开发者能以传统Java WEB模式的开发方式开发出具备分布式计算能力的流处理程序。
 ##### 开发者完全不需要理解分布式计算的理论知识和Flink框架的细节，便可以快速编写业务代码实现。
 ##### 为了进一步提升开发者使用该脚手架开发大型项目的敏捷的程度，该脚手架工程默认集成Spring框架进行Bean管理，同时将微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。
-##### The scaffolding shields the details of assembling the Flink API, making it easy to cross-border, allowing developers to develop stream processing programs with distributed computing capabilities in the traditional Java WEB mode of development.
-##### Developers do not need to understand the theoretical knowledge of distributed computing and the details of the Flink framework, and they can quickly write business code to achieve.
-##### In order to further enhance the agility of developers using the scaffolding to develop large-scale projects, the scaffolding project integrates the Spring framework by default for Bean management, and at the same time integrates microservices and frameworks frequently used in the WEB development field to further improve the development speed.
 
 懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发,让Flink全面拥抱Spring生态体系，使得开发者可以以Java WEB开发模式开发出分布式运行的流处理程序，懒松鼠让跨界变得更加简单。懒松鼠旨在让开发者以更底上手成本（不需要理解分布式计算的理论知识和Flink框架的细节）便可以快速编写业务代码实现。为了进一步提升开发者使用懒松鼠脚手架开发大型项目的敏捷的度，该脚手架默认集成Spring框架进行Bean管理，同时将微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。比如集成Mybatis ORM框架，Hibernate Validator校验框架,Spring Retry重试框架等，具体见下面的脚手架特性。
 
 ## [《深入理解Flink核心设计与实践原理》京东商城购买链接](https://item.jd.com/12765369.html)
-
-Lazy Squirrel Flink-Boot scaffolding is developed by the author of 《深入理解Flink核心设计与实践原理》, allowing Flink to fully embrace the Spring ecosystem, allowing developers to develop distributed running stream processing programs in the Java WEB development model. Lazy Squirrel makes cross-border easier. Lazy Squirrel aims to allow developers to quickly write business code implementation at a lower cost (no need to understand the theoretical knowledge of distributed computing and the details of the Flink framework). In order to further enhance the agility of developers using Lazy Squirrel Scaffolding to develop large-scale projects, the scaffolding integrates the Spring framework by default for Bean management, and at the same time integrates microservices and frameworks frequently used in the WEB development field to further improve the development speed. For example, integration of Mybatis ORM framework, Hibernate Validator verification framework, Spring Retry retry framework, etc., see the scaffolding features below for details.
 
 ##### 除此之外针对目前流行的各大Java框架，该Flink脚手架工程也进行了集成，加快开发人员的编码速度,比如:
 * 集成Jbcp-template对Mysql,Oracle,SQLServer等关系型数据库的快速访问。
@@ -22,13 +18,8 @@ Lazy Squirrel Flink-Boot scaffolding is developed by the author of 《深入理�
 * 集成Mybatis框架,提高对关系型数据库增，删，改，查的开发速度。
 * 集成Spring Cache框架,实现注解式定义方法缓存。
 * ......
-##### In addition to the current popular Java frameworks, the Flink scaffolding project has also been integrated to speed up the coding speed of developers, such as:
-* Integrate Jbcp-template to quickly access relational databases such as Mysql, Oracle, SQLServer.
-* Integrate Hibernate Validator framework for parameter verification.
-* Integrate Spring Retry framework for retry flag.
-* Integrate Mybatis framework to improve the development speed of adding, deleting, modifying and checking relational databases.
-* Integrate the Spring Cache framework to implement annotation-style defined method caching.
-* ......
+
+
 
 ## 你可能面临如下苦恼/You may face the following distress：
 
@@ -131,6 +122,8 @@ public class FlowData {
     private String billNumber;
 }
 ```
+### 与市面上其他集成Spring生态的优势
+* 不需要将集成Spring的程序JAR包防止在Flink集群每个节点的lib包下面，比如这个例子：https://blog.csdn.net/javajxz008/article/details/94656679
 ### 等等......
 
 
@@ -181,10 +174,17 @@ Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中
 ## 3. 快速开始
 
 下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
+```
+声明：懒松鼠Flink-Boot脚手架不是《深入理解Flink核心设计与实践原理》的配套内容，两者没有任何关系。
+1. 代码不易，尊重劳动成果，可打赏博主19.9元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
+2. 公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，其他组件的配置文件未提供，一般来说，自行研究框架3小时即可搞定。
+3. 也可以选择不打赏博主，懒松鼠Flink-Boot公开了与Spring生产集成的所有代码，仅相关配置文件未公开，一般来说，自行研究框架3小时即可搞定。
+4. 19.9元的打赏不是为了挣钱，只是为了让博主看到这个项目的价值有继续迭代的动力，为后续打造一级的开源项目做贡献。
+5. 博主已经免费共享了所有代码，再白嫖博主写详细的操作手册就不地道了，望各位理解后再添加微信号获取相关资料。
+```
 微信号：intsmaze [微信二维码无法显示可跳转该页面扫码](https://www.cnblogs.com/intsmaze/)
 
 ![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
-
 
 ### 3.1 核心基础工程
 
