@@ -27,10 +27,6 @@
 2. 要是有一天它可以像开发Spring Boot程序那样可以优雅的分层，优雅的装配Bean，不需要自己new对象好了
 3. 可以使用各种Spring生态的框架，一些琐碎的逻辑不再硬编码到代码中。
 
-1. In the Flink stream processing application developed, the business logic is all written in Flink operators, and the code cannot be reused and cannot be layered
-2. If one day it can be elegantly layered and assemble Beans elegantly like the development of Spring Boot programs, without having to own new objects.
-3. Various Spring ecological frameworks can be used, and some trivial logic is no longer hard-coded into the code.
-
 ### 接口缓存/Interface cache
 
 **你的现状/Your current situation**
@@ -176,11 +172,14 @@ Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中
 下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
 ```
 声明：懒松鼠Flink-Boot脚手架不是《深入理解Flink核心设计与实践原理》的配套内容，两者没有任何关系。
-1. 代码不易，尊重劳动成果，可打赏博主19.9元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
-2. 公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，其他组件的配置文件未提供，一般来说，自行研究框架3小时即可搞定。
-3. 也可以选择不打赏博主，懒松鼠Flink-Boot公开了与Spring生产集成的所有代码，仅相关配置文件未公开，一般来说，自行研究框架3小时即可搞定。
-4. 19.9元的打赏不是为了挣钱，只是为了让博主看到这个项目的价值有继续迭代的动力，为后续打造一级的开源项目做贡献。
-5. 博主已经免费共享了所有代码，再白嫖博主写详细的操作手册就不地道了，望各位理解后再添加微信号获取相关资料。
+1. 代码不易，尊重劳动成果，可打赏博主29.9元即可获得懒松鼠Flink-Boot相关核心配置文件
+（以及后续新特性集成代码）,购书读者可9.9元获得。
+2. 公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，
+其他组件的配置文件未提供，一般来说，自行研究框架3小时即可搞定。
+3. 也可以选择不打赏博主，懒松鼠Flink-Boot公开了与Spring生产集成的所有代码，
+仅相关配置文件未公开，一般来说，自行研究框架3小时即可搞定。
+4. 29.9元的打赏不是为了挣钱，只是为了让博主看到这个项目的价值有继续迭代的动力，
+为后续打造一级的开源项目做贡献。
 ```
 微信号：intsmaze [微信二维码无法显示可跳转该页面扫码](https://www.cnblogs.com/intsmaze/)
 
