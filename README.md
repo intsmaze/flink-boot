@@ -1,7 +1,6 @@
 
 # 懒松鼠Flink-Boot
 #### [懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发。](https://github.com/intsmaze/flink-book)
-#### 声明：懒松鼠Flink-Boot脚手架不是《深入理解Flink核心设计与实践原理》的配套内容，两者没有任何关系。
 ![image](https://github.com/intsmaze/flink-boot/blob/master/fm.png)
 ##### 该脚手架屏蔽掉组装Flink API细节，让跨界变得简单，使得开发者能以传统Java WEB模式的开发方式开发出具备分布式计算能力的流处理程序。
 ##### 开发者完全不需要理解分布式计算的理论知识和Flink框架的细节，便可以快速编写业务代码实现。
