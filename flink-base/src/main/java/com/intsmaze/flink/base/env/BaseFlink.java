@@ -142,7 +142,7 @@ public abstract class BaseFlink {
         properties.setProperty("group.id", id);
         System.out.println("-------------->>>>>>>>>>>>>>>>>> consumer name is :" + id);
         FlinkKafkaConsumer<String> stringFlinkKafkaConsumer = new FlinkKafkaConsumer<>(topic, new SimpleStringSchema(), properties);
-        return env.addSource(stringFlinkKafkaConsumer).map(new InnerMap());
+        return env.addSource(stringFlinkKafkaConsumer);
     }
 
 
