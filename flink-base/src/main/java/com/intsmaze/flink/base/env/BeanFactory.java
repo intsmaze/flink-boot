@@ -3,8 +3,6 @@ package com.intsmaze.flink.base.env;
 import com.google.common.base.Charsets;
 import com.google.common.base.Throwables;
 import com.google.common.io.Resources;
-//import com.intsmaze.etl.bean.FlowData;
-//import com.intsmaze.etl.service.DataService;
 import org.apache.flink.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -114,12 +112,5 @@ public class BeanFactory extends DefaultListableBeanFactory {
 	}
 
 
-	public static void main(String[] args) {
-//		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("intsmaze-topology.xml");
-//		DataService da = applicationContext.getBean(DataService.class);
-//		FlowData flowData=new FlowData();
-//		flowData.setBillNumber("1231");
-//		da.findUUID(flowData);
 
-	}
 }
