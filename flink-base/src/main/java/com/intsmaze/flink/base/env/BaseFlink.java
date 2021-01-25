@@ -72,7 +72,7 @@ public abstract class BaseFlink {
         if (StringUtils.isBlank(isLocal)) {
             env.getConfig().setRestartStrategy(RestartStrategies.fixedDelayRestart(4, 10000));
             String isIncremental = params.get("isIncremental");
-            Preconditions.checkNotNull(isIncremental, "isIncremental is null");
+//            Preconditions.checkNotNull(isIncremental, "isIncremental is null");
             StateBackend stateBackend;
             String hadoopIp = properties.getProperty("hadoopIp");
             if ("isIncremental".equals(isIncremental)) {
