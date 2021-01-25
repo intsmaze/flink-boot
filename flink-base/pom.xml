@@ -40,6 +40,17 @@
             <version>1.2.17</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+
         <!-- flink table 相关依赖 -->
         <dependency>
             <groupId>org.apache.flink</groupId>

@@ -46,12 +46,12 @@ public class SimpleClient extends BaseFlink {
 
     @Override
     public void createTopology(StreamExecutionEnvironment builder) {
-
+        builder.setParallelism(1);
         DataStream<String> inputDataStrem = env.addSource(new SimpleDataSource());
 
-        DataStream<String> processDataStream = inputDataStrem.flatMap(new SimpleFunction());
+//        DataStream<String> processDataStream = inputDataStrem.flatMap(new SimpleFunction());
 
-        processDataStream.print("输出结果");
+        inputDataStrem.print("输出结果");
     }
 
 }
