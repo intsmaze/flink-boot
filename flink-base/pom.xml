@@ -123,6 +123,11 @@
             <version>2.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.14</version>
+        </dependency>
 
     </dependencies>
 
