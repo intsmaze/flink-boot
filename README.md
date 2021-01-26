@@ -118,7 +118,7 @@ public class FlowData {
 }
 ```
 ### 与市面上其他集成Spring生态的优势
-* 不需要将集成Spring的程序JAR包防止在Flink集群每个节点的lib包下面，比如这个例子：https://blog.csdn.net/javajxz008/article/details/94656679
+* 不需要将集成Spring的程序JAR包放置在Flink集群每个节点的lib包下面，比如这个例子：https://blog.csdn.net/javajxz008/article/details/94656679
 ### 等等......
 
 
@@ -173,9 +173,11 @@ Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中
 2. 公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，其他组件的配置文件未提供，一般来说，自行研究框架3小时即可搞定。
 3. 也可以选择不打赏博主，懒松鼠Flink-Boot公开了与Spring生产集成的所有代码，仅相关配置文件未公开，一般来说，自行研究框架3小时即可搞定。
 4. ~~19.9~~ 29.9 元的打赏不是为了挣钱，只是为了让博主看到这个项目的价值有继续迭代的动力，为后续打造一级的开源项目做贡献。
-微信号：intsmaze [微信二维码无法显示可跳转该页面扫码](https://www.cnblogs.com/intsmaze/)
+微信号：intsmaze [微信二维码无法显示可跳转该页面扫码，微信转账即可](https://www.cnblogs.com/intsmaze/)
 
 ![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
+
+## [框架快速演示视频](https://www.ixigua.com/6922010036285735438?wid_try=1)
 
 ### 3.1 核心基础工程
 
