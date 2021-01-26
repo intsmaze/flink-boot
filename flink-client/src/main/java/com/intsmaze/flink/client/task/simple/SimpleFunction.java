@@ -4,11 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.intsmaze.flink.base.bean.FlowData;
-import com.intsmaze.flink.base.bean.SourceData;
 import com.intsmaze.flink.base.transform.CommonFunction;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.LinkedList;
 import java.util.UUID;
 
 /**

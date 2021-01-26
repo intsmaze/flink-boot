@@ -41,10 +41,10 @@ public class DataServiceWithRetry  {
      */
     @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 2000L, multiplier = 1.5))
     public void insertFlow(FlowData flowData) throws Exception {
-        LOG.info("执行insertFlow方法");
+        LOG.info("insertFlow method：{}",flowData.toString());
         makeError++;
         if (makeError % 5 == 1) {
-            System.out.println("抛出异常："+flowData.toString());
+            LOG.info("throw new Exception：{}",flowData.toString());
             throw new Exception("手动抛出异常..");
         }
         dataService.insertFlow(flowData);
@@ -62,7 +62,6 @@ public class DataServiceWithRetry  {
     @Cacheable(value="FlowData.findUUID",key="#flowData.subTestItem+'-'+#flowData.billNumber+'-'+#flowData.barcode")
     public String findUUID(FlowData flowData) {
         LOG.info("执行findUUID方法");
-        System.out.println("执行findUUID方法----------");
         return dataService.findUUID(flowData);
     }
 

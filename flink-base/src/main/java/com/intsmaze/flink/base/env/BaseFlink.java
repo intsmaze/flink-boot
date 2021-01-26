@@ -69,14 +69,14 @@ public abstract class BaseFlink {
         }
 
         String restartStrategy = params.get("restartStrategy");
-        if (restartStrategy.equals("fixedDelayRestart")) {
+        if ("fixedDelayRestart".equals(restartStrategy)) {
             env.setRestartStrategy(RestartStrategies.fixedDelayRestart(
                     3,
                     Time.of(60, TimeUnit.SECONDS)
             ));
-        } else if (restartStrategy.equals("noRestart")) {
+        } else if ("noRestart".equals(restartStrategy)) {
             env.setRestartStrategy(RestartStrategies.noRestart());
-        } else if (restartStrategy.equals("fallBackRestart")) {
+        } else if ("fallBackRestart".equals(restartStrategy)) {
             env.setRestartStrategy(RestartStrategies.fallBackRestart());
         } else {
             env.setRestartStrategy(RestartStrategies.failureRateRestart(
