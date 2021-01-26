@@ -8,6 +8,7 @@ import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import org.apache.flink.api.common.time.Time;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.contrib.streaming.state.RocksDBStateBackend;
@@ -58,21 +59,37 @@ public abstract class BaseFlink {
      * @date: 2020/10/15 18:33
      */
     public void init(ParameterTool params) throws IOException {
-        String isLocal = params.get("isLocal");
         env = StreamExecutionEnvironment.getExecutionEnvironment();
         tableEnv = TableEnvironment.getTableEnvironment(env);
 
         this.properties = PropertiesUtils.getProperties(getPropertiesName());
-
         String parallelism = properties.getProperty("parallelism");
         if (StringUtils.isNotBlank(parallelism)) {
             env.setParallelism(Integer.valueOf(parallelism));
         }
 
+        String restartStrategy = params.get("restartStrategy");
+        if (restartStrategy.equals("fixedDelayRestart")) {
+            env.setRestartStrategy(RestartStrategies.fixedDelayRestart(
+                    3,
+                    Time.of(60, TimeUnit.SECONDS)
+            ));
+        } else if (restartStrategy.equals("noRestart")) {
+            env.setRestartStrategy(RestartStrategies.noRestart());
+        } else if (restartStrategy.equals("fallBackRestart")) {
+            env.setRestartStrategy(RestartStrategies.fallBackRestart());
+        } else {
+            env.setRestartStrategy(RestartStrategies.failureRateRestart(
+                    3,
+                    Time.of(5, TimeUnit.MINUTES),
+                    Time.of(60, TimeUnit.SECONDS)
+            ));
+        }
+
+        String isLocal = params.get("isLocal");
         if (StringUtils.isBlank(isLocal)) {
-            env.getConfig().setRestartStrategy(RestartStrategies.fixedDelayRestart(4, 10000));
             String isIncremental = params.get("isIncremental");
-//            Preconditions.checkNotNull(isIncremental, "isIncremental is null");
+            Preconditions.checkNotNull(isIncremental, "isIncremental is null");
             StateBackend stateBackend;
             String hadoopIp = properties.getProperty("hadoopIp");
             if ("isIncremental".equals(isIncremental)) {
