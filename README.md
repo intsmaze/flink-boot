@@ -118,7 +118,7 @@ public class FlowData {
 }
 ```
 ### 与市面上其他集成Spring生态的优势
-* 不需要将集成Spring的程序JAR包防止在Flink集群每个节点的lib包下面，比如这个例子：https://blog.csdn.net/javajxz008/article/details/94656679
+* 不需要将集成Spring的程序JAR包放置在Flink集群每个节点的lib包下面，比如这个例子：https://blog.csdn.net/javajxz008/article/details/94656679
 ### 等等......
 
 
