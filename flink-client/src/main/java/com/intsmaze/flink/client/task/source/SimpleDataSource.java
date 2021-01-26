@@ -5,11 +5,15 @@ import com.google.gson.GsonBuilder;
 import com.intsmaze.flink.base.bean.MainData;
 import com.intsmaze.flink.base.transform.CommonDataSource;
 import org.apache.flink.configuration.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * github地址: https://github.com/intsmaze
@@ -20,6 +24,8 @@ import java.util.Random;
  * @date: 2020/10/15 18:33
  */
 public class SimpleDataSource extends CommonDataSource {
+
+    private static final Logger TRACE_LOGGER = LoggerFactory.getLogger(SimpleDataSource.class);
 
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
@@ -34,6 +40,8 @@ public class SimpleDataSource extends CommonDataSource {
     String billNumberPre = "intsmaze-";
 
     String barcodePre = "1992-";
+
+
 
     /**
      * github地址: https://github.com/intsmaze
@@ -72,6 +80,7 @@ public class SimpleDataSource extends CommonDataSource {
      */
     @Override
     public String sendMess() throws InterruptedException {
+        MDC.put("traceID", "TraceId-" + UUID.randomUUID().toString());
         Thread.sleep(1000);
         seqId++;
         num++;
