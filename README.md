@@ -161,7 +161,7 @@ Redis | 分布式缓存数据库  | 进行中
 Solr & Elasticsearch | 分布式全文搜索引擎  | 进行中
 Ehcache | 进程内缓存框架  | 进行中 
 sequence | 分布式高效ID生产  | 进行中 
-Dubbole消费者 | 服务消费者  | 进行中 
+Dubbole消费者 | 服务消费者  | 已集成 
 Spring eurake消费者 | 服务消费者  | 进行中 
 Apollo配置中心 | 携程阿波罗配置中心  | 进行中 
 Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中 
