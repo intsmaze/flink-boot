@@ -8,6 +8,6 @@ package com.intsmaze.dubbo.provider;
  */
 public class DemoServiceImpl implements DubboService {
     public String sayHello(String name) {
-        return "Hello " + name;
+        return "dubbo provider return mess: " + name;
     }
 }
