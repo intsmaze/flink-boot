@@ -9,6 +9,7 @@
     <!-- 提供方应用信息，用于计算依赖关系 -->
     <dubbo:application name="hello-world-app"  />
 
+    <dubbo:protocol port="-1" name="dubbo"/>
     <!-- 使用multicast广播注册中心暴露服务地址 -->
     <!--<dubbo:registry address="multicast://224.5.6.7:1234" />-->
 
