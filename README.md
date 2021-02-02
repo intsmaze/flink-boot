@@ -8,7 +8,11 @@
 
 懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发,让Flink全面拥抱Spring生态体系，使得开发者可以以Java WEB开发模式开发出分布式运行的流处理程序，懒松鼠让跨界变得更加简单。懒松鼠旨在让开发者以更底上手成本（不需要理解分布式计算的理论知识和Flink框架的细节）便可以快速编写业务代码实现。为了进一步提升开发者使用懒松鼠脚手架开发大型项目的敏捷的度，该脚手架默认集成Spring框架进行Bean管理，同时将微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。比如集成Mybatis ORM框架，Hibernate Validator校验框架,Spring Retry重试框架等，具体见下面的脚手架特性。
 
-## [《深入理解Flink核心设计与实践原理》京东商城购买链接](https://item.jd.com/12765369.html)
+## 诞生由来
+本人一直认为，Flink框架，在某些场景完全可以替代Spring微服务框架，但是很多人仍认为它只能用在OLAP场景，对批处理场景的扩展（批流一体不做讨论）。
+作为一个深耕流计算领域，同时具备java分布式开发能力的开发者，我一直认为一个Flink也好，Spark Streaming也好，Storm也好，流计算开发工程师必须具备深厚的Java功底，不然无法解决高并发的经验，毕竟和离线计算相比，它的失败重跑的代价太大，同时要和很多第三方系统进行交互，比如作为服务的消费组调用Eurake中的服务提供者，存储数据到关系型数据库，这又涉及到事务等理论等等。
+目前市场的普遍情况就是统计一些PU,VU指标等，更或者仅仅是实时ETL，面向SQL编程。很多流计算开发者对Flink框架的特性头头是道，但是基本的Java功底却很薄弱。
+**本框架未来将会开发DRPC组件，该组件将基于Dubbo服务注册者来注册服务供服务消费组进行消费，做到真正的同步响应。**
 
 ##### 除此之外针对目前流行的各大Java框架，该Flink脚手架工程也进行了集成，加快开发人员的编码速度,比如:
 * 集成Jbcp-template对Mysql,Oracle,SQLServer等关系型数据库的快速访问。
@@ -18,17 +22,17 @@
 * 集成Spring Cache框架,实现注解式定义方法缓存。
 * ......
 
+## [《深入理解Flink核心设计与实践原理》京东商城购买链接](https://item.jd.com/12765369.html)
 
-
-## 你可能面临如下苦恼/You may face the following distress：
+## 你可能面临如下苦恼：
 
 1. 开发的Flink流处理应用程序，业务逻辑全部写在Flink的操作符中，代码无法复用，无法分层
 2. 要是有一天它可以像开发Spring Boot程序那样可以优雅的分层，优雅的装配Bean，不需要自己new对象好了
 3. 可以使用各种Spring生态的框架，一些琐碎的逻辑不再硬编码到代码中。
 
-### 接口缓存/Interface cache
+### 接口缓存
 
-**你的现状/Your current situation**
+**你的现状**
 
 ```
 static Map<String,String> cache=new HashMap<String,String>();
@@ -45,7 +49,7 @@ public String findUUID(FlowData flowData) {
 }
 ```
 
-**你想要的是这样/What you want is this**
+**你想要的是这样**
 
 ```
 @Cacheable(value = "FlowData.findUUID", key = "#flowData.subTestItem")
@@ -54,9 +58,9 @@ public String findUUID(FlowData flowData) {
 }
 ```
 
-### 重试机制/Retry mechanism
+### 重试机制
 
-**你的现状/Your current situation**
+**你的现状**
 
 ```java
 public void insertFlow(FlowData flowData) {
@@ -70,7 +74,7 @@ public void insertFlow(FlowData flowData) {
 }
 ```
 
-**你想要的是这样/What you want is this**
+**你想要的是这样**
 
 ```java
     @Retryable(value = Exception.class, maxAttempts = 3, backoff = @Backoff(delay = 2000L, multiplier = 1.5))
@@ -82,9 +86,9 @@ public void insertFlow(FlowData flowData) {
 
 
 
-### Bean校验/Bean verification
+### Bean校验
 
-**你的现状/Your current situation**
+**你的现状**
 
 ```
 if(flowData.getSubTestItem().length()<2&&flowData.getSubTestItem().length()>7)
@@ -97,7 +101,7 @@ if(flowData.getBillNumber()==null)
 }
 ```
 
-**你想要的是这样/What you want is this**
+**你想要的是这样**
 
 ```
 Map<String, StringBuffer> validate = ValidatorUtil.validate(flowData);
@@ -122,7 +126,7 @@ public class FlowData {
 ### 等等......
 
 
-## 1. 组织结构/Organizational structure
+## 1. 组织结构
 
 ``` lua
 Flink-Boot
@@ -134,6 +138,8 @@ Flink-Boot
 ├── flink-validate -- 校验模块/validate module
 ├── flink-sql -- Flink SQL解耦至XML配置模块/SQL decoupling to XML configuration module
 ├── flink-cache-annotation -- 接口缓冲模块/Interface buffer module
+├── flink-dubbo-comsumer -- Dubbo 消费组模块/Dubbo comsumer module
+├── flink-other-service -- 组件原生运行模块
 ├── flink-junit -- 单元测试模块/Unit test module
 ├── flink-apollo -- 阿波罗配置客户端模块/Apollo configuration client module
 ```
@@ -147,6 +153,7 @@ Spring 基于注解方式配置Bean | 装配Bean  | 已集成
 Spring 基于注解声明方法重试机制 | Retry注解  | 已集成 
 Spring 基于注解声明方法缓存 | Cache注解  | 已集成 
 Hibernate Validator | 校验框架  | 已集成
+Dubbole消费者 | 服务消费者  | 已集成 
 Druid | 数据库连接池  | 已集成 
 MyBatis | ORM框架  | 已集成 
 Kafka | 消息队列  | 已集成
@@ -161,7 +168,6 @@ Redis | 分布式缓存数据库  | 进行中
 Solr & Elasticsearch | 分布式全文搜索引擎  | 进行中
 Ehcache | 进程内缓存框架  | 进行中 
 sequence | 分布式高效ID生产  | 进行中 
-Dubbole消费者 | 服务消费者  | 已集成 
 Spring eurake消费者 | 服务消费者  | 进行中 
 Apollo配置中心 | 携程阿波罗配置中心  | 进行中 
 Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中 
@@ -169,26 +175,22 @@ Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中
 ## 3. 快速开始
 
 下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
-1. 代码不易，尊重劳动成果，可打赏博主 ~~19.9~~  29.9元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
+1. 生活不易，脑力代码不易，尊重劳动成果，可打赏博主 ~~19.9~~  ~~29.9~~ 36.9元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
 2. 公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，其他组件的配置文件未提供，一般来说，自行研究框架3小时即可搞定。
 3. 也可以选择不打赏博主，懒松鼠Flink-Boot公开了与Spring生产集成的所有代码，仅相关配置文件未公开，一般来说，自行研究框架3小时即可搞定。
-4. ~~19.9~~ 29.9 元的打赏不是为了挣钱，只是为了让博主看到这个项目的价值有继续迭代的动力，为后续打造一级的开源项目做贡献。
+4. ~~19.9~~  ~~29.9~~  36.8元的打赏不是为了挣钱，只是为了让博主看到这个项目的价值有继续迭代的动力，为后续打造一级的开源项目做贡献。
 微信号：intsmaze [微信二维码无法显示可跳转该页面扫码，微信转账即可](https://www.cnblogs.com/intsmaze/)
 
+Flink框架的技术咨询可添加微信进行咨询。
 ![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
 
-会员享受功能：
+**会员享受功能：**
 1. 框架的详细手册和配置文件
 2. 可以免费获取后续新增功能
 3. 可以提想要集成的框架，我会根据是否有必要在一个月内集成
 4. 框架使用上有问题，我会跟踪解决（PS：因为环境问题导致的不在售后范围）
 5. 一杯星巴克的钱，省去三小时自我琢磨
 
-高级会员：
-提供开发中的咨询服务，帮助解决线上问题，收费标准包月1K，单次2小时100元。
-
-
-## [框架快速演示视频](https://www.ixigua.com/6922010036285735438?wid_try=1)
 
 ### 3.1 核心基础工程
 
@@ -420,7 +422,7 @@ public class SimpleClient extends BaseFlink {
 
 ## 演示地址
 
-演示地址： [待](https://www.cnblogs.com/intsmaze/)
+演示地址： [框架快速演示视频](https://www.ixigua.com/6922010036285735438?wid_try=1)
 
 ## 参与开发
 
