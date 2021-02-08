@@ -32,15 +32,15 @@
   - [Bean校验](#Bean校验)
   - [与市面上其他集成Spring生态的优势](#与市面上其他集成Spring生态的优势)
   - [等等](#等等......)
-- [组织结构 (必看 :+1:)](#1.组织结构)
-- [技术选项和集成情况](#2.技术选项和集成情况)
-- [快速开始](#3.快速开始)
-  - [核心基础工程](3.1核心基础工程)
+- [组织结构 (必看 :+1:)](#组织结构)
+- [技术选项和集成情况](#技术选项和集成情况)
+- [快速开始](#快速开始)
+  - [核心基础工程](核心基础工程)
   - [Spring容器](Spring容器)
   - [启动类示例](#启动类示例)
-  - [数据源](数据源)
-  - [业务逻辑实现](业务逻辑实现)
-  - [集群/本地运行](集群/本地运行)
+  - [数据源](#数据源)
+  - [业务逻辑实现](#业务逻辑实现)
+  - [集群/本地运行](#集群/本地运行)
 - [演示地址 (必看 :+1:)](#演示地址)
 - [其他](#其他)
   - [待办](#待办)
@@ -152,7 +152,7 @@ public class FlowData {
 ### 等等......
 
 
-## 1.组织结构
+## 组织结构
 
 ``` lua
 Flink-Boot
@@ -170,7 +170,7 @@ Flink-Boot
 ├── flink-apollo -- 阿波罗配置客户端模块/Apollo configuration client module
 ```
 
-## 2.技术选项和集成情况
+## 技术选项和集成情况
 技术 | 名称 | 状态 |
 ----|------|----
 Spring Framework | 容器  | 已集成 
@@ -198,7 +198,7 @@ Spring eurake消费者 | 服务消费者  | 进行中
 Apollo配置中心 | 携程阿波罗配置中心  | 进行中 
 Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中 
 
-## 3.快速开始
+## 快速开始
 
 下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
 1. 生活不易，脑力代码不易，尊重劳动成果，可打赏博主 ~~19.9~~  ~~29.9~~ 36.9元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
@@ -218,7 +218,7 @@ Flink框架的技术咨询可添加微信进行咨询。
 5. 一杯星巴克的钱，省去三小时自我琢磨
 
 
-### 3.1 核心基础工程
+### 核心基础工程
 
 * flink-base :基础工程，封装了开发Flink工程的必须参数，同时集成Spring容器，为后续集成Spring各类框架提供了支撑。
   1. 可以在本地开发环境和Flink集群运行环境中随意切换。
@@ -228,7 +228,7 @@ Flink框架的技术咨询可添加微信进行咨询。
   5. 内置实现了任务的暂停机制-达到任务仍在运行但不再接收Kafka数据源中的数据，代替了停止任务后再重新部署任务这一繁琐流程。
  * flink-client：业务工程，该工程依赖flink-base工程，开发任务在该工程中进行业务逻辑的开发。
 
-### 3.2 Spring容器
+### Spring容器
 
 该容器模式配置了JdbcTemplate实例，数据库连接池采用Druid，在业务方法中只需要获取容器中的JdbcTemplate实例便可以快速与关系型数据库进行交互,dataService实例封装了一些访问数据库表的方法。
 
@@ -267,7 +267,7 @@ jdbc.password = intsmaze
 jdbc.url = jdbc:mysql://127.0.0.1:3306/flink-boot?useUnicode=true&characterEncoding=UTF-8
 ```
 
-### 3.3 启动类示例
+### 启动类示例
 
 如下是SimpleClient（com.intsmaze.flink.client.SimpleClient）类的示例代码，该类继承了BaseFlink，可以看到对应实现的方法中分别设置如下：
 
@@ -320,7 +320,7 @@ public class SimpleClient extends BaseFlink {
 }
 ```
 
-### 3.4 数据源
+### 数据源
 
 采用自定义数据源，用户需要编写自定义DataSource类，该类需要继承XXX抽象类，实现如下方法。
 
@@ -350,7 +350,7 @@ public class SimpleDataSource extends CommonDataSource {
 }
 ```
 
-### 3.5 业务逻辑实现
+### 业务逻辑实现
 
 本作业计算的业务逻辑在Flink转换操作符中进行实现，一般来说开发者只需要实现flatMap算子即可以满足大部分算子的使用。
 
@@ -428,7 +428,7 @@ public void open(Configuration parameters){
 }
 ```
 
-### 3.6  集群/本地运行
+### 集群/本地运行
 
 在自定义的Topology类编写Main方法，创建自定义的Topology对象后，调用对象的run(...)方法。
 
@@ -454,6 +454,7 @@ public class SimpleClient extends BaseFlink {
 
 首先谢谢大家支持，如果你希望参与开发，欢迎通过[Github](https://github.com/intsmaze/flink-boot "Github")上fork本项目，并Pull Request您的commit。
 
+# 其他
 ## 联系我
 下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
 1. 生活不易，脑力代码不易，尊重劳动成果，可打赏博主 ~~19.9~~  ~~29.9~~ 36.9元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
