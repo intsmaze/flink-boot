@@ -2,11 +2,16 @@
 # 懒松鼠Flink-Boot
 #### [懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发。](https://github.com/intsmaze/flink-book)
 ![image](https://github.com/intsmaze/flink-boot/blob/master/fm.png)
-##### 该脚手架屏蔽掉组装Flink API细节，让跨界变得简单，使得开发者能以传统Java WEB模式的开发方式开发出具备分布式计算能力的流处理程序。
-##### 开发者完全不需要理解分布式计算的理论知识和Flink框架的细节，便可以快速编写业务代码实现。
-##### 为了进一步提升开发者使用该脚手架开发大型项目的敏捷的程度，该脚手架工程默认集成Spring框架进行Bean管理，同时将微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。
-
-懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发,让Flink全面拥抱Spring生态体系，使得开发者可以以Java WEB开发模式开发出分布式运行的流处理程序，懒松鼠让跨界变得更加简单。懒松鼠旨在让开发者以更底上手成本（不需要理解分布式计算的理论知识和Flink框架的细节）便可以快速编写业务代码实现。为了进一步提升开发者使用懒松鼠脚手架开发大型项目的敏捷的度，该脚手架默认集成Spring框架进行Bean管理，同时将微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。比如集成Mybatis ORM框架，Hibernate Validator校验框架,Spring Retry重试框架等，具体见下面的脚手架特性。
+##### 该脚手架屏蔽掉组装Flink API细节，让Flink全面拥抱Spring生态体系，使得开发者能以传统Java WEB模式的开发方式开发出具备分布式计算能力的流处理程序,懒松鼠让跨界变得更加简单。
+##### 懒松鼠旨在让开发者以更底上手成本（不需要理解分布式计算的理论知识和Flink框架的细节）便可以快速编写业务代码实现。
+##### 为了进一步提升开发者使用该脚手架开发大型项目的敏捷的程度，该脚手架工程默认集成Spring框架进行Bean管理，同时将微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。比如集成:
+* 集成Jbcp-template对Mysql,Oracle,SQLServer等关系型数据库的快速访问。
+* 集成Hibernate Validator框架进行参数校验。
+* 集成Spring Retry框架进行重试标志。
+* 集成Mybatis框架,提高对关系型数据库增，删，改，查的开发速度。
+* 集成Spring Cache框架,实现注解式定义方法缓存。
+* 集成Dubbo 框架,实现Dubbo Consumer调用Spring Cloud中的服务接口。
+* ......
 
 ## 诞生由来
 * 本人一直认为，Flink框架，在某些场景完全可以替代Spring微服务框架，但是很多人仍认为它只能用在OLAP场景，对批处理场景的扩展（批流一体不做讨论）。
@@ -14,15 +19,36 @@
 * 目前市场的普遍情况就是统计一些PU,VU指标等，更或者仅仅是实时ETL，面向SQL编程。很多流计算开发者对Flink框架的特性头头是道，但是基本的Java功底却很薄弱。
 * **本框架未来将会开发DRPC组件，该组件将基于Dubbo服务注册者来注册服务供服务消费组进行消费，做到真正的同步响应。**
 
-##### 除此之外针对目前流行的各大Java框架，该Flink脚手架工程也进行了集成，加快开发人员的编码速度,比如:
-* 集成Jbcp-template对Mysql,Oracle,SQLServer等关系型数据库的快速访问。
-* 集成Hibernate Validator框架进行参数校验。
-* 集成Spring Retry框架进行重试标志。
-* 集成Mybatis框架,提高对关系型数据库增，删，改，查的开发速度。
-* 集成Spring Cache框架,实现注解式定义方法缓存。
-* ......
-
 ## [《深入理解Flink核心设计与实践原理》京东商城购买链接](https://item.jd.com/12765369.html)
+
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [你可能面临如下苦恼](#你可能面临如下苦恼)
+  - [接口缓存](#接口缓存)
+  - [重试机制](#重试机制)
+  - [Bean校验](#Bean校验)
+  - [与市面上其他集成Spring生态的优势](#与市面上其他集成Spring生态的优势)
+  - [等等](#等等......)
+- [组织结构 (必看 :+1:)](#组织结构)
+- [技术选项和集成情况](#技术选项和集成情况)
+- [快速开始](#快速开始)
+  - [核心基础工程](核心基础工程)
+  - [Spring容器](Spring容器)
+  - [启动类示例](#启动类示例)
+  - [数据源](#数据源)
+  - [业务逻辑实现](#业务逻辑实现)
+  - [集群/本地运行](#集群/本地运行)
+- [演示地址 (必看 :+1:)](#演示地址)
+- [其他](#其他)
+  - [待办](#待办)
+  - [联系我](#联系我)
+  - [捐赠支持](#捐赠支持)
+  - [Contributor](#贡献者)
+
+<!-- /code_chunk_output -->
 
 ## 你可能面临如下苦恼：
 
@@ -126,7 +152,7 @@ public class FlowData {
 ### 等等......
 
 
-## 1. 组织结构
+## 组织结构
 
 ``` lua
 Flink-Boot
@@ -144,7 +170,7 @@ Flink-Boot
 ├── flink-apollo -- 阿波罗配置客户端模块/Apollo configuration client module
 ```
 
-## 2. 技术选项和集成情况
+## 技术选项和集成情况
 技术 | 名称 | 状态 |
 ----|------|----
 Spring Framework | 容器  | 已集成 
@@ -172,7 +198,7 @@ Spring eurake消费者 | 服务消费者  | 进行中
 Apollo配置中心 | 携程阿波罗配置中心  | 进行中 
 Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中 
 
-## 3. 快速开始
+## 快速开始
 
 下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
 1. 生活不易，脑力代码不易，尊重劳动成果，可打赏博主 ~~19.9~~  ~~29.9~~ 36.9元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
@@ -192,7 +218,7 @@ Flink框架的技术咨询可添加微信进行咨询。
 5. 一杯星巴克的钱，省去三小时自我琢磨
 
 
-### 3.1 核心基础工程
+### 核心基础工程
 
 * flink-base :基础工程，封装了开发Flink工程的必须参数，同时集成Spring容器，为后续集成Spring各类框架提供了支撑。
   1. 可以在本地开发环境和Flink集群运行环境中随意切换。
@@ -202,7 +228,7 @@ Flink框架的技术咨询可添加微信进行咨询。
   5. 内置实现了任务的暂停机制-达到任务仍在运行但不再接收Kafka数据源中的数据，代替了停止任务后再重新部署任务这一繁琐流程。
  * flink-client：业务工程，该工程依赖flink-base工程，开发任务在该工程中进行业务逻辑的开发。
 
-### 3.2 Spring容器
+### Spring容器
 
 该容器模式配置了JdbcTemplate实例，数据库连接池采用Druid，在业务方法中只需要获取容器中的JdbcTemplate实例便可以快速与关系型数据库进行交互,dataService实例封装了一些访问数据库表的方法。
 
@@ -241,7 +267,7 @@ jdbc.password = intsmaze
 jdbc.url = jdbc:mysql://127.0.0.1:3306/flink-boot?useUnicode=true&characterEncoding=UTF-8
 ```
 
-### 3.3 启动类示例
+### 启动类示例
 
 如下是SimpleClient（com.intsmaze.flink.client.SimpleClient）类的示例代码，该类继承了BaseFlink，可以看到对应实现的方法中分别设置如下：
 
@@ -294,7 +320,7 @@ public class SimpleClient extends BaseFlink {
 }
 ```
 
-### 3.4 数据源
+### 数据源
 
 采用自定义数据源，用户需要编写自定义DataSource类，该类需要继承XXX抽象类，实现如下方法。
 
@@ -324,7 +350,7 @@ public class SimpleDataSource extends CommonDataSource {
 }
 ```
 
-### 3.5 业务逻辑实现
+### 业务逻辑实现
 
 本作业计算的业务逻辑在Flink转换操作符中进行实现，一般来说开发者只需要实现flatMap算子即可以满足大部分算子的使用。
 
@@ -402,7 +428,7 @@ public void open(Configuration parameters){
 }
 ```
 
-### 3.6  集群/本地运行
+### 集群/本地运行
 
 在自定义的Topology类编写Main方法，创建自定义的Topology对象后，调用对象的run(...)方法。
 
@@ -428,3 +454,21 @@ public class SimpleClient extends BaseFlink {
 
 首先谢谢大家支持，如果你希望参与开发，欢迎通过[Github](https://github.com/intsmaze/flink-boot "Github")上fork本项目，并Pull Request您的commit。
 
+# 其他
+## 联系我
+下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
+1. 生活不易，脑力代码不易，尊重劳动成果，可打赏博主 ~~19.9~~  ~~29.9~~ 36.9元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
+2. 公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，其他组件的配置文件未提供，一般来说，自行研究框架3小时即可搞定。
+3. 也可以选择不打赏博主，懒松鼠Flink-Boot公开了与Spring生产集成的所有代码，仅相关配置文件未公开，一般来说，自行研究框架3小时即可搞定。
+4. ~~19.9~~  ~~29.9~~  36.8元的打赏不是为了挣钱，只是为了让博主看到这个项目的价值有继续迭代的动力，为后续打造一级的开源项目做贡献。
+微信号：intsmaze [微信二维码无法显示可跳转该页面扫码，微信转账即可](https://www.cnblogs.com/intsmaze/)
+
+Flink框架的技术咨询可添加微信进行咨询。
+![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
+
+**会员享受功能：**
+1. 框架的详细手册和配置文件
+2. 可以免费获取后续新增功能
+3. 可以提想要集成的框架，我会根据是否有必要在一个月内集成
+4. 框架使用上有问题，我会跟踪解决（PS：因为环境问题导致的不在售后范围）
+5. 一杯星巴克的钱，省去三小时自我琢磨
