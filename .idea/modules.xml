@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/flink-other-service/dubbo.consumer/dubbo-consumer.iml" filepath="$PROJECT_DIR$/flink-other-service/dubbo.consumer/dubbo-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-other-service/dubbo.provider/dubbo-provider.iml" filepath="$PROJECT_DIR$/flink-other-service/dubbo.provider/dubbo-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-annotation/flink-annotation.iml" filepath="$PROJECT_DIR$/flink-annotation/flink-annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-apollo/flink-apollo.iml" filepath="$PROJECT_DIR$/flink-apollo/flink-apollo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-base/flink-base.iml" filepath="$PROJECT_DIR$/flink-base/flink-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-boot.iml" filepath="$PROJECT_DIR$/flink-boot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-cache-annotation/flink-cache-annotation.iml" filepath="$PROJECT_DIR$/flink-cache-annotation/flink-cache-annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-client/flink-client.iml" filepath="$PROJECT_DIR$/flink-client/flink-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-drpc/flink-drpc.iml" filepath="$PROJECT_DIR$/flink-drpc/flink-drpc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-dubbo-consumer/flink-dubbo-consumer.iml" filepath="$PROJECT_DIR$/flink-dubbo-consumer/flink-dubbo-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-jedis/flink-jedis.iml" filepath="$PROJECT_DIR$/flink-jedis/flink-jedis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-junit/flink-junit.iml" filepath="$PROJECT_DIR$/flink-junit/flink-junit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-mybatis/flink-mybatis.iml" filepath="$PROJECT_DIR$/flink-mybatis/flink-mybatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-other-service/flink-other-service.iml" filepath="$PROJECT_DIR$/flink-other-service/flink-other-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-retry/flink-retry.iml" filepath="$PROJECT_DIR$/flink-retry/flink-retry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-sql/flink-sql.iml" filepath="$PROJECT_DIR$/flink-sql/flink-sql.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flink-validate/flink-validate.iml" filepath="$PROJECT_DIR$/flink-validate/flink-validate.iml" />
+    </modules>
+  </component>
+</project>
