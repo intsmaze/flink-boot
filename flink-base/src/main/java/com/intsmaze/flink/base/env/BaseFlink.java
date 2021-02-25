@@ -1,6 +1,5 @@
 package com.intsmaze.flink.base.env;
 
-import com.google.common.base.Preconditions;
 import com.intsmaze.flink.base.thread.SwitchThread;
 import com.intsmaze.flink.base.util.PropertiesUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -19,9 +18,8 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.java.StreamTableEnvironment;
+import org.apache.flink.util.Preconditions;
 import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
@@ -218,58 +216,6 @@ public abstract class BaseFlink {
 
         String topoName = StringUtils.join(getJobName(), "-", new DateTime().toString("yyyyMMdd-HHmmss"));
         env.execute(topoName);
-    }
-
-    /**
-     * github地址: https://github.com/intsmaze
-     * 博客地址：https://www.cnblogs.com/intsmaze/
-     * 出版书籍《深入理解Flink核心设计与实践原理》
-     *
-     * @auther: intsmaze(刘洋)
-     * @date: 2020/10/15 18:33
-     */
-    class InnerMap extends RichMapFunction<String, String> {
-
-        public Logger log = LoggerFactory.getLogger(BeanFactory.class);
-
-        /**
-         * github地址: https://github.com/intsmaze
-         * 博客地址：https://www.cnblogs.com/intsmaze/
-         * 出版书籍《深入理解Flink核心设计与实践原理》
-         *
-         * @auther: intsmaze(刘洋)
-         * @date: 2020/10/15 18:33
-         */
-        @Override
-        public void open(Configuration parameters) {
-            ExecutionConfig.GlobalJobParameters globalJobParameters = getRuntimeContext()
-                    .getExecutionConfig().getGlobalJobParameters();
-            ApplicationContext beanFactory = BeanFactory.getBeanFactory((Configuration) globalJobParameters);
-            beanFactory.getBean(SwitchThread.class);
-            System.out.println(SwitchThread.activityConfigs.getOrDefault(SwitchThread.isSleep, "no"));
-        }
-
-        /**
-         * github地址: https://github.com/intsmaze
-         * 博客地址：https://www.cnblogs.com/intsmaze/
-         * 出版书籍《深入理解Flink核心设计与实践原理》
-         *
-         * @auther: intsmaze(刘洋)
-         * @date: 2020/10/15 18:33
-         */
-        @Override
-        public String map(String value) {
-            try {
-                String isSleep = (String) SwitchThread.activityConfigs.getOrDefault(SwitchThread.isSleep, "no");
-                if (StringUtils.equals(isSleep, "yes")) {
-                    log.error("每运行一次,休眠30m");
-                    TimeUnit.SECONDS.sleep(30);
-                }
-            } catch (Exception e) {
-                log.error("", e);
-            }
-            return value;
-        }
     }
 
 }
