@@ -1,19 +1,18 @@
 package com.intsmaze.flink.client;
 
-import com.intsmaze.flink.base.bean.ResultBean;
 import com.intsmaze.flink.base.bean.SourceData;
 import com.intsmaze.flink.base.env.BaseFlink;
 import com.intsmaze.flink.sql.XmlUtils;
 import com.intsmaze.flink.sql.task.SqlFlatMap;
-import com.intsmaze.flink.sql.time.EventTimeWaterMarks;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
-import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.Table;
+import org.apache.flink.types.Row;
 
 import java.util.Map;
+
+import static org.apache.flink.table.api.Expressions.$;
 
 
 /**
@@ -64,22 +63,21 @@ public class SQLClient extends BaseFlink {
     @Override
     public void createTopology(StreamExecutionEnvironment builder) {
 
-        env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         System.out.println(properties.getProperty("sqlTopic"));
         DataStream<String> inputDataStrem = getKafkaSpout(properties.getProperty("sqlTopic").trim());
 
         DataStream<SourceData> dataStream = inputDataStrem.flatMap(new SqlFlatMap());
 
-        DataStream<SourceData> stream = dataStream.assignTimestampsAndWatermarks(new EventTimeWaterMarks());
-
         //额外声明一个字段作为时间属性，这个额外字段必须位于schema的最后定义
-        tableEnv.registerDataStream("sourceData", stream, "flag,uuid,testTime,seqId,stepNumber,stepType,cycleNumber," +
-                "batchNumber,flowId,threadName,receiveTime.rowtime");
+        tableEnv.createTemporaryView("sourceData", dataStream, $("flag"),$("uuid"),$("testTime"),$("seqId")
+                ,$("stepNumber"),$("stepType"),$("cycleNumber"),$("batchNumber"),$("flowId"),$("threadName")
+                );
 
         Table resultNew = tableEnv.sqlQuery(xmlForSql.get("sql_temp"));
 
-        DataStream<Tuple2<Boolean, ResultBean>> tuple2DataStream = tableEnv.toRetractStream(resultNew, ResultBean.class);
+        DataStream<Row> resultBeanDataStream = tableEnv.toAppendStream(resultNew, Row.class);
 
+        resultBeanDataStream.print("校验后的数据");
     }
 
 }

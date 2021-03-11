@@ -1,6 +1,5 @@
 package com.intsmaze.flink.client;
 
-import com.intsmaze.flink.annotation.task.AnnotationFlatMap;
 import com.intsmaze.flink.base.env.BaseFlink;
 import com.intsmaze.flink.client.task.source.SimpleDataSource;
 import com.intsmaze.flink.mybatis.task.MybatisFlatMap;

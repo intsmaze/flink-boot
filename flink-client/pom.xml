@@ -6,55 +6,55 @@
 
     <groupId>com.intsmaze.flink.client</groupId>
     <artifactId>flink-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
 
     <dependencies>
         <dependency>
             <groupId>com.intsmaze.flink.base</groupId>
             <artifactId>flink-base</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.validate</groupId>
             <artifactId>flink-validate</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.sql</groupId>
             <artifactId>flink-sql</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.annotation</groupId>
             <artifactId>flink-annotation</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.mybatis</groupId>
             <artifactId>flink-mybatis</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.retry</groupId>
             <artifactId>flink-retry</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.cache.annotation</groupId>
             <artifactId>flink-cache-annotation</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>com.intsmaze.flink</groupId>
             <artifactId>flink-dubbo-consumer</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0</version>
         </dependency>
 
     </dependencies>

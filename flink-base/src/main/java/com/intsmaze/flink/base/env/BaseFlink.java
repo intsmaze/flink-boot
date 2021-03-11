@@ -1,10 +1,7 @@
 package com.intsmaze.flink.base.env;
 
-import com.intsmaze.flink.base.thread.SwitchThread;
 import com.intsmaze.flink.base.util.PropertiesUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.flink.api.common.ExecutionConfig;
-import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.common.time.Time;
@@ -16,11 +13,11 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
+import org.apache.flink.table.api.EnvironmentSettings;
 import org.apache.flink.table.api.TableEnvironment;
-import org.apache.flink.table.api.java.StreamTableEnvironment;
+import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.util.Preconditions;
 import org.joda.time.DateTime;
-import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -42,6 +39,8 @@ public abstract class BaseFlink {
 
     protected String configFile;
 
+    protected EnvironmentSettings settings;
+
     protected StreamExecutionEnvironment env;
 
     protected StreamTableEnvironment tableEnv;
@@ -58,7 +57,9 @@ public abstract class BaseFlink {
      */
     public void init(ParameterTool params) throws IOException {
         env = StreamExecutionEnvironment.getExecutionEnvironment();
-        tableEnv = TableEnvironment.getTableEnvironment(env);
+        settings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
+        tableEnv = StreamTableEnvironment.create(env, settings);
+
 
         this.properties = PropertiesUtils.getProperties(getPropertiesName());
         String parallelism = properties.getProperty("parallelism");
