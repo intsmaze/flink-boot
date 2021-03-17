@@ -34,7 +34,7 @@ public class AnnotationFlatMap extends CommonFunction {
      * @date: 2020/10/15 18:33
      */
     @Override
-    public void open(Configuration parameters) {
+    public void open(Configuration parameters) throws Exception {
         super.open(parameters);
         dataServiceAnnotation = beanFactory.getBean(DataServiceAnnotation.class);
     }

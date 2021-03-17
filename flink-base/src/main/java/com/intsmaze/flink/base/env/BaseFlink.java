@@ -2,6 +2,7 @@ package com.intsmaze.flink.base.env;
 
 import com.intsmaze.flink.base.util.PropertiesUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.common.time.Time;
@@ -21,6 +22,7 @@ import org.joda.time.DateTime;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -117,24 +119,17 @@ public abstract class BaseFlink {
      * @auther: intsmaze(刘洋)
      * @date: 2020/10/15 18:33
      */
-    protected void setupConfig() throws IOException {
+    protected void setupConfig() {
 
         this.configFile = getConfigName();
         this.beanFactory = new BeanFactory(configFile);
 
-//        Map<String, String> stormConfig = beanFactory.getBean("flinkConfig", Map.class);
-//        Preconditions.checkNotNull(stormConfig);
-//
-//        Iterator<Map.Entry<String, String>> iterator = stormConfig.entrySet().iterator();
-//        while (iterator.hasNext()) {
-//            Map.Entry<String, String> next = iterator.next();
-//            String key = next.getKey();
-//            String value = next.getValue();
-//            config.setString(key, value);
-//        }
-        config.setString(BeanFactory.SPRING_BEAN_FACTORY_XML, beanFactory.getXml());
-        config.setString(BeanFactory.SPRING_BEAN_FACTORY_NAME, this.configFile);
-        env.getConfig().setGlobalJobParameters(config);
+        for (String key : this.properties.stringPropertyNames()) {
+            this.config.setString(key, this.properties.getProperty(key));
+        }
+        this.config.setString(BeanFactory.SPRING_BEAN_FACTORY_XML, beanFactory.getXml());
+        this.config.setString(BeanFactory.SPRING_BEAN_FACTORY_NAME, this.configFile);
+        env.getConfig().setGlobalJobParameters(this.config);
 
     }
 

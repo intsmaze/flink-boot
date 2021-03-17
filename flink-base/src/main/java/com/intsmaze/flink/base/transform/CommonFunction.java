@@ -40,7 +40,7 @@ public abstract class CommonFunction extends RichFlatMapFunction<String, String>
      * @date: 2020/10/15 18:33
      */
     @Override
-    public void open(Configuration parameters) {
+    public void open(Configuration parameters) throws Exception {
         getRuntimeContext().addAccumulator("num-FlatMap", this.numLines);
 
         ExecutionConfig.GlobalJobParameters globalJobParameters = getRuntimeContext()

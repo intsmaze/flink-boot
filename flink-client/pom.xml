@@ -7,8 +7,7 @@
     <groupId>com.intsmaze.flink.client</groupId>
     <artifactId>flink-client</artifactId>
     <version>1.0</version>
-
-
+    
     <dependencies>
         <dependency>
             <groupId>com.intsmaze.flink.base</groupId>
@@ -54,6 +53,12 @@
         <dependency>
             <groupId>com.intsmaze.flink</groupId>
             <artifactId>flink-dubbo-consumer</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.intsmaze.flink.hbase</groupId>
+            <artifactId>flink-hbase</artifactId>
             <version>1.0</version>
         </dependency>
 

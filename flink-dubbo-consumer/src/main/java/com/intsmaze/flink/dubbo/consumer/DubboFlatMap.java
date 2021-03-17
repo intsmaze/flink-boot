@@ -32,7 +32,7 @@ public class DubboFlatMap extends CommonFunction {
      * @date: 2020/10/15 18:33
      */
     @Override
-    public void open(Configuration parameters) {
+    public void open(Configuration parameters) throws Exception {
         super.open(parameters);
         dubboService = beanFactory.getBean(DubboService.class);
     }
