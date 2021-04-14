@@ -6,7 +6,7 @@
 
     <groupId>com.intsmaze.flink.base</groupId>
     <artifactId>flink-base</artifactId>
-    <version>1.0</version>
+    <version>1.12</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

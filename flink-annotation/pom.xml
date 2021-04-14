@@ -6,14 +6,14 @@
 
     <groupId>com.intsmaze.flink.annotation</groupId>
     <artifactId>flink-annotation</artifactId>
-    <version>1.0</version>
+    <version>1.12</version>
 
 
     <dependencies>
         <dependency>
             <groupId>com.intsmaze.flink.base</groupId>
             <artifactId>flink-base</artifactId>
-            <version>1.0</version>
+            <version>1.12</version>
         </dependency>
 
         <!---此为会员版功能：添加微信 intsmaze，付款36.9元即可获得全套会员版的配置文件。-->

@@ -6,7 +6,7 @@
 
     <groupId>com.intsmaze.flink.hbase</groupId>
     <artifactId>flink-hbase</artifactId>
-    <version>1.0</version>
+    <version>1.12</version>
 
     <dependencies>
 
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>com.intsmaze.flink.base</groupId>
             <artifactId>flink-base</artifactId>
-            <version>1.0</version>
+            <version>1.12</version>
         </dependency>
 
         <dependency>
