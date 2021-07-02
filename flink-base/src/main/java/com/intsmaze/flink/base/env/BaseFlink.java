@@ -64,7 +64,11 @@ public abstract class BaseFlink {
 
 
         this.properties = PropertiesUtils.getProperties(getPropertiesName());
-        String parallelism = properties.getProperty("parallelism");
+        Configuration configuration = new Configuration();
+        configuration.addAllToProperties(properties);
+        env.getConfig().setGlobalJobParameters(configuration);
+
+        String parallelism = params.get("parallelism");
         if (StringUtils.isNotBlank(parallelism)) {
             env.setParallelism(Integer.valueOf(parallelism));
         }
