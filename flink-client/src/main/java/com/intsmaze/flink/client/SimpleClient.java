@@ -20,6 +20,7 @@ public class SimpleClient extends BaseFlink {
     /**
      * 本地启动参数  -isLocal local
      * 集群启动参数  -isIncremental isIncremental
+     * -parallelism 4
      *
      * @param args
      * @throws Exception

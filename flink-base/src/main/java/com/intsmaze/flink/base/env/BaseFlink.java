@@ -8,6 +8,8 @@ import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.common.time.Time;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.configuration.Configuration;
+import org.apache.flink.contrib.streaming.state.PredefinedOptions;
+import org.apache.flink.contrib.streaming.state.RocksDBOptions;
 import org.apache.flink.contrib.streaming.state.RocksDBStateBackend;
 import org.apache.flink.runtime.state.StateBackend;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -19,6 +21,7 @@ import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.util.Preconditions;
 import org.joda.time.DateTime;
+import org.rocksdb.DBOptions;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -64,7 +67,11 @@ public abstract class BaseFlink {
 
 
         this.properties = PropertiesUtils.getProperties(getPropertiesName());
-        String parallelism = properties.getProperty("parallelism");
+        Configuration configuration = new Configuration();
+        configuration.addAllToProperties(properties);
+        env.getConfig().setGlobalJobParameters(configuration);
+
+        String parallelism = params.get("parallelism");
         if (StringUtils.isNotBlank(parallelism)) {
             env.setParallelism(Integer.valueOf(parallelism));
         }
@@ -91,7 +98,7 @@ public abstract class BaseFlink {
         if (StringUtils.isBlank(isLocal)) {
             String isIncremental = params.get("isIncremental");
             Preconditions.checkNotNull(isIncremental, "isIncremental is null");
-            StateBackend stateBackend;
+            RocksDBStateBackend stateBackend;
             String hadoopIp = properties.getProperty("hadoopIp");
             if ("isIncremental".equals(isIncremental)) {
                 //如果本地调试，必须指定hdfs的端口信息，且要依赖hadoop包，如果集群执行，flink与hdfs在同一集群，那么可以不指定hdfs端口信息，也不用将hadoop打进jar包。
