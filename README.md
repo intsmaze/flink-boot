@@ -1,5 +1,5 @@
 
-# 懒松鼠Flink-Boot*（稳定版请切分支拉取）
+# 懒松鼠Flink-Boot（稳定版请切分支拉取）
 #### [懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发。](https://github.com/intsmaze/flink-book)
 ![image](https://github.com/intsmaze/flink-boot/blob/master/fm.png)
 ##### 该脚手架屏蔽掉组装Flink API细节，让Flink全面拥抱Spring生态体系，使得开发者能以传统Java WEB模式的开发方式开发出具备分布式计算能力的流处理程序,懒松鼠让跨界变得更加简单。
@@ -165,6 +165,8 @@ Flink-Boot
 ├── flink-sql -- Flink SQL解耦至XML配置模块/SQL decoupling to XML configuration module
 ├── flink-cache-annotation -- 接口缓冲模块/Interface buffer module
 ├── flink-dubbo-comsumer -- Dubbo 消费组模块/Dubbo comsumer module
+├── flink-hbase -- Hbase 模块/Hbase module
+├── flink-drpc -- Drpc 模块/DRPC module
 ├── flink-other-service -- 组件原生运行模块
 ├── flink-junit -- 单元测试模块/Unit test module
 ├── flink-apollo -- 阿波罗配置客户端模块/Apollo configuration client module
@@ -183,7 +185,8 @@ Dubbole消费者 | 服务消费者  | 已集成
 Druid | 数据库连接池  | 已集成 
 MyBatis | ORM框架  | 已集成 
 Kafka | 消息队列  | 已集成
-HDFS | 分布式文件系统  | 已集成 
+HDFS | 分布式文件系统  | 已集成
+Hbase | No-Sql数据库 | 已集成 
 Log4J | 日志组件  | 已集成 
 Junit | 单元测试  | 已集成 
 Mybatis-Plus | MyBatis扩展包  | 进行中 
@@ -200,23 +203,7 @@ Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中
 
 ## 快速开始
 
-下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
-1. 生活不易，脑力代码不易，尊重劳动成果，可打赏博主 46.8元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
-2. 公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，其他组件的配置文件未提供，一般来说，自行研究框架3小时即可搞定。
-3. 也可以选择不打赏博主，懒松鼠Flink-Boot公开了与Spring生产集成的所有代码，仅相关配置文件未公开，一般来说，自行研究框架3小时即可搞定。
-4. 46.8元的打赏不是为了挣钱，只是为了让博主看到这个项目的价值有继续迭代的动力，为后续打造一级的开源项目做贡献。
-微信号：intsmaze [微信二维码无法显示可跳转该页面扫码，微信转账即可](https://www.cnblogs.com/intsmaze/)
-
-Flink框架的技术咨询可添加微信进行咨询。
-![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
-
-**会员享受功能：**
-1. 框架的详细手册和配置文件
-2. 可以免费获取后续新增功能
-3. 可以提想要集成的框架，我会根据是否有必要在一个月内集成
-4. 框架使用上有问题，我会跟踪解决（PS：因为环境问题导致的不在售后范围）
-5. 一杯星巴克的钱，省去三小时自我琢磨
-
+下面是集成Spring生态的基础手册，加作者微信号（微信号：intsmaze）获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
 
 ### 核心基础工程
 
@@ -429,9 +416,7 @@ public void open(Configuration parameters){
 ```
 
 ### 集群/本地运行
-
 在自定义的Topology类编写Main方法，创建自定义的Topology对象后，调用对象的run(...)方法。
-
 public class SimpleClient extends BaseFlink {
 
     /**
@@ -457,13 +442,12 @@ public class SimpleClient extends BaseFlink {
 # 其他
 ## 联系我
 下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
-1. 生活不易，脑力代码不易，尊重劳动成果，可打赏博主 46.8元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
-2. 公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，其他组件的配置文件未提供，一般来说，自行研究框架3小时即可搞定。
-3. 也可以选择不打赏博主，懒松鼠Flink-Boot公开了与Spring生产集成的所有代码，仅相关配置文件未公开，一般来说，自行研究框架3小时即可搞定。
-4. 46.8元的打赏不是为了挣钱，只是为了让博主看到这个项目的价值有继续迭代的动力，为后续打造一级的开源项目做贡献。
+1. 生活不易，脑力代码不易，尊重劳动成果，可打赏博主 39.9元即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
+2. 也可以选择不打赏博主，公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，其他组件的配置文件未提供，一般来说，自行研究框架4小时即可搞定。
+3. ps:我若衣食无忧必定无私奉献，39.9元的打赏只是为了让博主有继续花费精力迭代的动力帮助各位同行少加班。
 微信号：intsmaze [微信二维码无法显示可跳转该页面扫码，微信转账即可](https://www.cnblogs.com/intsmaze/)
 
-Flink框架的技术咨询可添加微信进行咨询。
+Flink业务场景解决方案可添加微信进行免费咨询（前提将业务场景以需求文档的方式编写好发送给我即可免费获得解决方案）。
 ![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
 
 **会员享受功能：**
@@ -471,4 +455,3 @@ Flink框架的技术咨询可添加微信进行咨询。
 2. 可以免费获取后续新增功能
 3. 可以提想要集成的框架，我会根据是否有必要在一个月内集成
 4. 框架使用上有问题，我会跟踪解决（PS：因为环境问题导致的不在售后范围）
-5. 一杯星巴克的钱，省去三小时自我琢磨
