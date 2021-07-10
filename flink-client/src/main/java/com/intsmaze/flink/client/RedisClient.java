@@ -2,7 +2,7 @@ package com.intsmaze.flink.client;
 
 import com.intsmaze.flink.base.env.BaseFlink;
 import com.intsmaze.flink.client.task.source.SimpleDataSource;
-import com.intsmaze.flink.dubbo.consumer.DubboFlatMap;
+import com.intsmaze.flink.redis.RedisFlatMap;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -13,9 +13,9 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
  * 出版书籍《深入理解Flink核心设计与实践原理》
  *
  * @auther: intsmaze(刘洋)
- * @date: 2020/10/15 18:33
+ * @date: 2021/07/10 18:33
  */
-public class DubboConsumerClient extends BaseFlink {
+public class RedisClient extends BaseFlink {
 
     /**
      * 本地启动参数  -isLocal local
@@ -25,18 +25,18 @@ public class DubboConsumerClient extends BaseFlink {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        DubboConsumerClient topo = new DubboConsumerClient();
+        RedisClient topo = new RedisClient();
         topo.run(ParameterTool.fromArgs(args));
     }
 
     @Override
     public String getJobName() {
-        return "DubboConsumerClient";
+        return "RedisClient";
     }
 
     @Override
     public String getConfigName() {
-        return "topology-dubbo-consumer.xml";
+        return "topology-redis.xml";
     }
 
     @Override
@@ -46,11 +46,12 @@ public class DubboConsumerClient extends BaseFlink {
 
     @Override
     public void createTopology(StreamExecutionEnvironment builder) {
+
         DataStream<String> inputDataStrem = env.addSource(new SimpleDataSource());
 
-        DataStream<String> processDataStream = inputDataStrem.flatMap(new DubboFlatMap());
+        DataStream<String> processDataStream = inputDataStrem.flatMap(new RedisFlatMap());
 
-        processDataStream.print("输出结果");
+        processDataStream.print("redis客户端交互");
     }
 
 }

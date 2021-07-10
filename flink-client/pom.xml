@@ -62,6 +62,12 @@
             <version>1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.intsmaze.flink.redis</groupId>
+            <artifactId>flink-redis</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+       default-init-method="init" default-destroy-method="destroy">
+
+    <!--如果遇到 java.net.SocketTimeoutException: Read timed out exception的异常信息，请在构造JedisPool的时候设置自己的超时值. JedisPool默认的超时时间是2秒(单位毫秒)-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="8"/><!-- 连接池中最大空闲的连接数-->
+        <property name="maxIdle" value="4"/><!-- 连接池中最少空闲的连接数-->
+        <property name="minIdle"
+                  value="1"/><!-- 当连接池资源耗尽时，调用者最大阻塞的时间，超时将跑出异常。单位，毫秒数;默认为-1.表示永不超时。高版本：maxWaitMillis，低版本：maxWait-->
+        <property name="maxWaitMillis" value="1500"/><!-- 连接空闲的最小时间，达到此值后空闲连接将可能会被移除。负值(-1)表示不移除-->
+        <property name="minEvictableIdleTimeMillis" value="300000"/><!-- 对于“空闲链接”检测线程而言，每次检测的链接资源的个数。默认为3-->
+        <property name="numTestsPerEvictionRun" value="3"/> <!-- “空闲链接”检测线程，检测的周期，毫秒数。如果为负值，表示不运行“检测线程”。默认为-1-->
+        <property name="timeBetweenEvictionRunsMillis"
+                  value="60000"/> <!-- 向调用者输出“链接”资源时，是否检测是有有效，如果无效则从连接池中移除，并尝试获取继续获取。默认为false。建议保持默认值-->
+        <property name="testOnBorrow" value="false"/> <!-- 向连接池“归还”链接时，是否检测“链接”对象的有效性。默认为false。建议保持默认值-->
+        <property name="testOnReturn" value="false"/> <!-- 向调用者输出“链接”对象时，是否检测它的空闲超时；默认为false。如果“链接”空闲超时，将会被移除。建议保持默认值-->
+        <property name="testWhileIdle" value="false"/>
+    </bean>
+
+
+    <!--
+    主节点挂了，不影响该实例从新加载，因为该实例加载的是哨兵的集群，如果哨兵的集群宕机了，也不会影响的。
+    但是发现有bug就是，如果集群当中某一个哨兵宕机了，那么主节点再宕机，则无法选举出新的主节点，必须所以的哨兵都复活才可以。
+    且，如果哨兵都宕机了，那么就会一直使用宕机前的主节点的ip进行操作。这就是为什么JedisSentinelPool不会因为集群的变化而需要重新实例化了。
+    -->
+    <bean id="hostAndPort-one" class="redis.clients.jedis.HostAndPort">
+        <constructor-arg value="192.168.19.131"></constructor-arg>
+        <constructor-arg value="8003"></constructor-arg>
+    </bean>
+
+    <bean id="hostAndPort-two" class="redis.clients.jedis.HostAndPort">
+        <constructor-arg value="192.168.19.132"></constructor-arg>
+        <constructor-arg value="8003"></constructor-arg>
+    </bean>
+
+
+    <bean id="jedisShardInfo-one" class="redis.clients.jedis.JedisShardInfo">
+        <constructor-arg value="192.168.19.131"></constructor-arg>
+        <constructor-arg value="8003"></constructor-arg>
+    </bean>
+
+    <bean id="jedisShardInfo-two" class="redis.clients.jedis.JedisShardInfo">
+        <constructor-arg value="192.168.19.132"></constructor-arg>
+        <constructor-arg value="8003"></constructor-arg>
+    </bean>
+
+
+
+    <!---此为会员版功能：添加微信 intsmaze，付款39.9元即可获得全套会员版的配置文件。-->
+
+
+</beans>
