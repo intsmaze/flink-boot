@@ -11,6 +11,7 @@
 * 集成Mybatis框架,提高对关系型数据库增，删，改，查的开发速度。
 * 集成Spring Cache框架,实现注解式定义方法缓存。
 * 集成Dubbo 框架,实现Dubbo Consumer调用Spring Cloud中的服务接口。
+* 集成redis客户端，实现多种集群模式消费者，比如哨兵模式，集群模式等。
 * ......
 
 ## 诞生由来
@@ -166,6 +167,7 @@ Flink-Boot
 ├── flink-cache-annotation -- 接口缓冲模块/Interface buffer module
 ├── flink-dubbo-comsumer -- Dubbo 消费组模块/Dubbo comsumer module
 ├── flink-hbase -- Hbase 模块/Hbase module
+├── flink-redis -- redis 模块/redis module
 ├── flink-drpc -- Drpc 模块/DRPC module
 ├── flink-other-service -- 组件原生运行模块
 ├── flink-junit -- 单元测试模块/Unit test module
@@ -185,6 +187,7 @@ Dubbole消费者 | 服务消费者  | 已集成
 Druid | 数据库连接池  | 已集成 
 MyBatis | ORM框架  | 已集成 
 Kafka | 消息队列  | 已集成
+Redis | 分布式缓存数据库  | 已集成 
 HDFS | 分布式文件系统  | 已集成
 Hbase | No-Sql数据库 | 已集成 
 Log4J | 日志组件  | 已集成 
@@ -193,7 +196,6 @@ Mybatis-Plus | MyBatis扩展包  | 进行中
 PageHelper | MyBatis物理分页插件  | 进行中 
 ZooKeeper | 分布式协调服务  | 进行中
 Dubbo | 分布式服务框架  | 进行中 
-Redis | 分布式缓存数据库  | 进行中 
 Solr & Elasticsearch | 分布式全文搜索引擎  | 进行中
 Ehcache | 进程内缓存框架  | 进行中 
 sequence | 分布式高效ID生产  | 进行中 
@@ -203,7 +205,7 @@ Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中
 
 ## 快速开始
 
-下面是集成Spring生态的基础手册，加作者微信号（微信号：intsmaze）获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
+下面是集成Spring生态的基础手册，通过目录中的[联系我](#联系我)标题可以找到我已获取更详细的开发手册，当然技术过硬自己摸索也只需3小时即可上手所有模块。
 
 ### 核心基础工程
 
@@ -447,6 +449,8 @@ public class SimpleClient extends BaseFlink {
 3. ps:我若衣食无忧必定无私奉献，39.9元的打赏只是为了让博主有继续花费精力迭代的动力帮助各位同行少加班。
 微信号：intsmaze [微信二维码无法显示可跳转该页面扫码，微信转账即可](https://www.cnblogs.com/intsmaze/)
 
+
+
 Flink业务场景解决方案可添加微信进行免费咨询（前提将业务场景以需求文档的方式编写好发送给我即可免费获得解决方案）。
 ![image](https://github.com/intsmaze/flink-boot/blob/master/wx.png)
 
@@ -455,3 +459,6 @@ Flink业务场景解决方案可添加微信进行免费咨询（前提将业务
 2. 可以免费获取后续新增功能
 3. 可以提想要集成的框架，我会根据是否有必要在一个月内集成
 4. 框架使用上有问题，我会跟踪解决（PS：因为环境问题导致的不在售后范围）
+
+详细文档目录结构如下：
+![image](https://github.com/intsmaze/flink-boot/blob/master/mulu.png)
