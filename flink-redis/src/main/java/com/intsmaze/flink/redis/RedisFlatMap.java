@@ -5,8 +5,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.intsmaze.flink.base.bean.FlowData;
 import com.intsmaze.flink.base.transform.CommonFunction;
+import com.intsmaze.flink.lock.DistributedLock;
+import com.intsmaze.flink.lock.LockFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.configuration.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -21,9 +25,13 @@ import redis.clients.jedis.JedisPool;
  */
 public class RedisFlatMap extends CommonFunction {
 
+    private Logger logger = LoggerFactory.getLogger(RedisFlatMap.class);
+
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     private JedisPool jedisPool;
+
+    private LockFactory lockFactory;
 
     /**
      * github地址: https://github.com/intsmaze
@@ -37,6 +45,7 @@ public class RedisFlatMap extends CommonFunction {
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
         jedisPool = beanFactory.getBean(JedisPool.class);
+        lockFactory = beanFactory.getBean(LockFactory.class);
     }
 
     /**
@@ -53,15 +62,22 @@ public class RedisFlatMap extends CommonFunction {
         FlowData flowData = gson.fromJson(message, new TypeToken<FlowData>() {
         }.getType());
 
+        DistributedLock distributedLock = lockFactory.newLock("lock:redis:" + flowData.getBillNumber());
+        distributedLock.lock();
         Jedis jedis = jedisPool.getResource();
         try {
             jedis.set(StringUtils.join("intsmaze", flowData.getBarcode()), flowData.getBarcode() + System.currentTimeMillis());
             String result = jedis.get(StringUtils.join("intsmaze", flowData.getBarcode()));
+            distributedLock.unlock();
             return result;
         } catch (Exception e) {
+            jedis.close();
             e.printStackTrace();
         } finally {
-            jedis.close();
+            if (distributedLock != null) {
+                logger.info("释放释放分布式锁。。。。。。。。。。。。。。。。。。。。");
+                distributedLock.unlock();
+            }
         }
         return null;
     }
