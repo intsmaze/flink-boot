@@ -188,6 +188,7 @@ Druid | 数据库连接池  | 已集成
 MyBatis | ORM框架  | 已集成 
 Kafka | 消息队列  | 已集成
 Redis | 分布式缓存数据库  | 已集成 
+分布式锁 | 基于Redis的分布式锁实现  | 已集成 
 HDFS | 分布式文件系统  | 已集成
 Hbase | No-Sql数据库 | 已集成 
 Log4J | 日志组件  | 已集成 
