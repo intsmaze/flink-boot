@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+	   default-destroy-method="destroy">
+
+	<import resource="spring-redis.xml"></import>
+
+	<bean id="compileJavaFileToRedisTemplate" class="com.intsmaze.flink.dynamic.base.utils.CompileJavaFileToRedisTemplate">
+		<property name="jedisPool" ref="jedisPool" />
+		<property name="fileSystemClassLoader" ref="fileSystemClassLoader" />
+	</bean>
+
+
+	<bean id="classLoadService" class="com.intsmaze.flink.dynamic.base.ClassLoadService">
+		<property name="fileSystemClassLoader" ref="fileSystemClassLoader" />
+	</bean>
+
+	<bean id="fileSystemClassLoader" class="com.intsmaze.flink.dynamic.base.FileSystemClassLoader">
+		<property name="jedisPool" ref="jedisPool" />
+	</bean>
+
+</beans>

@@ -1,15 +1,15 @@
-package com.intsmaze.flink.validate.tsak;
+package com.intsmaze.flink.dynamic;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.intsmaze.flink.base.bean.FlowData;
 import com.intsmaze.flink.base.transform.CommonFunction;
-import com.intsmaze.flink.validate.bean.FlowValidateData;
-import com.intsmaze.flink.validate.ValidatorUtil;
-import org.apache.flink.api.common.accumulators.IntCounter;
+import com.intsmaze.flink.dynamic.base.ClassLoadService;
 import org.apache.flink.configuration.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Map;
 
 /**
  * github地址: https://github.com/intsmaze
@@ -17,16 +17,16 @@ import java.util.Map;
  * 出版书籍《深入理解Flink核心设计与实践原理》
  *
  * @auther: intsmaze(刘洋)
- * @date: 2020/10/15 18:33
+ * @date: 2021/07/10 18:33
  */
-public class ValidateFlatMap extends CommonFunction {
+public class LoadClassFlatMap extends CommonFunction {
+
+    private Logger logger = LoggerFactory.getLogger(LoadClassFlatMap.class);
 
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
-    /**
-     * 记录接收的数据的数量
-     */
-    private IntCounter numLines = new IntCounter();
+    private DynamicService dynamicService;
+
 
     /**
      * github地址: https://github.com/intsmaze
@@ -34,12 +34,13 @@ public class ValidateFlatMap extends CommonFunction {
      * 出版书籍《深入理解Flink核心设计与实践原理》
      *
      * @auther: intsmaze(刘洋)
-     * @date: 2020/10/15 18:33
+     * @date: 2021/07/10 18:33
      */
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        getRuntimeContext().addAccumulator("num-GsonFlatMap", this.numLines);
+        ClassLoadService classLoadService = (ClassLoadService) beanFactory.getBean("classLoadService");
+        dynamicService = classLoadService.init();
     }
 
     /**
@@ -48,19 +49,15 @@ public class ValidateFlatMap extends CommonFunction {
      * 出版书籍《深入理解Flink核心设计与实践原理》
      *
      * @auther: intsmaze(刘洋)
-     * @date: 2020/10/15 18:33
+     * @date: 2021/07/10 18:33
      */
     @Override
-    public String execute(String value) {
-        FlowValidateData flowData = gson.fromJson(value, new TypeToken<FlowValidateData>() {
+    public String execute(String message) {
+        FlowData flowData = gson.fromJson(message, new TypeToken<FlowData>() {
         }.getType());
-
-        this.numLines.add(1);
-        Map<String, StringBuffer> validate = ValidatorUtil.validate(flowData);
-        if (validate != null) {
-            System.out.println(validate);
-            return null;
+        if (dynamicService != null) {
+            dynamicService.executeService(gson.toJson(flowData));
         }
-        return gson.toJson(flowData);
+        return null;
     }
 }
