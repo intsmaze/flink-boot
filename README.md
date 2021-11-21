@@ -15,6 +15,38 @@
 * 提供DPRC接口模型，以接口化的方式对外部服务提供接口调用，赋能fink计算能力
 * ......
 
+## 技术选项和集成情况
+技术 | 名称 | 状态 |
+----|------|----
+Spring Framework | 容器  | 已集成 
+Spring 基于XML方式配置Bean | 装配Bean  | 已集成 
+Spring 基于注解方式配置Bean | 装配Bean  | 已集成
+Spring 基于注解声明方法重试机制 | Retry注解  | 已集成 
+Spring 基于注解声明方法缓存 | Cache注解  | 已集成 
+Hibernate Validator | 校验框架  | 已集成
+Dubbole消费者 | 服务消费者  | 已集成 
+Dubbo服务提供者 | 分布式服务框架  | 已集成 
+DRPC接口 | flink对外暴露dprc接口提供接口服务  | 已集成 
+Druid | 数据库连接池  | 已集成 
+MyBatis | ORM框架  | 已集成 
+Kafka | 消息队列  | 已集成
+Redis | 分布式缓存数据库  | 已集成 
+分布式锁 | 基于Redis的分布式锁实现  | 已集成 
+HDFS | 分布式文件系统  | 已集成
+Hbase | No-Sql数据库 | 已集成 
+groovy | 规则表达式  | 已集成 
+Junit | 单元测试  | 已集成 
+MDC | 分布式日志链路追踪  | 已集成 
+Mybatis-Plus | MyBatis扩展包  | 进行中 
+PageHelper | MyBatis物理分页插件  | 进行中 
+ZooKeeper | 分布式协调服务  | 进行中
+Solr & Elasticsearch | 分布式全文搜索引擎  | 进行中
+Ehcache | 进程内缓存框架  | 进行中 
+sequence | 分布式高效ID生产  | 进行中 
+Spring eurake消费者 | 服务消费者  | 进行中 
+Apollo配置中心 | 携程阿波罗配置中心  | 进行中 
+Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中 
+
 ## 诞生由来
 * 本人一直认为，Flink框架，在某些场景完全可以替代Spring微服务框架，但是很多人仍认为它只能用在OLAP场景，对批处理场景的扩展（批流一体不做讨论）。
 * 作为一个深耕流计算领域，同时具备java分布式开发能力的开发者，我一直认为一个Flink也好，Spark Streaming也好，Storm也好，流计算开发工程师必须具备深厚的Java功底，不然无法解决高并发的经验，毕竟和离线计算相比，它的失败重跑的代价太大，同时要和很多第三方系统进行交互，比如作为服务的消费组调用Eurake中的服务提供者，存储数据到关系型数据库，这又涉及到事务等理论等等。
@@ -175,37 +207,7 @@ Flink-Boot
 ├── flink-apollo -- 阿波罗配置客户端模块/Apollo configuration client module
 ```
 
-## 技术选项和集成情况
-技术 | 名称 | 状态 |
-----|------|----
-Spring Framework | 容器  | 已集成 
-Spring 基于XML方式配置Bean | 装配Bean  | 已集成 
-Spring 基于注解方式配置Bean | 装配Bean  | 已集成
-Spring 基于注解声明方法重试机制 | Retry注解  | 已集成 
-Spring 基于注解声明方法缓存 | Cache注解  | 已集成 
-Hibernate Validator | 校验框架  | 已集成
-Dubbole消费者 | 服务消费者  | 已集成 
-Dubbo服务提供者 | 分布式服务框架  | 已集成 
-DRPC接口 | flink对外暴露dprc接口提供接口服务  | 已集成 
-Druid | 数据库连接池  | 已集成 
-MyBatis | ORM框架  | 已集成 
-Kafka | 消息队列  | 已集成
-Redis | 分布式缓存数据库  | 已集成 
-分布式锁 | 基于Redis的分布式锁实现  | 已集成 
-HDFS | 分布式文件系统  | 已集成
-Hbase | No-Sql数据库 | 已集成 
-Log4J | 日志组件  | 已集成 
-Junit | 单元测试  | 已集成 
-MDC | 分布式日志链路追踪  | 已集成 
-Mybatis-Plus | MyBatis扩展包  | 进行中 
-PageHelper | MyBatis物理分页插件  | 进行中 
-ZooKeeper | 分布式协调服务  | 进行中
-Solr & Elasticsearch | 分布式全文搜索引擎  | 进行中
-Ehcache | 进程内缓存框架  | 进行中 
-sequence | 分布式高效ID生产  | 进行中 
-Spring eurake消费者 | 服务消费者  | 进行中 
-Apollo配置中心 | 携程阿波罗配置中心  | 进行中 
-Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中 
+
 
 ## 快速开始
 
