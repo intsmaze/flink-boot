@@ -184,6 +184,8 @@ Spring 基于注解声明方法重试机制 | Retry注解  | 已集成
 Spring 基于注解声明方法缓存 | Cache注解  | 已集成 
 Hibernate Validator | 校验框架  | 已集成
 Dubbole消费者 | 服务消费者  | 已集成 
+Dubbo服务提供者 | 分布式服务框架  | 已集成 
+DRPC接口 | flink对外暴露dprc接口提供接口服务  | 已集成 
 Druid | 数据库连接池  | 已集成 
 MyBatis | ORM框架  | 已集成 
 Kafka | 消息队列  | 已集成
@@ -193,10 +195,10 @@ HDFS | 分布式文件系统  | 已集成
 Hbase | No-Sql数据库 | 已集成 
 Log4J | 日志组件  | 已集成 
 Junit | 单元测试  | 已集成 
+MDC | 分布式日志链路追踪  | 已集成 
 Mybatis-Plus | MyBatis扩展包  | 进行中 
 PageHelper | MyBatis物理分页插件  | 进行中 
 ZooKeeper | 分布式协调服务  | 进行中
-Dubbo | 分布式服务框架  | 进行中 
 Solr & Elasticsearch | 分布式全文搜索引擎  | 进行中
 Ehcache | 进程内缓存框架  | 进行中 
 sequence | 分布式高效ID生产  | 进行中 
