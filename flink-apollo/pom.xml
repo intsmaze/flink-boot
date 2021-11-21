@@ -8,5 +8,20 @@
     <artifactId>flink-apollo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>com.intsmaze.flink.base</groupId>
+            <artifactId>flink-base</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+    </dependencies>
 
 </project>
