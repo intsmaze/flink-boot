@@ -27,6 +27,7 @@ Hibernate Validator | 校验框架  | 已集成
 Dubbole消费者 | 服务消费者  | 已集成 
 Dubbo服务提供者 | 分布式服务框架  | 已集成 
 DRPC接口 | flink对外暴露dprc接口提供接口服务  | 已集成 
+Apollo配置中心 | 携程阿波罗配置中心  | 已集成 
 Druid | 数据库连接池  | 已集成 
 MyBatis | ORM框架  | 已集成 
 Kafka | 消息队列  | 已集成
@@ -44,7 +45,6 @@ Solr & Elasticsearch | 分布式全文搜索引擎  | 进行中
 Ehcache | 进程内缓存框架  | 进行中 
 sequence | 分布式高效ID生产  | 进行中 
 Spring eurake消费者 | 服务消费者  | 进行中 
-Apollo配置中心 | 携程阿波罗配置中心  | 进行中 
 Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中 
 
 ## 诞生由来
