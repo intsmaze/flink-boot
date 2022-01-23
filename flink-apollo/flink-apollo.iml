@@ -16,12 +16,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.ctrip.framework.apollo:apollo-client:1.7.0" level="project" />
-    <orderEntry type="library" name="Maven: com.ctrip.framework.apollo:apollo-core:1.7.0" level="project" />
-    <orderEntry type="library" name="Maven: com.google.inject:guice:4.1.0" level="project" />
-    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
-    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
-    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.17" level="project" />
     <orderEntry type="module" module-name="flink-base" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
