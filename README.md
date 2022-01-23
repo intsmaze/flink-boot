@@ -55,6 +55,19 @@ Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中
 
 ## [《深入理解Flink核心设计与实践原理》京东商城购买链接](https://item.jd.com/12765369.html)
 
+### 动态加载实时编译类
+![image](https://github.com/intsmaze/intsmaze/raw/master/image/classload.png)
+#### 架构来源
+在开发cep系统中，遇到某些规则需要用http的协议向远程服务发送请求获取某些结果后，在运用EL表达式进行校验。这个时候，我么需要编写新的java类来支持这一功能，但是编写java类需要重新停机发布，如何解决停机发布的问题就本架构解决方案。 
+
+
+### 一致性Hash算法（权威来源，算法可靠）通用组件
+一致性hash算法的实现，没有找到比较权威的官方API，百度网友博客的算法应用生产系统毕竟有风险，我发现jedis客户端封装了一致性hash算法的实现。所以我将jeds的一致性hash算法提取出来，进行保障以供生产系统使用。
+![image](https://github.com/intsmaze/intsmaze/raw/master/image/hash.png)
+关于一致性hash算法没有热点问题，我通过执行代码发现这个观点有待商榷。
+把jedis的源码提取出来后，跑了一下，发现没有热点问题。原因不是采用的算法问题，而是一个物理节点对应的虚拟节点的数量的问题导致使用hash算法后是否存在有热点问题。
+jedis源码物理节点对应虚拟节点时160，而网上大部分代码的虚拟节点都是10以下，所以导致了热点问题，这也告诉我们，实现一致性Hash算法时，不要太吝啬，虚拟节点设置的大点，热点问题就不会再有。
+
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
