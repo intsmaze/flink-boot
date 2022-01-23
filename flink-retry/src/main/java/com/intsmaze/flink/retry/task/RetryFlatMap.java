@@ -37,7 +37,7 @@ public class RetryFlatMap extends CommonFunction {
      * @date: 2020/10/15 18:33
      */
     @Override
-    public void open(Configuration parameters) {
+    public void open(Configuration parameters) throws Exception {
         super.open(parameters);
         dataServiceWithRetry = beanFactory.getBean(DataServiceWithRetry.class);
     }
