@@ -2,9 +2,7 @@ package com.intsmaze.flink.client;
 
 import com.intsmaze.flink.base.env.BaseFlink;
 import com.intsmaze.flink.cache.tash.CacheFlatMap;
-import com.intsmaze.flink.client.task.simple.SimpleFunction;
 import com.intsmaze.flink.client.task.source.SimpleDataSource;
-import com.intsmaze.flink.retry.task.RetryFlatMap;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

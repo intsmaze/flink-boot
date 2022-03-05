@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.intsmaze.flink.base.bean.FlowData;
-import com.intsmaze.flink.base.transform.CommonFunction;
+import com.intsmaze.flink.base.transform.BuiltinRichFlatMapFunction;
 import org.apache.flink.configuration.Configuration;
 import com.intsmaze.dubbo.provider.DubboService;
 
@@ -17,7 +17,7 @@ import com.intsmaze.dubbo.provider.DubboService;
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
  */
-public class DubboFlatMap extends CommonFunction {
+public class DubboFlatMap extends BuiltinRichFlatMapFunction {
 
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 

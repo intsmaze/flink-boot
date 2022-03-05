@@ -7,7 +7,11 @@
     <groupId>com.intsmaze.flink.cache.annotation</groupId>
     <artifactId>flink-cache-annotation</artifactId>
     <version>1.0</version>
-
+    <parent>
+        <groupId>com.intsmaze.flink</groupId>
+        <artifactId>flink-boot</artifactId>
+        <version>1.0</version>
+    </parent>
     <!---此为会员版功能：添加微信 intsmaze，付款36.9元即可获得全套会员版的配置文件。-->
 
     <dependencies>

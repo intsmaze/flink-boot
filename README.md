@@ -89,6 +89,7 @@ jedis源码物理节点对应虚拟节点时160，而网上大部分代码的虚
   - [业务逻辑实现](#业务逻辑实现)
   - [集群/本地运行](#集群/本地运行)
 - [演示地址 (必看 :+1:)](#演示地址)
+- [运行报错问题汇总 (必看 :+1:)](#运行报错问题汇总)
 - [其他](#其他)
   - [待办](#待办)
   - [联系我](#联系我)
@@ -452,9 +453,69 @@ public class SimpleClient extends BaseFlink {
     .......     
    
 
-## 演示地址
+# 演示地址
 
 演示地址： [框架快速演示视频](https://www.ixigua.com/6922010036285735438?wid_try=1)
+
+# 运行报错问题汇总
+
+## NoClassDefFoundError
+本地IDEA运行出现NoClassDefFoundError，在idea的run configurations中勾选 include dependenencies with "Provided" scope.具体见下图箭筒1所指。
+```
+java.lang.NoClassDefFoundError: org/apache/flink/runtime/state/StateBackend
+	at java.lang.Class.getDeclaredMethods0(Native Method)
+	at java.lang.Class.privateGetDeclaredMethods(Class.java:2701)
+	at java.lang.Class.privateGetMethodRecursive(Class.java:3048)
+	at java.lang.Class.getMethod0(Class.java:3018)
+	at java.lang.Class.getMethod(Class.java:1784)
+	at sun.launcher.LauncherHelper.validateMainClass(LauncherHelper.java:544)
+	at sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:526)
+Caused by: java.lang.ClassNotFoundException: org.apache.flink.runtime.state.StateBackend
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:349)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	... 7 more
+Error: A JNI error has occurred, please check your installation and try again
+Exception in thread "main" 
+```
+
+## java.lang.NullPointerException: isIncremental is null
+本地IDEA运行出现如下异常，在idea的run configurations中program arguments文本框中输入-isLocal local。具体见上图箭筒2所指。
+```
+Exception in thread "main" java.lang.NullPointerException: isIncremental is null
+	at org.apache.flink.util.Preconditions.checkNotNull(Preconditions.java:76)
+	at com.intsmaze.flink.base.env.BaseFlink.init(BaseFlink.java:97)
+	at com.intsmaze.flink.base.env.BaseFlink.run(BaseFlink.java:213)
+	at com.intsmaze.flink.client.RetryClient.main(RetryClient.java:29)
+```
+
+## NoSuchBeanDefinitionException: No qualifying bean of type
+本地和集群运行出现 No qualifying bean异常，缺少spring核心配置参数，找我索要配置参数即可解决。
+```
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.intsmaze.flink.base.service.DataService' available
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:348)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:335)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1101)
+	at com.intsmaze.flink.base.transform.BuiltinRichFlatMapFunction.open(BuiltinRichFlatMapFunction.java:50)
+	at com.intsmaze.flink.retry.task.RetryFlatMap.open(RetryFlatMap.java:39)
+	at org.apache.flink.api.common.functions.util.FunctionUtils.openFunction(FunctionUtils.java:34)
+	at org.apache.flink.streaming.api.operators.AbstractUdfStreamOperator.open(AbstractUdfStreamOperator.java:102)
+	at org.apache.flink.streaming.api.operators.StreamFlatMap.open(StreamFlatMap.java:40)
+	at org.apache.flink.streaming.runtime.tasks.OperatorChain.initializeStateAndOpenOperators(OperatorChain.java:426)
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.lambda$beforeInvoke$2(StreamTask.java:535)
+	at org.apache.flink.streaming.runtime.tasks.StreamTaskActionExecutor$SynchronizedStreamTaskActionExecutor.runThrowing(StreamTaskActionExecutor.java:93)
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.beforeInvoke(StreamTask.java:525)
+	at org.apache.flink.streaming.runtime.tasks.StreamTask.invoke(StreamTask.java:565)
+	at org.apache.flink.runtime.taskmanager.Task.doRun(Task.java:755)
+	at org.apache.flink.runtime.taskmanager.Task.run(Task.java:570)
+	at java.lang.Thread.run(Thread.java:748)
+```
+
+## 公开可运行客户端类如下
+1. com.intsmaze.flink.client.SimpleClient
+2. com.intsmaze.flink.client.ValidateClient
+3. com.intsmaze.flink.client.SQLClient
 
 ## 参与开发
 

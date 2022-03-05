@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.intsmaze.flink.base.bean.FlowData;
-import com.intsmaze.flink.base.transform.CommonFunction;
+import com.intsmaze.flink.base.transform.BuiltinRichFlatMapFunction;
 import com.intsmaze.flink.lock.DistributedLock;
 import com.intsmaze.flink.lock.LockFactory;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +23,7 @@ import redis.clients.jedis.JedisPool;
  * @auther: intsmaze(刘洋)
  * @date: 2021/07/10 18:33
  */
-public class RedisFlatMap extends CommonFunction {
+public class RedisFlatMap extends BuiltinRichFlatMapFunction {
 
     private Logger logger = LoggerFactory.getLogger(RedisFlatMap.class);
 

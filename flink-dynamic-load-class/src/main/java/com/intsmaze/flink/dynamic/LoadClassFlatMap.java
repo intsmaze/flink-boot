@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.intsmaze.flink.base.bean.FlowData;
-import com.intsmaze.flink.base.transform.CommonFunction;
+import com.intsmaze.flink.base.transform.BuiltinRichFlatMapFunction;
 import com.intsmaze.flink.dynamic.base.ClassLoadService;
 import org.apache.flink.configuration.Configuration;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @auther: intsmaze(刘洋)
  * @date: 2021/07/10 18:33
  */
-public class LoadClassFlatMap extends CommonFunction {
+public class LoadClassFlatMap extends BuiltinRichFlatMapFunction {
 
     private Logger logger = LoggerFactory.getLogger(LoadClassFlatMap.class);
 

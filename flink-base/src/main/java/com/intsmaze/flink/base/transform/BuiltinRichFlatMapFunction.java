@@ -18,7 +18,7 @@ import org.springframework.context.ApplicationContext;
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
  */
-public abstract class CommonFunction extends RichFlatMapFunction<String, String> {
+public abstract class BuiltinRichFlatMapFunction extends RichFlatMapFunction<String, String> {
 
 
     /**

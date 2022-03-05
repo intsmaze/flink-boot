@@ -3,7 +3,7 @@ package com.intsmaze.flink.validate.tsak;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.intsmaze.flink.base.transform.CommonFunction;
+import com.intsmaze.flink.base.transform.BuiltinRichFlatMapFunction;
 import com.intsmaze.flink.validate.bean.FlowValidateData;
 import com.intsmaze.flink.validate.ValidatorUtil;
 import org.apache.flink.api.common.accumulators.IntCounter;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
  */
-public class ValidateFlatMap extends CommonFunction {
+public class ValidateFlatMap extends BuiltinRichFlatMapFunction {
 
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 

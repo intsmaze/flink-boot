@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.intsmaze.flink.base.bean.FlowData;
-import com.intsmaze.flink.base.transform.CommonFunction;
+import com.intsmaze.flink.base.transform.BuiltinRichFlatMapFunction;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.configuration.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
@@ -22,7 +22,7 @@ import java.io.IOException;
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
  */
-public class HbaseFlatMap extends CommonFunction {
+public class HbaseFlatMap extends BuiltinRichFlatMapFunction {
 
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 

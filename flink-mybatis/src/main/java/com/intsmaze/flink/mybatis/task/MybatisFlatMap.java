@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.intsmaze.flink.base.bean.FlowData;
-import com.intsmaze.flink.base.transform.CommonFunction;
+import com.intsmaze.flink.base.transform.BuiltinRichFlatMapFunction;
 import com.intsmaze.flink.mybatis.service.FlowService;
 import com.intsmaze.flink.mybatis.service.impl.FlowServiceImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -20,7 +20,7 @@ import java.util.UUID;
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
  */
-public class MybatisFlatMap extends CommonFunction {
+public class MybatisFlatMap extends BuiltinRichFlatMapFunction {
 
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
