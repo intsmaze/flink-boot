@@ -9,7 +9,7 @@
 
 	<import resource="spring-redis.xml"></import>
 
-	<bean id="compileJavaFileToRedisTemplate" class="com.intsmaze.flink.dynamic.base.utils.CompileJavaFileToRedisTemplate">
+	<bean id="compileJavaFileRedisTemplate" class="com.intsmaze.flink.dynamic.base.utils.CompileJavaFileRedisTemplate">
 		<property name="jedisPool" ref="jedisPool" />
 		<property name="fileSystemClassLoader" ref="fileSystemClassLoader" />
 	</bean>

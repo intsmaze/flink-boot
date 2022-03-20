@@ -1,6 +1,6 @@
 package com.intsmaze.flink.dynamic.base;
 
-import com.intsmaze.flink.dynamic.base.utils.CompileJavaFileToRedisTemplate;
+import com.intsmaze.flink.dynamic.base.utils.CompileJavaFileRedisTemplate;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -34,7 +34,7 @@ public class FileSystemClassLoader extends ClassLoader {
      * @Param 类的完整名称
      */
     @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
+    public Class<?> findClass(String name) throws ClassNotFoundException {
 //        byte[] classData = getClassData(name);  // 获取类的字节数组
         byte[] classData = getClassDataFormRedis(name);
         if (classData == null) {
@@ -46,7 +46,9 @@ public class FileSystemClassLoader extends ClassLoader {
 
     private byte[] getClassDataFormRedis(String className) {
         Jedis jedis = jedisPool.getResource();
-        return jedis.get((CompileJavaFileToRedisTemplate.KEY_NAME + className).getBytes());
+        byte[] bytes = jedis.get((CompileJavaFileRedisTemplate.KEY_NAME + className).getBytes());
+        jedis.close();
+        return bytes;
 
     }
 

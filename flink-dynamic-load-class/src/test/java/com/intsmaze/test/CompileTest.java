@@ -1,8 +1,9 @@
 package com.intsmaze.test;
 
 
+import com.intsmaze.flink.dynamic.Constant;
 import com.intsmaze.flink.dynamic.DynamicService;
-import com.intsmaze.flink.dynamic.base.utils.CompileJavaFileToRedisTemplate;
+import com.intsmaze.flink.dynamic.base.utils.CompileJavaFileRedisTemplate;
 
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -17,9 +18,9 @@ public class CompileTest {
     public static void main(String[] args) throws Exception {
 
         URL[] urls = new URL[]{new URL("file:/"
-                + CompileJavaFileToRedisTemplate.CLASS_PATH + "/" + CompileJavaFileToRedisTest.CLASS_NAME + ".class")};
+                + CompileJavaFileRedisTemplate.CLASS_PATH + "/" + Constant.CLASS_NAME + ".class")};
         ClassLoader classLoader = new URLClassLoader(urls);
-        Class<?> c = classLoader.loadClass(CompileJavaFileToRedisTest.CLASS_NAME);
+        Class<?> c = classLoader.loadClass(Constant.CLASS_NAME);
         DynamicService o = (DynamicService) c.newInstance();
         o.executeService("ClassNotFoundException");
     }
