@@ -14,74 +14,8 @@
         <version>1.0</version>
     </parent>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <guava.version>11.0.2</guava.version>
-        <slf4j.version>1.7.12</slf4j.version>
-        <lang3.version>3.1</lang3.version>
-        <jedis.version>2.7.2</jedis.version>
-        <fst.version>2.40</fst.version>
-        <spring.version>5.0.0.RELEASE</spring.version>
-        <juel.version>2.2.7</juel.version>
-        <curator.version>2.6.0</curator.version>
-        <jodd.version>3.6.6</jodd.version>
-        <jackson.version>2.2.2</jackson.version>
-        <hessian.version>4.0.7</hessian.version>
-        <commons-lang3.version>3.1</commons-lang3.version>
-        <flink.version>1.12.1</flink.version>
-        <scala.binary.version>2.11</scala.binary.version>
-    </properties>
-
     <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.21</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.5</version>
-        </dependency>
 
-
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
@@ -117,6 +51,7 @@
             <artifactId>druid</artifactId>
             <version>1.0.14</version>
         </dependency>
+
 
     </dependencies>
 
