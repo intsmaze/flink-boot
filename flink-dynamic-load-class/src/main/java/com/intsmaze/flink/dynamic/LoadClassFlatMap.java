@@ -28,7 +28,7 @@ public class LoadClassFlatMap extends BuiltinRichFlatMapFunction {
 
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
-    private HashMap<String, DynamicService> dynamicServiceHashMap = new HashMap<>();
+    private HashMap<String,DynamicService>  dynamicServiceHashMap=new HashMap<>();
 
     private FileSystemClassLoader fileSystemClassLoader;
 
@@ -43,7 +43,7 @@ public class LoadClassFlatMap extends BuiltinRichFlatMapFunction {
      * @Param
      */
     public String[] getClassNames() {
-        String[] classNameArr = {Constant.PACKAGE_NAME + Constant.CLASS_NAME};
+        String[] classNameArr = {Constant.PACKAGE_NAME  +Constant.CLASS_NAME};
         return classNameArr;
     }
 
@@ -57,7 +57,7 @@ public class LoadClassFlatMap extends BuiltinRichFlatMapFunction {
                 String className = it.next();
                 Class<?> clazz = fileSystemClassLoader.loadClass(className);
                 DynamicService obj = (DynamicService) clazz.newInstance();
-                dynamicServiceHashMap.put(className, obj);
+                dynamicServiceHashMap.put(className,obj);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,11 +78,6 @@ public class LoadClassFlatMap extends BuiltinRichFlatMapFunction {
         super.open(parameters);
         fileSystemClassLoader = (FileSystemClassLoader) beanFactory.getBean("fileSystemClassLoader");
         init();
-//        Class<?> c = fileSystemClassLoader.loadClass(getClassNames()[0]);
-//        DynamicService o = (DynamicService) c.newInstance();
-//        o.executeService("flink boot,intsmaze");
-//        ClassLoadService classLoadService = (ClassLoadService) beanFactory.getBean("classLoadService");
-//        dynamicService = classLoadService.init();
     }
 
     /**

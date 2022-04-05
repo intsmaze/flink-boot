@@ -21,7 +21,7 @@ public class CompileJavaFileToRedisTest {
                 "import com.intsmaze.flink.dynamic.DynamicService;" +
                 "public class " + Constant.CLASS_NAME + " implements DynamicService {" +
                 "    public void executeService(String json) {" +
-                "        System.out.println(\"我经过了redis后得以执行，看我72变\");" +
+                "        System.out.println(\"DynamicDefineClassThree  我经过了redis后得以执行，看我1024变\");" +
                 "    }" +
                 "}";
 
