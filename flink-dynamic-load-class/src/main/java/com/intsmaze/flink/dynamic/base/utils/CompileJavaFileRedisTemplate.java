@@ -1,20 +1,17 @@
 package com.intsmaze.flink.dynamic.base.utils;
 
 import com.intsmaze.flink.dynamic.DynamicService;
-import com.intsmaze.flink.dynamic.LoadClassFlatMap;
-import com.intsmaze.flink.dynamic.base.FileSystemClassLoader;
+import com.intsmaze.flink.dynamic.base.RedisSystemClassLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
-import redis.clients.util.SafeEncoder;
 
 
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.SimpleJavaFileObject;
 import javax.tools.ToolProvider;
-import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -32,7 +29,7 @@ public class CompileJavaFileRedisTemplate {
 
     private JedisPool jedisPool;
 
-    private FileSystemClassLoader fileSystemClassLoader;
+    private RedisSystemClassLoader redisSystemClassLoader;
 
     public static final String CLASS_PATH = "c:/home/intsmaze/classload";
 
@@ -67,11 +64,11 @@ public class CompileJavaFileRedisTemplate {
     }
 
     public boolean loadClassToRedis(String packageName) {
-        FileSystemClassLoader fscl = new FileSystemClassLoader(
+        RedisSystemClassLoader fscl = new RedisSystemClassLoader(
                 CompileJavaFileRedisTemplate.CLASS_PATH);
-        fileSystemClassLoader.setRootDir(CompileJavaFileRedisTemplate.CLASS_PATH);
+        redisSystemClassLoader.setRootDir(CompileJavaFileRedisTemplate.CLASS_PATH);
 
-        byte[] classData = fileSystemClassLoader.getClassData(packageName);
+        byte[] classData = redisSystemClassLoader.getClassData(packageName);
         Jedis jedis = jedisPool.getResource();
         jedis.set((KEY_NAME + packageName).getBytes(), classData);
         jedis.close();
@@ -108,12 +105,12 @@ public class CompileJavaFileRedisTemplate {
         this.jedisPool = jedisPool;
     }
 
-    public FileSystemClassLoader getFileSystemClassLoader() {
-        return fileSystemClassLoader;
+    public RedisSystemClassLoader getRedisSystemClassLoader() {
+        return redisSystemClassLoader;
     }
 
-    public void setFileSystemClassLoader(FileSystemClassLoader fileSystemClassLoader) {
-        this.fileSystemClassLoader = fileSystemClassLoader;
+    public void setRedisSystemClassLoader(RedisSystemClassLoader redisSystemClassLoader) {
+        this.redisSystemClassLoader = redisSystemClassLoader;
     }
 
 

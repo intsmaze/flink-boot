@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.intsmaze.flink.base.bean.FlowData;
 import com.intsmaze.flink.base.transform.BuiltinRichFlatMapFunction;
-import com.intsmaze.flink.dynamic.base.FileSystemClassLoader;
+import com.intsmaze.flink.dynamic.base.RedisSystemClassLoader;
 import com.intsmaze.flink.dynamic.base.utils.CompileJavaFileRedisTemplate;
 import org.apache.flink.configuration.Configuration;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class LoadClassFlatMap extends BuiltinRichFlatMapFunction {
 
     private HashMap<String,DynamicService>  dynamicServiceHashMap=new HashMap<>();
 
-    private FileSystemClassLoader fileSystemClassLoader;
+    private RedisSystemClassLoader redisSystemClassLoader;
 
 
     /**
@@ -49,13 +49,13 @@ public class LoadClassFlatMap extends BuiltinRichFlatMapFunction {
 
     public void init() throws InstantiationException, IllegalAccessException, ClassNotFoundException {
         try {
-            fileSystemClassLoader.setRootDir(CompileJavaFileRedisTemplate.CLASS_PATH);
+            redisSystemClassLoader.setRootDir(CompileJavaFileRedisTemplate.CLASS_PATH);
             String[] arr = this.getClassNames();
             List<String> list = Arrays.asList(arr);
             Iterator<String> it = list.iterator();
             while (it.hasNext()) {
                 String className = it.next();
-                Class<?> clazz = fileSystemClassLoader.loadClass(className);
+                Class<?> clazz = redisSystemClassLoader.loadClass(className);
                 DynamicService obj = (DynamicService) clazz.newInstance();
                 dynamicServiceHashMap.put(className,obj);
             }
@@ -76,7 +76,7 @@ public class LoadClassFlatMap extends BuiltinRichFlatMapFunction {
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        fileSystemClassLoader = (FileSystemClassLoader) beanFactory.getBean("fileSystemClassLoader");
+        redisSystemClassLoader = (RedisSystemClassLoader) beanFactory.getBean("redisSystemClassLoader");
         init();
     }
 

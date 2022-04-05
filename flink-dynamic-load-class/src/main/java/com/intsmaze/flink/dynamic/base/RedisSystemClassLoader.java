@@ -11,16 +11,16 @@ import java.io.*;
  * @description: https://www.cnblogs.com/intsmaze/
  * @date : 2020/6/6 18:40
  */
-public class FileSystemClassLoader extends ClassLoader {
+public class RedisSystemClassLoader extends ClassLoader {
 
     private JedisPool jedisPool;
 
     public String rootDir;
 
-    public FileSystemClassLoader() {
+    public RedisSystemClassLoader() {
     }
 
-    public FileSystemClassLoader(String rootDir) {
+    public RedisSystemClassLoader(String rootDir) {
         this.rootDir = rootDir;
     }
 
