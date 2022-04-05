@@ -456,6 +456,8 @@ public class SimpleClient extends BaseFlink {
 # 演示地址
 
 演示地址： [框架快速演示视频](https://www.ixigua.com/6922010036285735438?wid_try=1)
+[SimpleClient功能模块](https://www.bilibili.com/video/BV1Gu411z7RP?spm_id_from=333.337.search-card.all.click)
+[Hibernate Validator校验框架](https://www.bilibili.com/video/BV1Lr4y1q73G?spm_id_from=333.999.0.0)
 
 # 运行报错问题汇总
 
