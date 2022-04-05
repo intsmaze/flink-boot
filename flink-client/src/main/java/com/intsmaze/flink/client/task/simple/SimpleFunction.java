@@ -36,6 +36,7 @@ public class SimpleFunction extends BuiltinRichFlatMapFunction {
         }.getType());
 
         String flowUUID = dataService.findUUID(flowData);
+
         if (StringUtils.isBlank(flowUUID)) {
             flowUUID = UUID.randomUUID().toString();
             flowData.setUuid(flowUUID);

@@ -55,11 +55,11 @@ public class SimpleDataSource extends CommonDataSource {
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
         stepTypeList = new ArrayList<String>();
-        stepTypeList.add("充电");
-        stepTypeList.add("放电");
-        stepTypeList.add("搁置");
-        stepTypeList.add("放电");
-        stepTypeList.add("搁置");
+        stepTypeList.add("点击");
+        stepTypeList.add("浏览");
+        stepTypeList.add("搜索");
+        stepTypeList.add("点击");
+        stepTypeList.add("浏览");
 
         subTestItemList = new ArrayList<String>();
         subTestItemList.add("测试方法-1");

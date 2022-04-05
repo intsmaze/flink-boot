@@ -2,7 +2,7 @@ package com.intsmaze.flink.client;
 
 import com.intsmaze.flink.base.env.BaseFlink;
 import com.intsmaze.flink.client.task.source.SimpleDataSource;
-import com.intsmaze.flink.redis.RedisFlatMap;
+import com.intsmaze.flink.dynamic.LoadClassFlatMap;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -49,7 +49,7 @@ public class DynamicLoadClassClient extends BaseFlink {
 
         DataStream<String> inputDataStrem = env.addSource(new SimpleDataSource());
 
-        DataStream<String> processDataStream = inputDataStrem.flatMap(new RedisFlatMap());
+        DataStream<String> processDataStream = inputDataStrem.flatMap(new LoadClassFlatMap());
 
         processDataStream.print("动态从redis中读取class加载进JVM");
     }
