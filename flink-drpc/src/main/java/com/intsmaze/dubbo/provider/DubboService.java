@@ -7,5 +7,6 @@ package com.intsmaze.dubbo.provider;
  * @modified By：
  */
 public interface DubboService {
-    String sayHello(String name) throws InterruptedException;
+
+    String flinkDealMess(String value) throws InterruptedException;
 }

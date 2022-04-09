@@ -7,8 +7,8 @@ package com.intsmaze.dubbo.provider;
  * @modified By：
  */
 public class DemoServiceImpl implements DubboService {
-    public String sayHello(String name) {
+    public String flinkDealMess(String value) {
         System.out.println(Thread.currentThread().getName()+"--------------------");
-        return "dubbo provider return mess: " + name;
+        return "dubbo provider return mess: " + value;
     }
 }

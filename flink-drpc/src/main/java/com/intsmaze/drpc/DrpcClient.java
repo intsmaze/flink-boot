@@ -1,6 +1,10 @@
 package com.intsmaze.drpc;
 
+import com.google.gson.Gson;
+import com.intsmaze.RedisTmp;
+import com.intsmaze.bean.DrpcBean;
 import com.intsmaze.flink.base.env.BaseFlink;
+import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -34,6 +38,11 @@ public class DrpcClient extends BaseFlink {
 
     @Override
     public String getConfigName() {
+        return "topology-base.xml";
+    }
+
+    @Override
+    public String getDubboConfigName() {
         return "dubbo-provider.xml";
     }
 
@@ -45,8 +54,15 @@ public class DrpcClient extends BaseFlink {
     @Override
     public void createTopology(StreamExecutionEnvironment builder) {
         builder.setParallelism(1);
-        DataStream<String> inputDataStrem = env.addSource(new DrpcDataSource());
-        inputDataStrem.addSink(new DprcDataSink());
+        env.addSource(new DrpcDataSource())
+                .map(new MapFunction<String, String>() {
+                    @Override
+                    public String map(String value) throws Exception {
+                        DrpcBean drpcBean = new Gson().fromJson(value, DrpcBean.class);
+                        drpcBean.setData("flink处理结束后的结果:"+drpcBean.getData());
+                        return new Gson().toJson(drpcBean);
+                    }
+                }).addSink(new DprcDataSink());
     }
 
 }

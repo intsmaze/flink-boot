@@ -1,5 +1,7 @@
 package com.intsmaze.drpc;
 
+import com.google.gson.Gson;
+import com.intsmaze.bean.DrpcBean;
 import com.intsmaze.RedisTmp;
 import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 
@@ -14,8 +16,8 @@ public class DprcDataSink implements SinkFunction<String> {
 
     @Override
     public void invoke(String value, Context context) throws Exception {
-        System.out.println("sink -----------"+value);
-        String[] split = value.split(":");
-        RedisTmp.RedisData.put(split[1],"处理结束："+split[0]);
+        Gson gson=new Gson();
+        DrpcBean drpcBean = gson.fromJson(value, DrpcBean.class);
+        RedisTmp.RedisData.put(drpcBean.getUuid(),drpcBean.getData());
     }
 }

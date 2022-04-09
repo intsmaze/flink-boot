@@ -1,17 +1,15 @@
 package com.intsmaze.drpc;
 
+import com.google.gson.Gson;
 import com.intsmaze.RedisTmp;
+import com.intsmaze.bean.DrpcBean;
 import com.intsmaze.dubbo.provider.DubboService;
-import com.intsmaze.flink.base.transform.CommonDataSource;
+import com.intsmaze.flink.base.env.BeanFactory;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.flink.api.common.state.ListState;
-import org.apache.flink.api.common.state.ListStateDescriptor;
-import org.apache.flink.api.common.typeinfo.TypeHint;
-import org.apache.flink.api.common.typeinfo.TypeInformation;
+import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.configuration.Configuration;
-import org.apache.flink.runtime.state.FunctionInitializationContext;
-import org.apache.flink.runtime.state.FunctionSnapshotContext;
-import org.apache.flink.streaming.api.checkpoint.CheckpointedFunction;
+import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
+import org.springframework.context.ApplicationContext;
 
 import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -24,9 +22,10 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @auther: intsmaze(刘洋)
  * @date: 2020/10/15 18:33
  */
-public class DrpcDataSource extends CommonDataSource implements DubboService, CheckpointedFunction {
+public class DrpcDataSource extends RichParallelSourceFunction<String> implements DubboService {
 
-    DubboService dubboService;
+
+    protected ApplicationContext beanFactory;
 
     /**
      * github地址: https://github.com/intsmaze
@@ -39,90 +38,63 @@ public class DrpcDataSource extends CommonDataSource implements DubboService, Ch
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        dubboService = beanFactory.getBean(DubboService.class);
-    }
-
-    @Override
-    public String sayHello(String name) throws InterruptedException {
-        System.out.println(Thread.currentThread().getName() + "--11111111111--" + name + "  size:" + linkedBlockingQueue.size());
-        UUID uuid = UUID.randomUUID();
-        bufferedElements.add(uuid.toString());
-        try {
-            linkedBlockingQueue.put(name + ":" + uuid.toString());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        String s="";
-        RedisTmp.RedisData.put(uuid.toString(), "");
-        for (int i = 0; i < 80; i++) {
-            s = RedisTmp.RedisData.get(uuid.toString());
-            if (StringUtils.isNotBlank(s)) {
-                break;
-            }
-            Thread.sleep(10);
-        }
-        if (StringUtils.isBlank(s)) {
-            s="超时消息";
-        }
-
-        bufferedElements.remove(uuid.toString());//应该是消费组接收成功消息后再进行remove操作，所以服务提供者响应后应该要回调一下。
-        return "dubbo provider return mess: " + s;
+        ExecutionConfig.GlobalJobParameters globalJobParameters = getRuntimeContext()
+                .getExecutionConfig().getGlobalJobParameters();
+        beanFactory = BeanFactory.getDubboBeanFactory((Configuration) globalJobParameters);
     }
 
 
     public static LinkedBlockingQueue<String> linkedBlockingQueue = new LinkedBlockingQueue(10);
+
+
+    /**
+     * 负责对外发布服务
+     *
+     * @param value
+     * @return
+     * @throws InterruptedException
+     */
+    @Override
+    public String flinkDealMess(String value) throws InterruptedException {
+        System.out.println(Thread.currentThread().getName() + "--flink source--" + value + "  size:" + DrpcDataSource.linkedBlockingQueue.size());
+        UUID uuid = UUID.randomUUID();
+        try {
+            DrpcDataSource.linkedBlockingQueue.put(new Gson().toJson(new DrpcBean(value, uuid.toString())));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        String result = "超时消息";
+        RedisTmp.RedisData.put(uuid.toString(), "");
+
+        //下游算子处理完的结果存储到RedisData中，然后服务从这里获取结果返回给请求
+        for (int i = 0; i < 80; i++) {
+            result = RedisTmp.RedisData.get(uuid.toString());
+            if (StringUtils.isNotBlank(result)) {
+                break;
+            }
+            Thread.sleep(10);
+        }
+
+        return "flink dubbo provider return mess: " + result;
+    }
+
 
     @Override
     public void run(SourceContext<String> sourceContext) throws Exception {
         while (true) {
             Thread.sleep(100);
             System.out.println(Thread.currentThread().getName() + " linkedBlockingQueue size:" + linkedBlockingQueue.size());
-            String poll = linkedBlockingQueue.take();
-            if (StringUtils.isBlank(poll)) {
-                sourceContext.collect("null");
-            } else {
-                sourceContext.collect(poll);
-            }
+            //获取服务接收到的消息然后发送给下游算子进行处理
+            String drpcBean = linkedBlockingQueue.take();
+            sourceContext.collect(drpcBean);
         }
     }
 
-
-    private transient ListState<String> checkpointedState;
-
-    private LinkedList<String> bufferedElements= new LinkedList<>();;
-
-
-    /**
-     * github地址: https://github.com/intsmaze
-     * 博客地址：https://www.cnblogs.com/intsmaze/
-     * 出版书籍《深入理解Flink核心设计与实践原理》
-     *
-     * @auther: intsmaze(刘洋)
-     * @date: 2020/10/15 18:33
-     */
     @Override
-    public String sendMess() {
-        return null;
+    public void cancel() {
+
     }
 
-    @Override
-    public void snapshotState(FunctionSnapshotContext context) throws Exception {
-        checkpointedState.update(bufferedElements);
-    }
 
-    @Override
-    public void initializeState(FunctionInitializationContext context) throws Exception {
-        ListStateDescriptor<String> descriptor =
-                new ListStateDescriptor<String>(
-                        "ListState",
-                        TypeInformation.of(new TypeHint<String>() {
-                        }));
-        checkpointedState = context.getOperatorStateStore().getListState(descriptor);
-        if (context.isRestored()) {
-            for (String element : checkpointedState.get()) {
-                bufferedElements.offer(element);
-            }
-        }
-    }
 }
