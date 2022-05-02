@@ -7,10 +7,8 @@
 
     <import resource="spring-redis.xml"></import>
 
-    <bean id="cacheService" class="com.intsmaze.flink.groovy.CacheGroovyService">
+    <bean id="configGroovyRule" class="com.intsmaze.flink.groovy.test.TestConfigGroovyRule">
         <property name="jedisPool" ref="jedisPool"/>
     </bean>
-
-    <bean id="scriptExecutor" class="com.intsmaze.flink.groovy.GroovyScriptExecutor"/>
 
 </beans>

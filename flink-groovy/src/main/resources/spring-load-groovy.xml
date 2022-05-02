@@ -2,13 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd"
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        default-lazy-init="true" default-init-method="init">
 
     <import resource="spring-redis.xml"></import>
-
-    <bean id="CUDGroovy" class="com.intsmaze.flink.groovy.loadshell.DaoGroovy">
-        <property name="jedisPool" ref="jedisPool"/>
-    </bean>
 
 </beans>

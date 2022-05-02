@@ -1,8 +1,8 @@
-package com.intsmaze.flink.groovy.bean;
+package com.intsmaze.flink.groovy;
 
 import java.io.Serializable;
 
-public class  GroovyDemo implements Serializable {
+public class GroovyInterface implements Serializable {
 
 	public String getAge(String age)
 	{

@@ -1,4 +1,4 @@
-package com.intsmaze.flink.groovy;
+package com.intsmaze.flink.groovy.service;
 
 import com.google.common.base.Preconditions;
 import groovy.lang.Script;
@@ -8,26 +8,26 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.nustaq.serialization.FSTConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import com.intsmaze.flink.groovy.bean.ScriptCacheMapping;
 import com.intsmaze.flink.groovy.bean.RuleConfigModel;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
-
+@Component
 public class CacheGroovyService {
 
     private final Logger logger = LoggerFactory.getLogger(CacheGroovyService.class);
 
     private static FSTConfiguration jsonConfiguration = FSTConfiguration.createJsonConfiguration();
 
+    @Autowired
     private JedisPool jedisPool;
 
     //这个是最主要的，脚本调用
@@ -71,7 +71,7 @@ public class CacheGroovyService {
         public void run() {
             while (true) {
                 try {
-                    TimeUnit.SECONDS.sleep(180);
+                    TimeUnit.SECONDS.sleep(10);
                 } catch (InterruptedException e1) {
                     logger.error("", e1);
                 }
@@ -96,15 +96,16 @@ public class CacheGroovyService {
                 byte[] data = jedis.get(RedisKeys.getRuleConfig());
                 Preconditions.checkNotNull(data);
                 // 规则更新
-                List<RuleConfigModel> rules = (List<RuleConfigModel>) asObject(data);
+                Set<RuleConfigModel> rules = (Set<RuleConfigModel>) asObject(data);
                 for (RuleConfigModel rule : rules) {
                     Long id = rule.getId();
+                    System.out.println(rule.getRuleScript());
                     cacheScript(id, rule.getRuleScript(), rule.getHashcode());
                 }
             }
             ruleConfigVersion = newVersion;
         } finally {
-            jedisPool.close();
+            jedis.close();
         }
     }
 

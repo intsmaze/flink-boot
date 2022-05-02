@@ -1,11 +1,13 @@
-package com.intsmaze.flink.groovy;
+package com.intsmaze.flink.groovy.service;
 
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import groovy.lang.Script;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GroovyScriptExecutor {
 
 	private static final Logger logger = LoggerFactory.getLogger(GroovyScriptExecutor.class);

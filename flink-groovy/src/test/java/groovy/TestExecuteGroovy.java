@@ -1,31 +1,29 @@
 package groovy;
 
 import com.intsmaze.flink.base.env.BeanFactory;
-import com.intsmaze.flink.groovy.CacheGroovyService;
-import com.intsmaze.flink.groovy.GroovyRuleCalc;
-import com.intsmaze.flink.groovy.GroovyScriptExecutor;
+import com.intsmaze.flink.groovy.service.CacheGroovyService;
+import com.intsmaze.flink.groovy.service.GroovyRuleCalc;
+import com.intsmaze.flink.groovy.service.GroovyScriptExecutor;
 import groovy.lang.Binding;
 import org.junit.Test;
-import com.intsmaze.flink.groovy.bean.GroovyDemo;
+import com.intsmaze.flink.groovy.GroovyInterface;
 
-public class ExecuteGroovy {
+public class TestExecuteGroovy {
 
 
     @Test
     public void test() {
-        BeanFactory beanFactory = new BeanFactory("redis-base.xml");
+        BeanFactory beanFactory = new BeanFactory("spring-load-groovy.xml");
         CacheGroovyService cacheService = beanFactory.getBean(CacheGroovyService.class);
-        cacheService.init();
-
         GroovyScriptExecutor scriptExecutor = beanFactory.getBean(GroovyScriptExecutor.class);
 
         Binding shellContext = new Binding();
         shellContext.setVariable("AGE", "100");
-        shellContext.setVariable("GROOVY", new GroovyDemo());
+        shellContext.setVariable("SEX", "男");
+        shellContext.setVariable("GROOVY", new GroovyInterface());
 
         //*********************配置脚本核心计算处*******************
-        GroovyRuleCalc calc = new GroovyRuleCalc();
-        calc.executeRuleCalcAll(scriptExecutor, shellContext); // 核心计算
+        GroovyRuleCalc.executeRuleCalcAll(scriptExecutor, shellContext); // 核心计算
         //*********************配置脚本核心计算处*******************
         while (true) {
 

@@ -1,4 +1,4 @@
-package com.intsmaze.flink.groovy;
+package com.intsmaze.flink.groovy.service;
 
 import groovy.lang.Binding;
 import groovy.lang.Script;
@@ -12,15 +12,15 @@ import java.util.concurrent.ConcurrentMap;
 
 public class GroovyRuleCalc {
 
-	protected final Logger logger = LoggerFactory.getLogger(GroovyRuleCalc.class);
+	public static final Logger logger = LoggerFactory.getLogger(GroovyRuleCalc.class);
 
 	/**
 	* @author:YangLiu
 	* @date:2018年5月21日 下午9:50:03 
 	* @describe:执行指定的脚本
 	 */
-	public boolean executeRuleCalc(GroovyScriptExecutor scriptExecutor,
-			Binding shellContext, long ruleId) {
+	public static boolean executeRuleCalc(GroovyScriptExecutor scriptExecutor,
+								   Binding shellContext, long ruleId) {
 		boolean ruleIsMatched = false;
 		String logtag = "";
 		try {
@@ -60,7 +60,7 @@ public class GroovyRuleCalc {
 	 * @date:2018年5月7日 下午7:44:32
 	 * @describe:执行所有的脚步
 	 */
-	public boolean executeRuleCalcAll(GroovyScriptExecutor scriptExecutor,
+	public static boolean executeRuleCalcAll(GroovyScriptExecutor scriptExecutor,
 			Binding shellContext) {
 		boolean ruleIsMatched = false;
 		String logtag = "";
@@ -84,7 +84,7 @@ public class GroovyRuleCalc {
 							CacheGroovyService.ScriptTextmap.get(entry.getKey()
 									+ "a"));
 					ruleIsMatched = scriptExecutor.execute(script);
-					logtag = String.valueOf(shellContext.getVariable("logtag"));
+					logtag = String.valueOf(shellContext.getVariable("LOG_STR"));
 					logger.info(logtag);
 				}
 

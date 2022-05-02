@@ -5,7 +5,7 @@ import redis.clients.util.SafeEncoder;
 public class RedisKeys {
 
     public static byte[] getRuleConfig() {
-        return SafeEncoder.encode("RuleConfig");
+        return SafeEncoder.encode("rule_config_test_2");
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.intsmaze.flink.groovy.loadshell;
+package com.intsmaze.flink.groovy.test;
 
 import com.intsmaze.flink.base.env.BeanFactory;
 import com.intsmaze.flink.groovy.util.RedisKeys;
@@ -7,11 +7,13 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import com.intsmaze.flink.groovy.bean.RuleConfigModel;
-import java.util.ArrayList;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
-public class DaoGroovy {
+public class TestConfigGroovyRule {
 
     private FSTConfiguration fstConf = FSTConfiguration
             .createJsonConfiguration();
@@ -19,19 +21,29 @@ public class DaoGroovy {
     private JedisPool jedisPool;
 
     public static void main(String[] args) throws Exception {
-        BeanFactory beanFactory = new BeanFactory("redis-cud.xml");
-        DaoGroovy groovy = beanFactory.getBean(DaoGroovy.class);
+        BeanFactory beanFactory = new BeanFactory("test.xml");
+        TestConfigGroovyRule groovy = beanFactory.getBean(TestConfigGroovyRule.class);
 
         //id必须唯一，不能重复
         RuleConfigModel newModel = new RuleConfigModel(
                 2L,
                 "intsmaze测试groovy脚本",
                 "脚本红引入的类必须在这个工程的jvm中存在intsmaze",
-                "import org.intsmaze.GroovyDemo\nimport org.intsmaze.GroovyLogger\n\nGroovyDemo groovyDemo = GROOVY\nString age = AGE\n\nif (age.contains(\"-\")||age.contains(\"_\")) {\n    return false\n}\nString regAge = groovyDemo.getSex(age);\n\nLOGTAG = GroovyLogger.text(\"传入参数\", age, \"处理后参数\", regAge)\nreturn true",
-                "39.9元配置文件带走", 1);
+                "import com.intsmaze.flink.groovy.GroovyInterface\n" +
+                        "import com.intsmaze.flink.groovy.util.GroovyLogger\n\n" +
+                        "GroovyInterface groovyDemo = GROOVY\n" +
+                        "String age = AGE\n\n" +
+                        "String sex = SEX\n\n" +
+                        "if (age.contains(\"-\")||age.contains(\"_\")) {\n"+
+                        "   return false\n" +
+                        "}\n" +
+                        "String regAge = groovyDemo.getAge(age);\n\n" +
+                        "String regSex = groovyDemo.getSex(sex);\n\n"+
+                        "LOG_STR = GroovyLogger.infor(\"age传入参数\", age,\"sex传入参数\", sex, \"处理后参数\",regSex, regAge)\n" +
+//                        "LOG_STR = GroovyLogger.infor(\"age传入参数\", age, \"处理后参数\", regAge)\n" +
+                        "return true",
+                "39.9元配置文件带走");
         groovy.flushSingleRule(newModel);
-
-
     }
 
     /**
@@ -41,23 +53,25 @@ public class DaoGroovy {
      */
     public boolean flushSingleRule(RuleConfigModel newModel) throws Exception {
         Jedis jedis = jedisPool.getResource();
-        List<RuleConfigModel> list = null;
+        Set<RuleConfigModel> list =  new HashSet<RuleConfigModel>();
         byte[] data = jedis.get(RedisKeys.getRuleConfig());
         if (data != null) {
-            list = (List<RuleConfigModel>) fstConf.asObject(data);
+            list = (HashSet<RuleConfigModel>) fstConf.asObject(data);
             if (list != null) {
+                list.remove(newModel);
                 list.add(newModel);
             }
         } else {
-            list = new ArrayList<RuleConfigModel>();
             list.add(newModel);
         }
+        System.out.println(list);
         boolean result = false;
+        //一般来说要加锁，但是不加锁也是可以容忍的
+        result = "OK".equals(jedis
+                .set(RedisKeys.getRuleConfig(), fstConf.asByteArray(list))) ? true : false;
         result = "OK".equals(jedis.set(RedisKeys.getRuleConfigVersion(),
                 String.valueOf(System.currentTimeMillis()))) ? true
                 : false;
-        result = "OK".equals(jedis
-                .set(RedisKeys.getRuleConfig(), fstConf.asByteArray(list))) ? true : false;
         return result;
     }
 
@@ -77,9 +91,9 @@ public class DaoGroovy {
             }
             flag = "OK".equals(jedis.set(RedisKeys.getRuleConfig(),
                     fstConf.asByteArray(list))) ? true : false;
+            jedis.set(RedisKeys.getRuleConfigVersion(),
+                    String.valueOf(System.currentTimeMillis()));
         }
-        jedis.set(RedisKeys.getRuleConfigVersion(),
-                String.valueOf(System.currentTimeMillis()));
         return flag;
     }
 
