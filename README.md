@@ -456,9 +456,24 @@ public class SimpleClient extends BaseFlink {
 # 演示地址
 
 演示地址： [框架快速演示视频](https://www.ixigua.com/6922010036285735438?wid_try=1)
-[SimpleClient功能模块](https://www.bilibili.com/video/BV1Gu411z7RP?spm_id_from=333.337.search-card.all.click)
-[Hibernate Validator校验框架](https://www.bilibili.com/video/BV1Lr4y1q73G?spm_id_from=333.999.0.0)
 
+[1.SimpleClient功能模块](https://www.bilibili.com/video/BV1Gu411z7RP/?spm_id_from=333.788)
+
+[2.Hibernate Validator校验框架](https://www.bilibili.com/video/BV1Lr4y1q73G?spm_id_from=333.999.0.0)
+
+[3.Flink集成Spring,创建对象一个注解搞定(再也不用new)](https://www.bilibili.com/video/BV18R4y1A7Am/?spm_id_from=333.788)
+ 
+[4.Flink集成Spring Retry注解，方式重试一个注解搞定](https://www.bilibili.com/video/BV1zR4y1P7ff/?spm_id_from=333.788)
+  
+[5. Flink集成Spring Cache注解，一行代码实现方法缓存](https://www.bilibili.com/video/BV1LY4y1r779/?spm_id_from=333.788)
+
+[6.Flink集成mybatis框架，提效sql维表查询开发能力](https://www.bilibili.com/video/BV1VA4y1f7vG/?spm_id_from=333.788)
+     
+[8.Flink 计算服接口化--DRPC 对外提供接口化服务](https://www.bilibili.com/video/BV1cF411g7Zv/?spm_id_from=333.788)
+
+[9.Flink 借助JAVA语言三大特性实现动态规则引擎实现](https://www.bilibili.com/video/BV1vL4y1j7YX/?spm_id_from=333.788)
+      
+      
 # 运行报错问题汇总
 
 ## NoClassDefFoundError

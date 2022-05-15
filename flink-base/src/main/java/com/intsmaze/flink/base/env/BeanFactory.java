@@ -31,6 +31,8 @@ public class BeanFactory extends DefaultListableBeanFactory {
 
 	public static final String SPRING_BEAN_FACTORY_NAME = "springframework.bean.factory.name";
 
+	public static final String DUBBO_SPRING_BEAN_FACTORY_NAME = "dubbo.springframework.bean.factory.name";
+
 	private static BeanFactory instance;
 
 	public static BeanFactory getInstance() {
@@ -98,6 +100,21 @@ public class BeanFactory extends DefaultListableBeanFactory {
 		return beanConf;
 	}
 
+
+	/**
+	 * github地址: https://github.com/intsmaze
+	 * 博客地址：https://www.cnblogs.com/intsmaze/
+	 * 出版书籍《深入理解Flink核心设计与实践原理》
+	 *
+	 * @auther: intsmaze(刘洋)
+	 * @date: 2020/10/15 18:33
+	 */
+	public static ApplicationContext getDubboBeanFactory(Configuration globalJobParameters) {
+		String xmlName = globalJobParameters.getString(BeanFactory.DUBBO_SPRING_BEAN_FACTORY_NAME, null);
+		System.out.println("xmlName is :"+xmlName);
+		ApplicationContext beanConf = new ClassPathXmlApplicationContext(xmlName);
+		return beanConf;
+	}
 
 	/**
 	 * github地址: https://github.com/intsmaze

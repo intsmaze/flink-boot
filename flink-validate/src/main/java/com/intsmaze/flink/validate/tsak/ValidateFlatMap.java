@@ -58,7 +58,7 @@ public class ValidateFlatMap extends BuiltinRichFlatMapFunction {
         this.numLines.add(1);
         Map<String, StringBuffer> validate = ValidatorUtil.validate(flowData);
         if (validate != null) {
-            System.out.println(validate);
+            System.out.println(validate+"---------"+value);
             return null;
         }
         return gson.toJson(flowData);

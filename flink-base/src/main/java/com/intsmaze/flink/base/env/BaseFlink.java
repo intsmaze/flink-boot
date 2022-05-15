@@ -41,6 +41,8 @@ public abstract class BaseFlink {
 
     protected String configFile;
 
+    protected String dubboConfigFile;
+
     protected EnvironmentSettings settings;
 
     protected StreamExecutionEnvironment env;
@@ -126,6 +128,7 @@ public abstract class BaseFlink {
     protected void setupConfig() {
 
         this.configFile = getConfigName();
+        this.dubboConfigFile = getDubboConfigName();
         this.beanFactory = new BeanFactory(configFile);
 
         for (String key : this.properties.stringPropertyNames()) {
@@ -133,6 +136,10 @@ public abstract class BaseFlink {
         }
         this.config.setString(BeanFactory.SPRING_BEAN_FACTORY_XML, beanFactory.getXml());
         this.config.setString(BeanFactory.SPRING_BEAN_FACTORY_NAME, this.configFile);
+        if(StringUtils.isNotBlank(dubboConfigFile))
+        {
+            this.config.setString(BeanFactory.DUBBO_SPRING_BEAN_FACTORY_NAME, this.dubboConfigFile);
+        }
         env.getConfig().setGlobalJobParameters(this.config);
 
     }
@@ -179,6 +186,11 @@ public abstract class BaseFlink {
      * @date: 2020/10/15 18:33
      */
     public abstract String getConfigName();
+
+    public String getDubboConfigName()
+    {
+        return null;
+    }
 
     /**
      * github地址: https://github.com/intsmaze
