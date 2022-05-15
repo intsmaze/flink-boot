@@ -11,8 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.configuration.Configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.*;
 
 
 /**
@@ -30,6 +29,9 @@ public class RedisFlatMap extends BuiltinRichFlatMapFunction {
     private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     private JedisPool jedisPool;
+    private JedisCluster jedisCluster;
+    private JedisSentinelPool jedisSentinelPool;
+    private ShardedJedisPool shardedJedisPool;
 
     private LockFactory lockFactory;
 
@@ -44,8 +46,11 @@ public class RedisFlatMap extends BuiltinRichFlatMapFunction {
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        jedisPool = beanFactory.getBean(JedisPool.class);
-        lockFactory = beanFactory.getBean(LockFactory.class);
+        this.jedisPool = beanFactory.getBean(JedisPool.class);
+        this.jedisCluster = beanFactory.getBean(JedisCluster.class);
+        this.jedisSentinelPool = beanFactory.getBean(JedisSentinelPool.class);
+        this.shardedJedisPool = beanFactory.getBean(ShardedJedisPool.class);
+        this.lockFactory = beanFactory.getBean(LockFactory.class);
     }
 
     /**
