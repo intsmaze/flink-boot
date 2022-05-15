@@ -13,7 +13,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
  * 出版书籍《深入理解Flink核心设计与实践原理》
  *
  * @auther: intsmaze(刘洋)
- * @date: 2020/10/15 18:33
+ * @date: 2022/10/15 18:33
  */
 public class DubboConsumerClient extends BaseFlink {
     /**

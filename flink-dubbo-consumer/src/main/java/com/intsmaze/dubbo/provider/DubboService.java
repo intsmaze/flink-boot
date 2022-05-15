@@ -7,5 +7,7 @@ package com.intsmaze.dubbo.provider;
  * @modified By：
  */
 public interface DubboService {
-    String sayHello(String name);
+
+    String flinkDealMess(String value);
+
 }

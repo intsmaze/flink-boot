@@ -15,7 +15,7 @@ import com.intsmaze.dubbo.provider.DubboService;
  * 出版书籍《深入理解Flink核心设计与实践原理》
  *
  * @auther: intsmaze(刘洋)
- * @date: 2020/10/15 18:33
+ * @date: 20202/10/15 18:33
  */
 public class DubboFlatMap extends BuiltinRichFlatMapFunction {
 
@@ -29,7 +29,7 @@ public class DubboFlatMap extends BuiltinRichFlatMapFunction {
      * 出版书籍《深入理解Flink核心设计与实践原理》
      *
      * @auther: intsmaze(刘洋)
-     * @date: 2020/10/15 18:33
+     * @date: 2022/10/15 18:33
      */
     @Override
     public void open(Configuration parameters) throws Exception {
@@ -43,7 +43,7 @@ public class DubboFlatMap extends BuiltinRichFlatMapFunction {
      * 出版书籍《深入理解Flink核心设计与实践原理》
      *
      * @auther: intsmaze(刘洋)
-     * @date: 2020/10/15 18:33
+     * @date: 2022/10/15 18:33
      */
     @Override
     public String execute(String message) {
@@ -51,6 +51,6 @@ public class DubboFlatMap extends BuiltinRichFlatMapFunction {
         FlowData flowData = gson.fromJson(message, new TypeToken<FlowData>() {
         }.getType());
 
-        return dubboService.sayHello(gson.toJson(flowData));
+        return dubboService.flinkDealMess(gson.toJson(flowData));
     }
 }
