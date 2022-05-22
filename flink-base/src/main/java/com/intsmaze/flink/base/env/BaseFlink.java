@@ -14,9 +14,9 @@ import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
-import org.apache.flink.table.api.EnvironmentSettings;
-import org.apache.flink.table.api.TableEnvironment;
-import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
+//import org.apache.flink.table.api.EnvironmentSettings;
+//import org.apache.flink.table.api.TableEnvironment;
+//import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.util.Preconditions;
 import org.joda.time.DateTime;
 
@@ -43,11 +43,11 @@ public abstract class BaseFlink {
 
     protected String dubboConfigFile;
 
-    protected EnvironmentSettings settings;
+//    protected EnvironmentSettings settings;
 
     protected StreamExecutionEnvironment env;
 
-    protected StreamTableEnvironment tableEnv;
+//    protected StreamTableEnvironment tableEnv;
 
     protected Properties properties;
 
@@ -61,8 +61,8 @@ public abstract class BaseFlink {
      */
     public void init(ParameterTool params) throws IOException {
         env = StreamExecutionEnvironment.getExecutionEnvironment();
-        settings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
-        tableEnv = StreamTableEnvironment.create(env, settings);
+//        settings = EnvironmentSettings.newInstance().useBlinkPlanner().inStreamingMode().build();
+//        tableEnv = StreamTableEnvironment.create(env, settings);
 
 
         this.properties = PropertiesUtils.getProperties(getPropertiesName());

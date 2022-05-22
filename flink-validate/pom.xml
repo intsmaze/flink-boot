@@ -6,11 +6,11 @@
 
     <groupId>com.intsmaze.flink.validate</groupId>
     <artifactId>flink-validate</artifactId>
-    <version>1.0</version>
+    <version>1.15.0</version>
     <parent>
         <groupId>com.intsmaze.flink</groupId>
         <artifactId>flink-boot</artifactId>
-        <version>1.0</version>
+        <version>1.15.0</version>
     </parent>
 
     <dependencies>
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.intsmaze.flink.base</groupId>
             <artifactId>flink-base</artifactId>
-            <version>1.0</version>
+            <version>1.15.0</version>
         </dependency>
 
         <dependency>
