@@ -2,13 +2,13 @@
 # 懒松鼠Flink-Boot（稳定版请切分支拉取）
 #### [懒松鼠Flink-Boot 脚手架由《深入理解Flink核心设计与实践原理》作者开发。](https://github.com/intsmaze/flink-book)
 ![image](https://github.com/intsmaze/flink-boot/blob/master/fm.png)
-### 该脚手架屏蔽掉组装Flink API细节，让Flink全面拥抱Spring生态体系，使得开发者能以传统Java WEB模式的开发方式开发出具备分布式计算能力的流处理程序,懒松鼠让跨界变得更加简单。
-### 懒松鼠旨在让开发者以更底上手成本（不需要理解分布式计算的理论知识和Flink框架的细节）便可以快速编写业务代码实现。
+#### [该脚手架屏蔽掉组装Flink API细节，让Flink全面拥抱Spring生态体系，使得开发者能以传统Java WEB模式的开发方式开发出具备分布式计算能力的流处理程序,懒松鼠让跨界变得更加简单。](https://www.cnblogs.com/intsmaze/)
+#### [懒松鼠旨在让开发者以更底上手成本（不需要理解分布式计算的理论知识和Flink框架的细节）便可以快速编写业务代码实现。](https://www.cnblogs.com/intsmaze/)
 
 
-### 支撑作者5年流计算任务开发，累计1300+任务基于flink-boot脚手架原型进行业务需求实现，平均每个需求节省1天，累计摸鱼1300天，公司每年可少养两名程序员。
-### 基于flink-boot脚手架开发的任务，最大QPS可达10万(每秒10万)，也支撑过超核心业务，比如世界五百强公司信用卡交易后话术推送。
-### 给用户的话:本框架不追求集成spring-boot(难度太大，就算集成成功，没有大规模实际生产应用，为我自己更为你负责，不想你因为盲目集成spring-boot导致生产事故，背锅走人，同是打工人，何苦相互为难)
+#### [支撑作者5年流计算任务开发，累计1300+任务基于flink-boot脚手架原型进行业务需求实现，平均每个需求节省1天，累计摸鱼1300天，公司每年可少养两名程序员。](https://www.cnblogs.com/intsmaze/)
+#### [基于flink-boot脚手架开发的任务，最大QPS可达10万(每秒10万)，也支撑过超核心业务，比如世界五百强公司信用卡交易后话术推送。](https://www.cnblogs.com/intsmaze/)
+#### [给用户的话:本框架不追求集成spring-boot(难度太大，就算集成成功，没有大规模实际生产应用，为我自己更为你负责，不想你因为盲目集成spring-boot导致生产事故，背锅走人，同是打工人，何苦相互为难)](https://www.cnblogs.com/intsmaze/)
 
 
 ## 微服务以及WEB开发领域中经常用到的框架集成进来，进一步提升开发速度。比如集成:
@@ -58,20 +58,6 @@ Spring Config配置中心 | Spring Cloud Config配置中心  | 进行中
 * 目前市场的普遍情况就是统计一些PU,VU指标等，更或者仅仅是实时ETL，面向SQL编程。很多流计算开发者对Flink框架的特性头头是道，但是基本的Java功底却很薄弱。 
 * **开发DRPC组件接口，该组件基于Dubbo服务注册者来注册服务供服务消费组进行消费，做到真正的同步响应。**
 
-
-
-### 动态加载实时编译类
-![image](https://github.com/intsmaze/intsmaze/raw/master/image/classload.png)
-#### 架构来源
-在开发cep系统中，遇到某些规则需要用http的协议向远程服务发送请求获取某些结果后，在运用EL表达式进行校验。这个时候，我么需要编写新的java类来支持这一功能，但是编写java类需要重新停机发布，如何解决停机发布的问题就本架构解决方案。 
-
-
-### 一致性Hash算法（权威来源，算法可靠）通用组件
-一致性hash算法的实现，没有找到比较权威的官方API，百度网友博客的算法应用生产系统毕竟有风险，我发现jedis客户端封装了一致性hash算法的实现。所以我将jeds的一致性hash算法提取出来，进行保障以供生产系统使用。
-![image](https://github.com/intsmaze/intsmaze/raw/master/image/hash.png)
-关于一致性hash算法没有热点问题，我通过执行代码发现这个观点有待商榷。
-把jedis的源码提取出来后，跑了一下，发现没有热点问题。原因不是采用的算法问题，而是一个物理节点对应的虚拟节点的数量的问题导致使用hash算法后是否存在有热点问题。
-jedis源码物理节点对应虚拟节点时160，而网上大部分代码的虚拟节点都是10以下，所以导致了热点问题，这也告诉我们，实现一致性Hash算法时，不要太吝啬，虚拟节点设置的大点，热点问题就不会再有。
 
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
@@ -478,7 +464,22 @@ public class SimpleClient extends BaseFlink {
 
 [9.Flink 借助JAVA语言三大特性实现动态规则引擎实现](https://www.bilibili.com/video/BV1vL4y1j7YX/?spm_id_from=333.788)
       
-      
+
+# 进阶功能   
+### 动态加载实时编译类
+![image](https://github.com/intsmaze/intsmaze/raw/master/image/classload.png)
+#### 架构来源
+在开发cep系统中，遇到某些规则需要用http的协议向远程服务发送请求获取某些结果后，在运用EL表达式进行校验。这个时候，我么需要编写新的java类来支持这一功能，但是编写java类需要重新停机发布，如何解决停机发布的问题就本架构解决方案。 
+
+
+### 一致性Hash算法（权威来源，算法可靠）通用组件
+一致性hash算法的实现，没有找到比较权威的官方API，百度网友博客的算法应用生产系统毕竟有风险，我发现jedis客户端封装了一致性hash算法的实现。所以我将jeds的一致性hash算法提取出来，进行保障以供生产系统使用。
+![image](https://github.com/intsmaze/intsmaze/raw/master/image/hash.png)
+关于一致性hash算法没有热点问题，我通过执行代码发现这个观点有待商榷。
+把jedis的源码提取出来后，跑了一下，发现没有热点问题。原因不是采用的算法问题，而是一个物理节点对应的虚拟节点的数量的问题导致使用hash算法后是否存在有热点问题。
+jedis源码物理节点对应虚拟节点时160，而网上大部分代码的虚拟节点都是10以下，所以导致了热点问题，这也告诉我们，实现一致性Hash算法时，不要太吝啬，虚拟节点设置的大点，热点问题就不会再有。
+
+
 # 运行报错问题汇总
 
 ## NoClassDefFoundError
@@ -545,14 +546,13 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 
 # 其他
 ## 联系我
-下面是集成Spring生态的基础手册，加作者微信号获取更详细的开发手册，当然技术过硬自己摸索也只需8小时即可上手所有模块。
-1. 生活不易，脑力代码不易，尊重劳动成果，可打赏博主 39.9元成为我的会员即可获得懒松鼠Flink-Boot相关核心配置文件（以及后续新特性集成代码）。
-2. 也可以选择不打赏博主，公开版仅提供了Flink与以上Spring组件集成的所有代码，仅提供Flink与Spring基础集成的配置文件，其他组件的配置文件未提供，一般来说，自行研究框架4小时即可搞定。
-3. 免费版本仅暴露XML的方式和spring集成的配置，会员版本提供了注解方式构造各种bean对象。
-4. ps:我若衣食无忧必定无私奉献，39.9元的打赏只是为了让博主有继续花费精力迭代的动力帮助各位同行少加班。
+1. 公开版本仅暴露通过XML的方式和spring集成的配置，对于spring注解方式，缺少相关配置参数，如果需要可以加作者微信号进行购买，当然技术过硬自己摸索也只需8小时即可上手所有模块。
+2. ps:我若衣食无忧必定无私奉献，39.9元的打赏只是为了让博主有继续花费精力迭代的动力帮助各位同行少加班。
+
 微信号：intsmaze [微信二维码无法显示可跳转该页面扫码，微信转账即可](https://www.cnblogs.com/intsmaze/)
 39.9元会员你可以获得什么？
 * 永久会员，后续新增功能均可享受。
+* 进入会员群
 * 免费的技术方案咨询
 * flink技术问题答疑，flink知识点那么多，工作也不会全部用上，也没有必要全部看，过于浪费精力，你直接说场景和疑问，我直接告诉你去看哪个方面的知识点。
 * 底气:flink书籍作者，书写80万字，常见知识点都知道。
@@ -561,13 +561,6 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 
 ### 谁买了
 目前一些在一些互联网公司的开发小哥都加我微信买了配置文件，BAT等的开发小哥都有购买配置文件进行学习。
-
-
-**会员享受功能：**
-1. 框架的详细手册和配置文件
-2. 可以免费获取后续新增功能
-3. 可以提想要集成的框架，我会根据是否有必要在一个月内集成
-4. 框架使用上有问题，我会跟踪解决（PS：因为环境问题导致的不在售后范围）
 
 详细文档目录结构如下：
 ![image](https://github.com/intsmaze/flink-boot/blob/master/mulu.png)
