@@ -558,6 +558,19 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 * 底气:flink书籍作者，书写80万字，常见知识点都知道。
 * 大家都月薪过万，这时间成本都明白的。
 
+### 购买前必读
+这个项目已经卖了200份了，出售的安装手册已经很完善了，你按照安装手册的步骤，这个项目绝对跑的起来，如果还报错就看《常见问题汇总》，基本是使用姿势不对。
+这一套项目没有卖几千几百，就卖几十块钱，也没指望靠它发财，所以拿到安装手册，请安装步骤让项目的所有功能run起来后再加入自己主观意识的逻辑，否则因为你自己
+原因跑失败来频繁问我，耽误我精力。
+一个普通程序员1W6工资，一个小时工资也是100块，为你这几十块以及你自己的失误(不是我项目原因)和你频繁沟通浪费我半个小时精力我真的做不到，希望你能换位思考，不要用PUA的思想。
+如果你是下面这种人，也请你不要加我微信购买，不想为了几十块钱影响我几个小时的心情。
+图片如果渲染不出来，见image目录下消息X的四个图片(聊天记录)
+![image](https://github.com/intsmaze/flink-boot/blob/master/image/消息1.png)
+![image](https://github.com/intsmaze/flink-boot/blob/master/image/消息2.png)
+![image](https://github.com/intsmaze/flink-boot/blob/master/image/消息3.png)
+![image](https://github.com/intsmaze/flink-boot/blob/master/image/消息4.png)
+![image](https://github.com/intsmaze/flink-boot/blob/master/image/消息5.png)
+
 
 ### 谁买了
 目前一些在一些互联网公司的开发小哥都加我微信买了配置文件，BAT等的开发小哥都有购买配置文件进行学习。
