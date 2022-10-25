@@ -42,7 +42,7 @@ public class TestConfigGroovyRule {
                         "LOG_STR = GroovyLogger.infor(\"age传入参数\", age,\"sex传入参数\", sex, \"处理后参数\",regSex, regAge)\n" +
 //                        "LOG_STR = GroovyLogger.infor(\"age传入参数\", age, \"处理后参数\", regAge)\n" +
                         "return true",
-                "39.9元配置文件带走");
+                "88.8元配置文件带走");
         groovy.flushSingleRule(newModel);
     }
 
