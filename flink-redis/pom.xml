@@ -6,11 +6,10 @@
 
     <groupId>com.intsmaze.flink.redis</groupId>
     <artifactId>flink-redis</artifactId>
-    <version>1.15.0</version>
     <parent>
         <groupId>com.intsmaze.flink</groupId>
         <artifactId>flink-boot</artifactId>
-        <version>1.15.0</version>
+        <version>1.16.0</version>
     </parent>
 
     <dependencies>
@@ -47,8 +46,7 @@
         <dependency>
             <groupId>com.intsmaze.flink.base</groupId>
             <artifactId>flink-base</artifactId>
-            <version>1.15.0</version>
-            <scope>compile</scope>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

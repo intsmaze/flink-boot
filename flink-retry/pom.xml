@@ -6,11 +6,10 @@
 
     <groupId>com.intsmaze.flink.retry</groupId>
     <artifactId>flink-retry</artifactId>
-    <version>1.15.0</version>
     <parent>
         <groupId>com.intsmaze.flink</groupId>
         <artifactId>flink-boot</artifactId>
-        <version>1.15.0</version>
+        <version>1.16.0</version>
     </parent>
     <!---
         此为会员版功能：添加微信 intsmaze，付款88.8元即可获得全套会员版的配置文件。
@@ -20,7 +19,7 @@
         <dependency>
             <groupId>com.intsmaze.flink.base</groupId>
             <artifactId>flink-base</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.retry</groupId>

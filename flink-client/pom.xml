@@ -6,60 +6,59 @@
 
     <groupId>com.intsmaze.flink.client</groupId>
     <artifactId>flink-client</artifactId>
-    <version>1.15.0</version>
 
     <parent>
         <groupId>com.intsmaze.flink</groupId>
         <artifactId>flink-boot</artifactId>
-        <version>1.15.0</version>
+        <version>1.16.0</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>com.intsmaze.flink.base</groupId>
             <artifactId>flink-base</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.validate</groupId>
             <artifactId>flink-validate</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.intsmaze.flink.sql</groupId>-->
-            <!--<artifactId>flink-sql</artifactId>-->
-            <!--<version>1.0</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.intsmaze.flink.sql</groupId>
+            <artifactId>flink-sql</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.annotation</groupId>
             <artifactId>flink-annotation</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.mybatis</groupId>
             <artifactId>flink-mybatis</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.retry</groupId>
             <artifactId>flink-retry</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.cache.annotation</groupId>
             <artifactId>flink-cache-annotation</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.intsmaze.flink</groupId>
             <artifactId>flink-dubbo-consumer</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-api</artifactId>
@@ -71,7 +70,7 @@
         <dependency>
             <groupId>com.intsmaze.flink.hbase</groupId>
             <artifactId>flink-hbase</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-log4j12</artifactId>
@@ -87,23 +86,23 @@
         <dependency>
             <groupId>com.intsmaze.flink.redis</groupId>
             <artifactId>flink-redis</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.intsmaze.flink</groupId>
             <artifactId>flink-dynamic-load-class</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.intsmaze.flink.groovy</groupId>
             <artifactId>flink-groovy</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.intsmaze.flink.apollo</groupId>
             <artifactId>flink-apollo</artifactId>
-            <version>1.15.0</version>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>
