@@ -6,7 +6,7 @@
 
     <groupId>com.intsmaze.flink</groupId>
     <artifactId>flink-boot</artifactId>
-    <version>1.15.0</version>
+    <version>1.16.0</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -22,13 +22,23 @@
         <module>flink-mybatis</module>
         <module>flink-redis</module>
         <module>flink-retry</module>
-        <!--<module>flink-sql</module>-->
+        <module>flink-sql</module>
         <module>flink-validate</module>
         <module>flink-client</module>
     </modules>
 
 
     <properties>
+        <spring.version>5.0.0.RELEASE</spring.version>
+        <spring.version.core>5.2.15.RELEASE</spring.version.core>
+
+        <org.projectlombok.version>1.18.24</org.projectlombok.version>
+        <jackson.version>2.13.4</jackson.version>
+        <mysql.version>8.0.30</mysql.version>
+        <ch.driver.version>0.3.2</ch.driver.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <apache.httpclient.version>4.5.13</apache.httpclient.version>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <guava.version>11.0.2</guava.version>
         <slf4j.version>1.7.12</slf4j.version>
@@ -42,11 +52,144 @@
         <jackson.version>2.2.2</jackson.version>
         <hessian.version>4.0.7</hessian.version>
         <commons-lang3.version>3.1</commons-lang3.version>
-        <flink.version>1.15.0</flink.version>
-        <scala.binary.version>2.11</scala.binary.version>
+        <flink.version>1.16.1</flink.version>
+        <scala.binary.version>2.12</scala.binary.version>
     </properties>
 
     <dependencies>
+
+
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${org.projectlombok.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!--flink-->
+
+        <!--database-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.yandex.clickhouse</groupId>
+            <artifactId>clickhouse-jdbc</artifactId>
+            <version>${ch.driver.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--mybatis & mybatis plus-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.0.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
+
+        <!--apache httpclient-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${apache.httpclient.version}</version>
+        </dependency>
+
+
+        <!--spring test-->
+
+
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+        <!-- Flink core -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+        <!-- Table ecosystem -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-api-java-bridge</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-api-scala-bridge_${scala.binary.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-runtime</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-table-planner_${scala.binary.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
+
+
+
+        <!--<dependency>-->
+            <!--<groupId>ru.ivi.opensource</groupId>-->
+            <!--<artifactId>flink-clickhouse-sink</artifactId>-->
+            <!--<version>${org.apache.flink-clickhouse.version}</version>-->
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<artifactId>logback-classic</artifactId>-->
+                    <!--<groupId>ch.qos.logback</groupId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
+
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka</artifactId>
@@ -70,108 +213,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-clients</artifactId>
-            <version>${flink.version}</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-java</artifactId>
-            <version>${flink.version}</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-streaming-java</artifactId>
-            <version>${flink.version}</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.flink</groupId>-->
-            <!--<artifactId>flink-table-api-java-bridge</artifactId>-->
-            <!--<version>${flink.version}</version>-->
-            <!--<scope>provided</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<artifactId>slf4j-api</artifactId>-->
-                    <!--<groupId>org.slf4j</groupId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.flink</groupId>-->
-            <!--<artifactId>flink-table-api-scala-bridge</artifactId>-->
-            <!--<version>${flink.version}</version>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<artifactId>slf4j-api</artifactId>-->
-                    <!--<groupId>org.slf4j</groupId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-            <!--&lt;!&ndash;<scope>provided</scope>&ndash;&gt;-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.flink</groupId>-->
-            <!--<artifactId>flink-table-planner_2.11</artifactId>-->
-            <!--<version>${flink.version}</version>-->
-            <!--<scope>provided</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<artifactId>slf4j-api</artifactId>-->
-                    <!--<groupId>org.slf4j</groupId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.flink</groupId>-->
-            <!--<artifactId>flink-table-planner-blink_2.11</artifactId>-->
-            <!--<version>${flink.version}</version>-->
-            <!--<scope>provided</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<artifactId>slf4j-api</artifactId>-->
-                    <!--<groupId>org.slf4j</groupId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.flink</groupId>-->
-            <!--<artifactId>flink-table-common</artifactId>-->
-            <!--<version>1.12.0</version>-->
-            <!--<scope>provided</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<artifactId>slf4j-api</artifactId>-->
-                    <!--<groupId>org.slf4j</groupId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
-
 
 
         <dependency>
