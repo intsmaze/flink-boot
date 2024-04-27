@@ -93,8 +93,8 @@ public class BeanFactory extends DefaultListableBeanFactory {
 	 * @auther: intsmaze(刘洋)
 	 * @date: 2020/10/15 18:33
 	 */
-	public static ApplicationContext getBeanFactory(Configuration globalJobParameters) {
-		String xmlName = globalJobParameters.getString(BeanFactory.SPRING_BEAN_FACTORY_NAME, null);
+	public static ApplicationContext getBeanFactory(Map<String,String> globalJobParameters) {
+		String xmlName = globalJobParameters.get(BeanFactory.SPRING_BEAN_FACTORY_NAME);
 		System.out.println("xmlName is :"+xmlName);
 		ApplicationContext beanConf = new ClassPathXmlApplicationContext(xmlName);
 		return beanConf;
@@ -109,8 +109,8 @@ public class BeanFactory extends DefaultListableBeanFactory {
 	 * @auther: intsmaze(刘洋)
 	 * @date: 2020/10/15 18:33
 	 */
-	public static ApplicationContext getDubboBeanFactory(Configuration globalJobParameters) {
-		String xmlName = globalJobParameters.getString(BeanFactory.DUBBO_SPRING_BEAN_FACTORY_NAME, null);
+	public static ApplicationContext getDubboBeanFactory(Map<String,String> globalJobParameters) {
+		String xmlName = globalJobParameters.get(BeanFactory.DUBBO_SPRING_BEAN_FACTORY_NAME);
 		System.out.println("xmlName is :"+xmlName);
 		ApplicationContext beanConf = new ClassPathXmlApplicationContext(xmlName);
 		return beanConf;

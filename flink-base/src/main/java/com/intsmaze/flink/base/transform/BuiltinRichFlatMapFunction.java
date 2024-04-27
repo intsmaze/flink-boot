@@ -43,9 +43,9 @@ public abstract class BuiltinRichFlatMapFunction extends RichFlatMapFunction<Str
     public void open(Configuration parameters) throws Exception {
         getRuntimeContext().addAccumulator("num-FlatMap", this.numLines);
 
-        ExecutionConfig.GlobalJobParameters globalJobParameters = getRuntimeContext()
+        Map<String,String> globalJobParameters = getRuntimeContext()
                 .getExecutionConfig().getGlobalJobParameters();
-        beanFactory = BeanFactory.getBeanFactory((Configuration) globalJobParameters);
+        beanFactory = BeanFactory.getBeanFactory(globalJobParameters);
 
         dataService = beanFactory.getBean(DataService.class);
     }

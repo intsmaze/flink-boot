@@ -10,7 +10,7 @@
     <parent>
         <groupId>com.intsmaze.flink</groupId>
         <artifactId>flink-boot</artifactId>
-        <version>1.16.0</version>
+        <version>1.19.0</version>
     </parent>
     <!---此为会员版功能：添加微信 intsmaze，付款88.8元即可获得全套会员版的配置文件。-->
 

@@ -11,7 +11,7 @@
 
     <!-- ===========base=====start============  -->
     <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
         <property name="url"
                   value="${jdbc.url}"></property>
         <property name="username" value="${jdbc.user}"></property>

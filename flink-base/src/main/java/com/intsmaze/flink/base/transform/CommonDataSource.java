@@ -30,9 +30,9 @@ public abstract class CommonDataSource extends RichParallelSourceFunction<String
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        ExecutionConfig.GlobalJobParameters globalJobParameters = getRuntimeContext()
+        Map<String,String> globalJobParameters = getRuntimeContext()
                 .getExecutionConfig().getGlobalJobParameters();
-        beanFactory = BeanFactory.getBeanFactory((Configuration) globalJobParameters);
+        beanFactory = BeanFactory.getBeanFactory( globalJobParameters);
     }
 
     /**

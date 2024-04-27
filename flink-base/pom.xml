@@ -10,7 +10,7 @@
     <parent>
         <groupId>com.intsmaze.flink</groupId>
         <artifactId>flink-boot</artifactId>
-        <version>1.16.0</version>
+        <version>1.19.0</version>
     </parent>
 
     <dependencies>
@@ -51,6 +51,11 @@
             <version>1.0.14</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
 
     </dependencies>
 
