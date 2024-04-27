@@ -38,9 +38,8 @@ public class DrpcDataSource extends RichParallelSourceFunction<String> implement
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        ExecutionConfig.GlobalJobParameters globalJobParameters = getRuntimeContext()
-                .getExecutionConfig().getGlobalJobParameters();
-        beanFactory = BeanFactory.getDubboBeanFactory((Configuration) globalJobParameters);
+        Map<String,String> globalJobParameters = getRuntimeContext().getGlobalJobParameters();
+        beanFactory = BeanFactory.getBeanFactory( globalJobParameters);
     }
 
 
