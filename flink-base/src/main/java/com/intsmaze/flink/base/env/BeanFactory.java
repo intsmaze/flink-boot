@@ -14,6 +14,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 
 import java.net.URL;
+import java.util.Map;
 
 /**
  * github地址: https://github.com/intsmaze

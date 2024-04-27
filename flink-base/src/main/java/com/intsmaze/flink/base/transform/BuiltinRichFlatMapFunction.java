@@ -10,6 +10,8 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.util.Collector;
 import org.springframework.context.ApplicationContext;
 
+import java.util.Map;
+
 /**
  * github地址: https://github.com/intsmaze
  * 博客地址：https://www.cnblogs.com/intsmaze/
@@ -43,8 +45,7 @@ public abstract class BuiltinRichFlatMapFunction extends RichFlatMapFunction<Str
     public void open(Configuration parameters) throws Exception {
         getRuntimeContext().addAccumulator("num-FlatMap", this.numLines);
 
-        Map<String,String> globalJobParameters = getRuntimeContext()
-                .getExecutionConfig().getGlobalJobParameters();
+        Map<String,String> globalJobParameters = getRuntimeContext().getGlobalJobParameters();
         beanFactory = BeanFactory.getBeanFactory(globalJobParameters);
 
         dataService = beanFactory.getBean(DataService.class);

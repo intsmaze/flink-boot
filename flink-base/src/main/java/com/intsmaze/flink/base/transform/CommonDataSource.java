@@ -6,6 +6,8 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 import org.springframework.context.ApplicationContext;
 
+import java.util.Map;
+
 /**
  * github地址: https://github.com/intsmaze
  * 博客地址：https://www.cnblogs.com/intsmaze/
@@ -30,8 +32,7 @@ public abstract class CommonDataSource extends RichParallelSourceFunction<String
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        Map<String,String> globalJobParameters = getRuntimeContext()
-                .getExecutionConfig().getGlobalJobParameters();
+        Map<String,String> globalJobParameters = getRuntimeContext().getGlobalJobParameters();
         beanFactory = BeanFactory.getBeanFactory( globalJobParameters);
     }
 
